@@ -33,7 +33,7 @@ class _HadeethListItemState extends State<HadeethListItem> {
         ),
       ),
       onTap: () {
-        Navigator.of(context, rootNavigator: true).pushNamed(
+        Navigator.of(context).pushNamed(
           '/hadeeth_content',
           arguments: HadeethArgument(
             widget.item.id,
