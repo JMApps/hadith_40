@@ -7,7 +7,10 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '40 хадисов',
-      theme: ThemeData(primarySwatch: Colors.grey),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        fontFamily: 'Gilroy',
+      ),
       onGenerateRoute: appRouter.onGenerateRouter,
       initialRoute: '/',
     ),

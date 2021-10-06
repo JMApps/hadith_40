@@ -30,7 +30,7 @@ flutter:
     - assets/audios/
     - assets/pictures/
 
-#  fonts:
-#    - family: Gilroy
-#      fonts:
-#        - asset:
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy_medium.ttf
