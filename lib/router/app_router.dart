@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hadith_40/pages/hadeeth_content.dart';
 import 'package:hadith_40/pages/main_page.dart';
 
 class AppRouter {
@@ -7,6 +8,9 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
             builder: (_) => const MainPage(), settings: routeSettings);
+      case '/hadeeth_content':
+        return MaterialPageRoute(
+            builder: (_) => const HadeethContent(), settings: routeSettings);
       default:
         throw Exception('Invalid route');
     }
