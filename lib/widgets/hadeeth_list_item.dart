@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/model/hadeeth_argument.dart';
 import 'package:hadith_40/model/hadeeth_item.dart';
-import 'package:hadith_40/widgets/favorite_button.dart';
 
 class HadeethListItem extends StatefulWidget {
   const HadeethListItem({Key? key, required this.item}) : super(key: key);
@@ -13,11 +13,26 @@ class HadeethListItem extends StatefulWidget {
 }
 
 class _HadeethListItemState extends State<HadeethListItem> {
+  final _databaseQuery = DatabaseQuery();
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: FavoriteButton(
-          item: widget.item),
+      leading: IconButton(
+        icon: Icon(
+          widget.item.favoriteState == 0
+              ? Icons.bookmark_border
+              : Icons.bookmark,
+          size: 25,
+          color: Colors.blue,
+        ),
+        onPressed: () {
+          setState(() {
+            _databaseQuery.addRemoveFavorite(
+                widget.item.favoriteState == 0 ? 1 : 0, widget.item.id!);
+          });
+        },
+      ),
       title: Text(
         '${widget.item.hadeethNumber}',
         style: const TextStyle(
