@@ -11,6 +11,13 @@ class DatabaseQuery {
     return allChapters!;
   }
 
+  Future<List<HadeethItem>> getOneHadeeth(int id) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_chapters', where: '_id == $id');
+    List<HadeethItem>? oneHadeeth = res.isNotEmpty ? res.map((c) => HadeethItem.fromMap(c)).toList() : null;
+    return oneHadeeth!;
+  }
+
   Future<List<HadeethItem>> getSearchResult(String text) async {
     var dbClient = await con.db;
     var res = await dbClient.rawQuery("SELECT * FROM Table_of_chapters WHERE hadeeth_number LIKE '%$text%' OR hadeeth_title LIKE '%$text%'");

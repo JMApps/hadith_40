@@ -17,6 +17,7 @@ dependencies:
   provider: ^6.0.1
   sqflite: ^2.0.0+4
   path_provider: ^2.0.5
+  flutter_html: ^2.1.4
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +38,6 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/gilroy_medium.ttf
+    - family: Arabic
+      fonts:
+        - asset: assets/fonts/arabic.ttf
