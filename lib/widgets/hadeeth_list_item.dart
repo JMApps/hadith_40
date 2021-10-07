@@ -53,6 +53,7 @@ class _HadeethListItemState extends State<HadeethListItem> {
           arguments: HadeethArgument(
             widget.item.id,
             widget.item.hadeethNumber,
+            widget.item.hadeethTitle,
           ),
         );
       },
