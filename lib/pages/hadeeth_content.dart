@@ -56,7 +56,7 @@ class _HadeethContentState extends State<HadeethContent> {
             child: FutureBuilder<List>(
               future: _databaseQuery.getOneHadeeth(args.id!),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                return Scrollbar(
+                return snapshot.hasData ? Scrollbar(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -66,7 +66,7 @@ class _HadeethContentState extends State<HadeethContent> {
                       ],
                     ),
                   ),
-                );
+                ) : const CircularProgressIndicator();
               },
             ),
           ),

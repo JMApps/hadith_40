@@ -10,16 +10,14 @@ class HadeethTranslation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 16),
-      child: SelectableHtml(
+      padding: const EdgeInsets.only(left: 8, top: 4, right: 8, bottom: 8),
+      child: Html(
         data: hadeethTranslation,
         style: {
           '#': Style(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
             fontSize: const FontSize(18),
             fontFamily: 'Gilroy',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.justify,
           ),
           'small': Style(
             fontSize: const FontSize(14),

@@ -11,7 +11,7 @@ class HadeethArabic extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
-      child: SelectableHtml(
+      child: Html(
         data: hadeethArabic,
         style: {
           '#': Style(
@@ -20,11 +20,13 @@ class HadeethArabic extends StatelessWidget {
             fontSize: const FontSize(20),
             fontFamily: 'Arabic',
             direction: TextDirection.rtl,
+            textAlign: TextAlign.justify,
             lineHeight: LineHeight.rem(1.3),
           ),
           'small': Style(
             fontSize: const FontSize(14),
             color: Colors.black54,
+            direction: TextDirection.rtl,
           ),
         },
       ),
