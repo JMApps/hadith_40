@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/widgets/hadeeth_list.dart';
@@ -49,9 +50,7 @@ class _MainHadeethListState extends State<MainHadeethList> {
                       ],
                     )
                   : const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.grey,
-                      ),
+                      child: CupertinoActivityIndicator(),
                     );
         },
       ),
