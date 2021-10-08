@@ -1,4 +1,5 @@
 import 'package:hadith_40/data/database_helper.dart';
+import 'package:hadith_40/model/hadeeth_apart_item.dart';
 import 'package:hadith_40/model/hadeeth_item.dart';
 
 class DatabaseQuery {
@@ -42,5 +43,12 @@ class DatabaseQuery {
     var res = await dbClient.query('Table_of_chapters', where: '_id == $id');
     List<HadeethItem>? chapterContent = res.isNotEmpty ? res.map((c) => HadeethItem.fromMap(c)).toList() : null;
     return chapterContent!;
+  }
+
+  Future<List<HadeethApartItem>> getApartHadeeth(int hadeethId) async {
+    var dbClient = await con.db;
+    var res = await dbClient.query('Table_of_cut', where: 'item_position == $hadeethId');
+    List<HadeethApartItem>? apartHadeeth = res.isNotEmpty ? res.map((c) => HadeethApartItem.fromMap(c)).toList() : null;
+    return apartHadeeth!;
   }
 }
