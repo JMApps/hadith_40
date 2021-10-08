@@ -18,7 +18,7 @@ class _HadeethContentState extends State<HadeethContent> {
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)!.settings.arguments as HadeethArgument;
+    final args = ModalRoute.of(context)!.settings.arguments as HadeethArgument;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -31,14 +31,23 @@ class _HadeethContentState extends State<HadeethContent> {
           '${args.hadeethNumber}',
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.blue,
         actions: [
           IconButton(
             icon: const Icon(
               CupertinoIcons.square_stack_3d_up,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                '/hadeeth_apart_content',
+                arguments: HadeethArgument(
+                  args.id,
+                  args.hadeethNumber,
+                  args.hadeethTitle,
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(
@@ -51,22 +60,37 @@ class _HadeethContentState extends State<HadeethContent> {
       ),
       body: Column(
         children: [
-          HadeethContentTitle(hadeethTitle: args.hadeethTitle!),
+          HadeethContentTitle(
+            hadeethTitle: args.hadeethTitle!,
+            backgroundColor: Colors.blue,
+            textColor: Colors.white,
+            borderRadius: 0,
+          ),
           Expanded(
             child: FutureBuilder<List>(
               future: _databaseQuery.getOneHadeeth(args.id!),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                return snapshot.hasData ? Scrollbar(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        HadeethArabic(hadeethArabic: snapshot.data![0].hadeethArabic),
-                        const Divider(indent: 16, endIndent: 16, color: Colors.black54,),
-                        HadeethTranslation(hadeethTranslation: snapshot.data![0].hadeethTranslation),
-                      ],
-                    ),
-                  ),
-                ) : const CircularProgressIndicator();
+                return snapshot.hasData
+                    ? Scrollbar(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              HadeethArabic(
+                                  hadeethArabic:
+                                      snapshot.data![0].hadeethArabic),
+                              const Divider(
+                                indent: 16,
+                                endIndent: 16,
+                                color: Colors.black54,
+                              ),
+                              HadeethTranslation(
+                                  hadeethTranslation:
+                                      snapshot.data![0].hadeethTranslation),
+                            ],
+                          ),
+                        ),
+                      )
+                    : const CircularProgressIndicator();
               },
             ),
           ),

@@ -14,11 +14,11 @@ class _HadeethSearcherState extends State<HadeethSearcher> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey[700],
-        border: const Border(
-          bottom: BorderSide(color: CupertinoColors.systemGrey4),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(35),
         ),
       ),
       child: CupertinoTextField(
@@ -27,9 +27,14 @@ class _HadeethSearcherState extends State<HadeethSearcher> {
         onChanged: (String text) {
           setState(() {});
         },
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: CupertinoColors.white,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(35),
+            topRight: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+            topLeft: Radius.circular(15),
+          ),
         ),
         prefix: Padding(
           padding: const EdgeInsets.all(8),

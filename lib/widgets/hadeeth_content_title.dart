@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class HadeethContentTitle extends StatelessWidget {
-  const HadeethContentTitle({Key? key, required this.hadeethTitle}) : super(key: key);
+  const HadeethContentTitle({
+    Key? key,
+    required this.hadeethTitle,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.borderRadius,
+  }) : super(key: key);
 
   final String hadeethTitle;
+  final Color backgroundColor;
+  final Color textColor;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +20,9 @@ class HadeethContentTitle extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 16),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.grey[700],
-        borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(50),
+        color: backgroundColor,
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(borderRadius),
         ),
       ),
       child: Wrap(
@@ -23,7 +32,7 @@ class HadeethContentTitle extends StatelessWidget {
             hadeethTitle,
             style: TextStyle(
               fontSize: 18,
-              color: Colors.blue[100],
+              color: textColor,
             ),
             textAlign: TextAlign.center,
           ),

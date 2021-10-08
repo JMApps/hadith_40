@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.bookmark_border), label: 'Избранное'),
         ],
-        selectedItemColor: Colors.grey[700],
+        selectedItemColor: Colors.purple,
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
