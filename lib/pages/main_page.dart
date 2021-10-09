@@ -12,9 +12,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _mainLists = const [
+  final List<Widget> _mainLists = [
     MainHadeethList(),
-    BookmarkHadeethList(),
+    const BookmarkHadeethList(),
   ];
 
   @override

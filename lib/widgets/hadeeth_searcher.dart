@@ -1,15 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hadith_40/provider/search_data.dart';
+import 'package:provider/provider.dart';
 
-class HadeethSearcher extends StatefulWidget {
+class HadeethSearcher extends StatelessWidget {
   const HadeethSearcher({Key? key}) : super(key: key);
-
-  @override
-  _HadeethSearcherState createState() => _HadeethSearcherState();
-}
-
-class _HadeethSearcherState extends State<HadeethSearcher> {
-  final _searchTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +17,9 @@ class _HadeethSearcherState extends State<HadeethSearcher> {
         ),
       ),
       child: CupertinoTextField(
-        controller: _searchTextController,
         autocorrect: true,
         onChanged: (String text) {
-          setState(() {});
+          context.read<SearchData>().updateTextFieldData(text);
         },
         decoration: const BoxDecoration(
           color: CupertinoColors.white,
@@ -44,12 +38,8 @@ class _HadeethSearcherState extends State<HadeethSearcher> {
           ),
         ),
         placeholder: 'Поиск хадисов...',
-        style: TextStyle(
-          fontFamily: 'Gilroy',
-          fontSize: 18,
-          color: Colors.grey[800],
-        ),
-        cursorColor: Colors.grey[700],
+        placeholderStyle: TextStyle(color: Colors.grey[500]),
+        style: TextStyle(color: Colors.grey[700]),
         clearButtonMode: OverlayVisibilityMode.editing,
       ),
     );

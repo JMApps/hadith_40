@@ -1,19 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
+import 'package:hadith_40/provider/search_data.dart';
 import 'package:hadith_40/widgets/hadeeth_list.dart';
 import 'package:hadith_40/widgets/hadeeth_searcher.dart';
+import 'package:provider/provider.dart';
 
-class MainHadeethList extends StatefulWidget {
-  const MainHadeethList({Key? key}) : super(key: key);
+class MainHadeethList extends StatelessWidget {
+  MainHadeethList({Key? key}) : super(key: key);
 
-  @override
-  _MainHadeethListState createState() => _MainHadeethListState();
-}
-
-class _MainHadeethListState extends State<MainHadeethList> {
   final _databaseQuery = DatabaseQuery();
-  final _searchTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,30 +25,31 @@ class _MainHadeethListState extends State<MainHadeethList> {
         ),
         backgroundColor: Colors.grey[700],
       ),
-      body: FutureBuilder<List>(
-        future: _searchTextController.text.isEmpty
-            ? _databaseQuery.getAllHadeeths()
-            : _databaseQuery.getSearchResult(
-                _searchTextController.text.toString(),
-              ),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return snapshot.hasError
-              ? Center(
-                  child: Text('${snapshot.error}'),
-                )
-              : snapshot.hasData
-                  ? Column(
-                      children: [
-                        const HadeethSearcher(),
-                        Expanded(
-                          child: HadeethList(snapshot: snapshot),
+      body: Column(
+        children: [
+          const HadeethSearcher(),
+          Expanded(
+            child: FutureBuilder<List>(
+              future: context.watch<SearchData>().getTextFieldText.isNotEmpty
+                  ? _databaseQuery.getSearchResult(context.watch<SearchData>().getTextFieldText)
+                  : _databaseQuery.getAllHadeeths(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                return snapshot.hasError
+                    ? const Center(
+                        child: Text(
+                          'По вашему запросу ничего не найдено',
+                          style: TextStyle(fontSize: 18),
                         ),
-                      ],
-                    )
-                  : const Center(
-                      child: CupertinoActivityIndicator(),
-                    );
-        },
+                      )
+                    : snapshot.hasData
+                        ? HadeethList(snapshot: snapshot)
+                        : const Center(
+                            child: CupertinoActivityIndicator(),
+                          );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
