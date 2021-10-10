@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hadith_40/widgets/hadeeth_arapt_list_item.dart';
+import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 
 class HadeethApartList extends StatefulWidget {
   const HadeethApartList({Key? key, required this.snapshot}) : super(key: key);

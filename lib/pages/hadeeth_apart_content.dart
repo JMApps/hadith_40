@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/model/hadeeth_argument.dart';
-import 'package:hadith_40/widgets/hadeeth_arapt_list_item.dart';
+import 'package:hadith_40/widgets/apart_player.dart';
+import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 
 class HadeethApartContent extends StatefulWidget {
@@ -42,32 +43,45 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
             borderRadius: 50,
           ),
           Expanded(
-              child: FutureBuilder<List>(
-            future: _databaseQuery.getApartHadeeth(args.id!),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return snapshot.hasError
-                  ? Center(
-                      child: Text('${snapshot.error}'),
-                    )
-                  : snapshot.hasData
-                      ? Scrollbar(
-                          child: ListView.separated(
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return HadeethApartListItem(
-                                  item: snapshot.data[index]);
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const Divider();
-                            },
-                          ),
-                        )
-                      : const Center(
-                          child: CupertinoActivityIndicator(),
-                        );
-            },
-          )),
+            child: FutureBuilder<List>(
+              future: _databaseQuery.getApartHadeeth(args.id!),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                return snapshot.hasError
+                    ? Center(
+                        child: Text('${snapshot.error}'),
+                      )
+                    : snapshot.hasData
+                        ? Scrollbar(
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return HadeethApartListItem(
+                                    item: snapshot.data[index]);
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const Divider();
+                              },
+                            ),
+                          )
+                        : const Center(
+                            child: CupertinoActivityIndicator(),
+                          );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(bottom: 16),
+            height: 66,
+            decoration: const BoxDecoration(
+              color: Colors.deepPurple,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+              ),
+            ),
+            child: const ApartPlayer(),
+          ),
         ],
       ),
     );
