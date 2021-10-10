@@ -15,7 +15,7 @@ class HadeethListItem extends StatelessWidget {
       leading: Consumer<BookmarkState>(
         builder: (context, provider, _) => IconButton(
           icon: Icon(
-            provider.getUpdateList == 0 ? Icons.bookmark_border : Icons.bookmark,
+            item.favoriteState == 0 ? Icons.bookmark_border : Icons.bookmark,
             size: 25,
             color: Colors.grey[700],
           ),
