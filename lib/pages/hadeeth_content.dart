@@ -84,8 +84,14 @@ class _HadeethContentState extends State<HadeethContent> {
                                   endIndent: 16,
                                   color: Colors.black54),
                               Container(
-                                height: 50,
-                                color: Colors.purple[300],
+                                height: 66,
+                                decoration: const BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    bottomRight: Radius.circular(25),
+                                  ),
+                                ),
                                 child: const MainPlayer(),
                               ),
                               const Divider(
