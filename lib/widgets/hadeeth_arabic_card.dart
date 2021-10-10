@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:hadith_40/provider/hadeeth_settings_state.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HadeethArabic extends StatelessWidget {
   const HadeethArabic({Key? key, required this.hadeethArabic})
@@ -33,5 +34,10 @@ class HadeethArabic extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<int> textSizeCount() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getInt('key_text_size') ?? 18;
   }
 }
