@@ -8,7 +8,7 @@ class AppRouter {
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(
-            builder: (_) => const MainPage(), settings: routeSettings);
+            builder: (_) => MainPage(), settings: routeSettings);
       case '/hadeeth_content':
         return MaterialPageRoute(
             builder: (_) => const HadeethContent(), settings: routeSettings);
