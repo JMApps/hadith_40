@@ -5,6 +5,7 @@ import 'package:hadith_40/model/hadeeth_argument.dart';
 import 'package:hadith_40/widgets/hadeeth_arabic_card.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_translation_card.dart';
+import 'package:hadith_40/widgets/main_player.dart';
 
 class HadeethContent extends StatefulWidget {
   const HadeethContent({Key? key}) : super(key: key);
@@ -79,10 +80,18 @@ class _HadeethContentState extends State<HadeethContent> {
                                   hadeethArabic:
                                       snapshot.data![0].hadeethArabic),
                               const Divider(
-                                indent: 16,
-                                endIndent: 16,
-                                color: Colors.black54,
+                                  indent: 16,
+                                  endIndent: 16,
+                                  color: Colors.black54),
+                              Container(
+                                height: 50,
+                                color: Colors.purple[300],
+                                child: const MainPlayer(),
                               ),
+                              const Divider(
+                                  indent: 16,
+                                  endIndent: 16,
+                                  color: Colors.black54),
                               HadeethTranslation(
                                   hadeethTranslation:
                                       snapshot.data![0].hadeethTranslation),
