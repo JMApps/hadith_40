@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
+import 'package:hadith_40/provider/bookmark_state.dart';
 import 'package:hadith_40/provider/search_data.dart';
 import 'package:hadith_40/widgets/hadeeth_list.dart';
 import 'package:hadith_40/widgets/hadeeth_searcher.dart';
@@ -23,14 +24,14 @@ class MainHadeethList extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.grey[800],
       ),
       body: Column(
         children: [
           const HadeethSearcher(),
           Expanded(
             child: FutureBuilder<List>(
-              future: context.watch<SearchData>().getTextFieldText.isNotEmpty
+              future: context.watch<SearchData>().getTextFieldText.isNotEmpty || context.watch<BookmarkState>().getUpdateList
                   ? _databaseQuery.getSearchResult(context.watch<SearchData>().getTextFieldText)
                   : _databaseQuery.getAllHadeeths(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
+import 'package:hadith_40/provider/bookmark_state.dart';
 import 'package:hadith_40/widgets/hadeeth_list.dart';
+import 'package:provider/provider.dart';
 
 class BookmarkHadeethList extends StatefulWidget {
   const BookmarkHadeethList({Key? key}) : super(key: key);
@@ -27,7 +29,9 @@ class _BookmarkHadeethListState extends State<BookmarkHadeethList> {
         backgroundColor: Colors.grey[700],
       ),
       body: FutureBuilder<List>(
-        future: _databaseQuery.getFavoriteHadeeths(),
+        future: context.watch<BookmarkState>().getUpdateList
+            ? _databaseQuery.getFavoriteHadeeths()
+            : _databaseQuery.getFavoriteHadeeths(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return snapshot.hasData
               ? HadeethList(snapshot: snapshot)

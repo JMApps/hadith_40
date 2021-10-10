@@ -35,7 +35,7 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.purple[800],
         actions: [
           IconButton(
             onPressed: () {
@@ -57,7 +57,7 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
         children: [
           HadeethContentTitle(
             hadeethTitle: args.hadeethTitle!,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Colors.purple[800]!,
             textColor: Colors.white,
             borderRadius: 50,
           ),
@@ -93,9 +93,9 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
           Container(
             padding: const EdgeInsets.only(bottom: 16),
             height: 66,
-            decoration: const BoxDecoration(
-              color: Colors.deepPurple,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Colors.purple[800],
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(50),
               ),
             ),

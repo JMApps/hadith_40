@@ -36,7 +36,7 @@ class _HadeethContentState extends State<HadeethContent> {
           '${args.hadeethNumber}',
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue[800],
         actions: [
           IconButton(
             icon: const Icon(
@@ -81,7 +81,7 @@ class _HadeethContentState extends State<HadeethContent> {
         children: [
           HadeethContentTitle(
             hadeethTitle: args.hadeethTitle!,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.blue[800]!,
             textColor: Colors.white,
             borderRadius: 0,
           ),
@@ -103,9 +103,9 @@ class _HadeethContentState extends State<HadeethContent> {
                                   color: Colors.black54),
                               Container(
                                 height: 50,
-                                decoration: const BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.only(
+                                decoration: BoxDecoration(
+                                  color: Colors.blue[800],
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     bottomRight: Radius.circular(25),
                                   ),

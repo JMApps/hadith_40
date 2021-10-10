@@ -11,7 +11,7 @@ class HadeethSearcher extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey[700],
+        color: Colors.grey[800],
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(35),
         ),
@@ -34,12 +34,12 @@ class HadeethSearcher extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Icon(
             CupertinoIcons.search,
-            color: Colors.grey[700],
+            color: Colors.grey[800],
           ),
         ),
         placeholder: 'Поиск хадисов...',
-        placeholderStyle: TextStyle(color: Colors.grey[500]),
-        style: TextStyle(color: Colors.grey[700]),
+        placeholderStyle: const TextStyle(color: Colors.grey),
+        style: TextStyle(color: Colors.grey[800]),
         clearButtonMode: OverlayVisibilityMode.editing,
       ),
     );
