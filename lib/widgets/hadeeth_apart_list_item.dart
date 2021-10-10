@@ -22,6 +22,7 @@ class _HadeethApartListItemState extends State<HadeethApartListItem> {
         style: TextStyle(
           fontSize: context.watch<HadeethSettingsState>().getTextSizeCount + 3,
           fontFamily: 'Arabic',
+          color: context.watch<HadeethSettingsState>().getArabicColor
         ),
         textDirection: TextDirection.rtl,
         textAlign: TextAlign.start,
@@ -32,6 +33,7 @@ class _HadeethApartListItemState extends State<HadeethApartListItem> {
           '#': Style(
             fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount),
             textAlign: TextAlign.end,
+            color: context.watch<HadeethSettingsState>().getTranslationColor
           ),
         },
       ),

@@ -25,6 +25,7 @@ class HadeethArabic extends StatelessWidget {
             direction: TextDirection.rtl,
             textAlign: TextAlign.justify,
             lineHeight: LineHeight.rem(1.3),
+            color: context.watch<HadeethSettingsState>().getArabicColor
           ),
           'small': Style(
             fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),

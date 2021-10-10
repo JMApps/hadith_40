@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/model/hadeeth_argument.dart';
-import 'package:hadith_40/provider/hadeeth_settings_state.dart';
 import 'package:hadith_40/widgets/apart_player.dart';
 import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_settings.dart';
-import 'package:provider/provider.dart';
 
 class HadeethApartContent extends StatefulWidget {
   const HadeethApartContent({Key? key}) : super(key: key);

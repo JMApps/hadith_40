@@ -24,6 +24,7 @@ class _HadeethContentState extends State<HadeethContent> {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as HadeethArgument;
     context.read<HadeethSettingsState>().getLastTextSizeCount();
+    context.read<HadeethSettingsState>().getLastTextsColors();
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(

@@ -20,6 +20,7 @@ class HadeethTranslation extends StatelessWidget {
             fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount),
             fontFamily: 'Gilroy',
             textAlign: TextAlign.justify,
+            color: context.watch<HadeethSettingsState>().getTranslationColor
           ),
           'small': Style(
             fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),
