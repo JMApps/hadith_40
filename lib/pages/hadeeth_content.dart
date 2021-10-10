@@ -4,6 +4,7 @@ import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/model/hadeeth_argument.dart';
 import 'package:hadith_40/widgets/hadeeth_arabic_card.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
+import 'package:hadith_40/widgets/hadeeth_settings.dart';
 import 'package:hadith_40/widgets/hadeeth_translation_card.dart';
 import 'package:hadith_40/widgets/main_player.dart';
 
@@ -51,6 +52,20 @@ class _HadeethContentState extends State<HadeethContent> {
             },
           ),
           IconButton(
+            onPressed: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (BuildContext context) {
+                  return const HadeethSettings();
+                },
+              );
+            },
+            icon: const Icon(
+              CupertinoIcons.settings,
+              color: Colors.white,
+            ),
+          ),
+          IconButton(
             icon: const Icon(
               CupertinoIcons.share,
               color: Colors.white,
@@ -76,13 +91,8 @@ class _HadeethContentState extends State<HadeethContent> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              HadeethArabic(
-                                  hadeethArabic:
-                                      snapshot.data![0].hadeethArabic),
-                              const Divider(
-                                  indent: 16,
-                                  endIndent: 16,
-                                  color: Colors.black54),
+                              HadeethArabic(hadeethArabic: snapshot.data![0].hadeethArabic),
+                              const Divider(indent: 16, endIndent: 16, color: Colors.black54),
                               Container(
                                 height: 50,
                                 decoration: const BoxDecoration(
@@ -94,13 +104,8 @@ class _HadeethContentState extends State<HadeethContent> {
                                 ),
                                 child: const MainPlayer(),
                               ),
-                              const Divider(
-                                  indent: 16,
-                                  endIndent: 16,
-                                  color: Colors.black54),
-                              HadeethTranslation(
-                                  hadeethTranslation:
-                                      snapshot.data![0].hadeethTranslation),
+                              const Divider(indent: 16, endIndent: 16, color: Colors.black54),
+                              HadeethTranslation(hadeethTranslation: snapshot.data![0].hadeethTranslation),
                             ],
                           ),
                         ),

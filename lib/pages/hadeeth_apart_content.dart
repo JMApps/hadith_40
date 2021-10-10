@@ -5,6 +5,7 @@ import 'package:hadith_40/model/hadeeth_argument.dart';
 import 'package:hadith_40/widgets/apart_player.dart';
 import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
+import 'package:hadith_40/widgets/hadeeth_settings.dart';
 
 class HadeethApartContent extends StatefulWidget {
   const HadeethApartContent({Key? key}) : super(key: key);
@@ -33,6 +34,22 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
           ),
         ),
         backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (BuildContext context) {
+                  return const HadeethSettings();
+                },
+              );
+            },
+            icon: const Icon(
+              CupertinoIcons.settings,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [

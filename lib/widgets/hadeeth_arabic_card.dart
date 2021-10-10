@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:hadith_40/provider/hadeeth_settings_state.dart';
+import 'package:provider/provider.dart';
 
 class HadeethArabic extends StatelessWidget {
   const HadeethArabic({Key? key, required this.hadeethArabic})
@@ -17,14 +19,14 @@ class HadeethArabic extends StatelessWidget {
           '#': Style(
             margin: EdgeInsets.zero,
             padding: EdgeInsets.zero,
-            fontSize: const FontSize(20),
+            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount + 3),
             fontFamily: 'Arabic',
             direction: TextDirection.rtl,
             textAlign: TextAlign.justify,
             lineHeight: LineHeight.rem(1.3),
           ),
           'small': Style(
-            fontSize: const FontSize(14),
+            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),
             color: Colors.black54,
             direction: TextDirection.rtl,
           ),

@@ -17,7 +17,7 @@ class HadeethListItem extends StatelessWidget {
           icon: Icon(
             provider.getUpdateList == 0 ? Icons.bookmark_border : Icons.bookmark,
             size: 25,
-            color: Colors.blue,
+            color: Colors.grey[700],
           ),
           onPressed: () {
             provider.updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id!);
@@ -26,10 +26,10 @@ class HadeethListItem extends StatelessWidget {
       ),
       title: Text(
         '${item.hadeethNumber}',
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 18,
-          color: Colors.blue,
-          fontWeight: FontWeight.w600,
+          color: Colors.grey[700],
+          fontWeight: FontWeight.w900,
         ),
       ),
       subtitle: Text(

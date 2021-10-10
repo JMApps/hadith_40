@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hadith_40/provider/bookmark_state.dart';
+import 'package:hadith_40/provider/hadeeth_settings_state.dart';
 import 'package:hadith_40/provider/navigator_index_state.dart';
 import 'package:hadith_40/provider/search_data.dart';
 import 'package:hadith_40/router/app_router.dart';
@@ -13,6 +14,7 @@ void main() {
         ChangeNotifierProvider<NavigatorIndexState>(create: (_) => NavigatorIndexState()),
         ChangeNotifierProvider<SearchData>(create: (_) => SearchData()),
         ChangeNotifierProvider<BookmarkState>(create: (_) => BookmarkState()),
+        ChangeNotifierProvider<HadeethSettingsState>(create: (_) => HadeethSettingsState()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

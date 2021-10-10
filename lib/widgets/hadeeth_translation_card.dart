@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:hadith_40/provider/hadeeth_settings_state.dart';
+import 'package:provider/provider.dart';
 
 class HadeethTranslation extends StatelessWidget {
   const HadeethTranslation({Key? key, required this.hadeethTranslation})
@@ -15,12 +17,12 @@ class HadeethTranslation extends StatelessWidget {
         data: hadeethTranslation,
         style: {
           '#': Style(
-            fontSize: const FontSize(18),
+            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount),
             fontFamily: 'Gilroy',
             textAlign: TextAlign.justify,
           ),
           'small': Style(
-            fontSize: const FontSize(14),
+            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),
             color: Colors.black54,
           ),
         },
