@@ -106,7 +106,7 @@ class _HadeethContentState extends State<HadeethContent> {
                                     bottomRight: Radius.circular(25),
                                   ),
                                 ),
-                                child: const MainPlayer(),
+                                child: MainPlayer(hadeethId: args.id!),
                               ),
                               const Divider(
                                   indent: 16,
