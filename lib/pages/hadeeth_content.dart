@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
@@ -101,10 +102,6 @@ class _HadeethContentState extends State<HadeethContent> {
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.blue[800],
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    bottomRight: Radius.circular(25),
-                                  ),
                                 ),
                                 child: MainPlayer(hadeethId: args.id!),
                               ),

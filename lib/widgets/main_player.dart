@@ -8,15 +8,15 @@ class MainPlayer extends StatelessWidget {
   MainPlayer({Key? key, required this.hadeethId}) : super(key: key);
 
   final int hadeethId;
-  final assetsAudioPlayer = AssetsAudioPlayer();
+  final _assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   Widget build(BuildContext context) {
-    assetsAudioPlayer.open(Audio('assets/audios/hadeeth_$hadeethId.mp3'),
+    _assetsAudioPlayer.open(Audio('assets/audios/hadeeth_$hadeethId.mp3'),
         autoStart: false, loopMode: LoopMode.none);
-    return assetsAudioPlayer.builderRealtimePlayingInfos(
+    return _assetsAudioPlayer.builderRealtimePlayingInfos(
       builder: (context, realtimePlayingInfos) {
-        assetsAudioPlayer.playlistFinished.listen((finished) {
+        _assetsAudioPlayer.playlistFinished.listen((finished) {
           if (finished) {}
         });
         return Row(
@@ -25,13 +25,13 @@ class MainPlayer extends StatelessWidget {
             IconButton(
               icon: Icon(
                 realtimePlayingInfos.isPlaying
-                    ? CupertinoIcons.pause
-                    : CupertinoIcons.play,
+                    ? CupertinoIcons.pause_circle
+                    : CupertinoIcons.play_circle,
                 color: Colors.white,
                 size: 30,
               ),
               onPressed: () {
-                assetsAudioPlayer.playOrPause();
+                _assetsAudioPlayer.playOrPause();
               },
             ),
             Expanded(
@@ -41,7 +41,7 @@ class MainPlayer extends StatelessWidget {
                 value: realtimePlayingInfos.currentPosition.inMilliseconds
                     .toDouble(),
                 onChanged: (value) {
-                  assetsAudioPlayer.seek(Duration(milliseconds: value.toInt()));
+                  _assetsAudioPlayer.seek(Duration(milliseconds: value.toInt()));
                 },
                 thumbColor: Colors.white,
                 activeColor: Colors.blue[300],
@@ -57,12 +57,8 @@ class MainPlayer extends StatelessWidget {
                 size: 30,
               ),
               onPressed: () {
-                context.read<MainPlayerState>().playProgress(
-                    !context.read<MainPlayerState>().getTrackLoopState);
-                assetsAudioPlayer.setLoopMode(
-                    context.read<MainPlayerState>().getTrackLoopState
-                        ? LoopMode.single
-                        : LoopMode.none);
+                context.read<MainPlayerState>().loopState(!context.read<MainPlayerState>().getTrackLoopState);
+                _assetsAudioPlayer.setLoopMode(context.read<MainPlayerState>().getTrackLoopState ? LoopMode.single : LoopMode.none);
               },
             ),
             const SizedBox(width: 16),

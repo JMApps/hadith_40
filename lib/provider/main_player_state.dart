@@ -6,7 +6,7 @@ class MainPlayerState with ChangeNotifier {
 
   bool get getTrackLoopState => _trackLoopState;
 
-  playProgress(bool loopState) {
+  loopState(bool loopState) {
     _trackLoopState = loopState;
     notifyListeners();
   }

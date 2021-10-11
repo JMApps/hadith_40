@@ -70,36 +70,42 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
                         child: Text('${snapshot.error}'),
                       )
                     : snapshot.hasData
-                        ? Scrollbar(
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return HadeethApartListItem(
-                                    item: snapshot.data[index]);
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return const Divider();
-                              },
-                            ),
+                        ? Column(
+                            children: [
+                              Expanded(
+                                child: ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  itemCount: snapshot.data!.length,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return HadeethApartListItem(
+                                        item: snapshot.data[index]);
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return const Divider();
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                height: 66,
+                                decoration: BoxDecoration(
+                                  color: Colors.purple[800],
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(50),
+                                  ),
+                                ),
+                                child: ApartPlayer(snapshot: snapshot),
+                              ),
+                            ],
                           )
                         : const Center(
                             child: CupertinoActivityIndicator(),
                           );
               },
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 16),
-            height: 66,
-            decoration: BoxDecoration(
-              color: Colors.purple[800],
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(50),
-              ),
-            ),
-            child: const ApartPlayer(),
           ),
         ],
       ),
