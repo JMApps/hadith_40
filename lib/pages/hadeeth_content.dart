@@ -8,6 +8,7 @@ import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_settings.dart';
 import 'package:hadith_40/widgets/hadeeth_translation_card.dart';
 import 'package:hadith_40/widgets/main_player.dart';
+import 'package:hadith_40/widgets/share_hadeeth_button.dart';
 import 'package:provider/provider.dart';
 
 class HadeethContent extends StatefulWidget {
@@ -69,13 +70,7 @@ class _HadeethContentState extends State<HadeethContent> {
               color: Colors.white,
             ),
           ),
-          IconButton(
-            icon: const Icon(
-              CupertinoIcons.share,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+          ShareHadeethButton(id: args.id!),
         ],
       ),
       body: Column(

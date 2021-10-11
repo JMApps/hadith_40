@@ -6,6 +6,7 @@ import 'package:hadith_40/widgets/apart_player.dart';
 import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_settings.dart';
+import 'package:hadith_40/widgets/share_hadeeth_button.dart';
 
 class HadeethApartContent extends StatefulWidget {
   const HadeethApartContent({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
               color: Colors.white,
             ),
           ),
+          ShareHadeethButton(id: args.id!),
         ],
       ),
       body: Column(
