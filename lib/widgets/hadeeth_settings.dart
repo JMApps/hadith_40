@@ -42,18 +42,12 @@ class HadeethSettings extends StatelessWidget {
                           activeColor: Colors.blue,
                           min: 14,
                           max: 40,
-                          value: context
-                              .read<HadeethSettingsState>()
-                              .getTextSizeCount,
+                          value: context.read<HadeethSettingsState>().getTextSizeCount,
                           onChanged: (value) {
-                            context
-                                .read<HadeethSettingsState>()
-                                .changeTextSizeCount(value);
+                            context.read<HadeethSettingsState>().changeTextSizeCount(value);
                           },
                           onChangeEnd: (value) {
-                            context
-                                .read<HadeethSettingsState>()
-                                .saveTextSizeCount(value);
+                            context.read<HadeethSettingsState>().saveTextSizeCount(value);
                           },
                         ),
                       ),
