@@ -1,4 +1,3 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
@@ -99,7 +98,7 @@ class _HadeethContentState extends State<HadeethContent> {
                                   endIndent: 16,
                                   color: Colors.black54),
                               Container(
-                                height: 50,
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: Colors.blue[800],
                                 ),
