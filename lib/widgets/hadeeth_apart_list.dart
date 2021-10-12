@@ -18,7 +18,7 @@ class _HadeethApartListState extends State<HadeethApartList> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: widget.snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
-          return HadeethApartListItem(item: widget.snapshot.data![index]);
+          return HadeethApartListItem(item: widget.snapshot.data![index], index: index);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const Divider();

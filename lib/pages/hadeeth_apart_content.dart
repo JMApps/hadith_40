@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_40/data/database_query.dart';
 import 'package:hadith_40/model/hadeeth_argument.dart';
+import 'package:hadith_40/provider/main_player_state.dart';
 import 'package:hadith_40/widgets/apart_player.dart';
 import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_settings.dart';
 import 'package:hadith_40/widgets/share_hadeeth_button.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:provider/provider.dart';
 
 class HadeethApartContent extends StatefulWidget {
   const HadeethApartContent({Key? key}) : super(key: key);
@@ -73,17 +76,17 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
                         ? Column(
                             children: [
                               Expanded(
-                                child: ListView.separated(
+                                child: ScrollablePositionedList.separated(
+                                  itemScrollController: context.read<MainPlayerState>().getItemScrollController,
                                   padding: EdgeInsets.zero,
                                   itemCount: snapshot.data!.length,
                                   physics: const BouncingScrollPhysics(),
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return HadeethApartListItem(
-                                        item: snapshot.data[index]);
+                                        item: snapshot.data[index], index: index);
                                   },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
+                                  separatorBuilder: (BuildContext context, int index) {
                                     return const Divider();
                                   },
                                 ),

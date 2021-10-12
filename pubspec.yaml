@@ -20,8 +20,9 @@ dependencies:
   flutter_html: ^2.1.5
   shared_preferences: ^2.0.8
   o_color_picker: ^1.0.2
-  assets_audio_player: ^3.0.3+6
   share_plus: ^3.0.2
+  assets_audio_player: ^3.0.3+6
+  scrollable_positioned_list: ^0.2.2
 
 dev_dependencies:
   flutter_test:
