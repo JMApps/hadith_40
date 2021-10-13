@@ -6,6 +6,7 @@ import 'package:hadith_40/provider/search_data.dart';
 import 'package:hadith_40/widgets/hadeeth_list.dart';
 import 'package:hadith_40/widgets/hadeeth_searcher.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainHadeethList extends StatelessWidget {
   MainHadeethList({Key? key}) : super(key: key);
@@ -28,6 +29,21 @@ class MainHadeethList extends StatelessWidget {
           ),
           backgroundColor: Colors.grey[800],
           actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.apps,
+                color: Colors.white,
+              ),
+              onPressed: () async {
+                if (await canLaunch(
+                    'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953')) {
+                  await launch(
+                      'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953');
+                } else {
+                  throw 'Could not launch';
+                }
+              },
+            ),
             IconButton(
               icon: const Icon(
                 CupertinoIcons.info,
