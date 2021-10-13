@@ -5,16 +5,16 @@ import 'package:hadith_40/provider/main_player_state.dart';
 import 'package:provider/provider.dart';
 
 class ApartPlayer extends StatefulWidget {
-  const ApartPlayer({Key? key, required this.snapshot}) : super(key: key);
+  const ApartPlayer({Key? key, required this.snapshot, required this.player}) : super(key: key);
 
   final AsyncSnapshot snapshot;
+  final AssetsAudioPlayer player;
 
   @override
   _ApartPlayerState createState() => _ApartPlayerState();
 }
 
 class _ApartPlayerState extends State<ApartPlayer> {
-  final _assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
@@ -22,16 +22,10 @@ class _ApartPlayerState extends State<ApartPlayer> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _assetsAudioPlayer.dispose();
-    super.dispose();
-  }
-
   initPlayer() async {
     var listAudios = List<Audio>.generate(widget.snapshot.data.length,
         (i) => Audio('assets/audios/${widget.snapshot.data[i].nameAudio}.mp3'));
-    _assetsAudioPlayer.open(
+    widget.player.open(
         Playlist(
           audios: listAudios,
         ),
@@ -41,15 +35,16 @@ class _ApartPlayerState extends State<ApartPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return _assetsAudioPlayer.builderRealtimePlayingInfos(
+    return widget.player.builderRealtimePlayingInfos(
       builder: (context, realtimePlayingInfos) {
-        _assetsAudioPlayer.playlistAudioFinished.listen((event) {
-          context.read<MainPlayerState>().toIndex(_assetsAudioPlayer.readingPlaylist!.currentIndex);
+        widget.player.playlistAudioFinished.listen((event) {
+          context.read<MainPlayerState>().setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
+          context.read<MainPlayerState>().toIndex(context.read<MainPlayerState>().getCurrentIndex);
         });
-        _assetsAudioPlayer.playlistFinished.listen((playListFinished) {
+        widget.player.playlistFinished.listen((playListFinished) {
           if (playListFinished) {
             context.read<MainPlayerState>().toIndex(0);
-            context.read<MainPlayerState>().setCurrentIndex();
+            context.read<MainPlayerState>().setCurrentIndexToDefault();
           }
         });
         return Consumer<MainPlayerState>(
@@ -66,8 +61,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                   size: 30,
                 ),
                 onPressed: () {
-                  _assetsAudioPlayer.previous();
-                  mainPlayerState.toIndex(_assetsAudioPlayer.readingPlaylist!.currentIndex);
+                  widget.player.previous();
+                  mainPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               IconButton(
@@ -79,7 +74,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                   size: 35,
                 ),
                 onPressed: () {
-                  _assetsAudioPlayer.playOrPause();
+                  widget.player.playOrPause();
+                  mainPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               IconButton(
@@ -89,8 +85,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                   size: 30,
                 ),
                 onPressed: () {
-                  _assetsAudioPlayer.next(stopIfLast: true);
-                  mainPlayerState.toIndex(_assetsAudioPlayer.readingPlaylist!.currentIndex);
+                  widget.player.next(stopIfLast: true);
+                  mainPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               const Spacer(),
@@ -100,12 +96,12 @@ class _ApartPlayerState extends State<ApartPlayer> {
                   color: context.watch<MainPlayerState>().getTrackLoopState
                       ? Colors.red
                       : Colors.white,
-                  size: 30,
+                  size: 25,
                 ),
                 onPressed: () {
                   context.read<MainPlayerState>().loopState(
                       !context.read<MainPlayerState>().getTrackLoopState);
-                  _assetsAudioPlayer.setLoopMode(
+                  widget.player.setLoopMode(
                       context.read<MainPlayerState>().getTrackLoopState
                           ? LoopMode.single
                           : LoopMode.none);

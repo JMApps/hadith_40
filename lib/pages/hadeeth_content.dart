@@ -46,7 +46,7 @@ class _HadeethContentState extends State<HadeethContent> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed(
+              Navigator.of(context).pushReplacementNamed(
                 '/hadeeth_apart_content',
                 arguments: HadeethArgument(
                   args.id,

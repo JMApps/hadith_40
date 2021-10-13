@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -11,6 +12,16 @@ class MainPlayerState with ChangeNotifier {
   bool _trackLoopState = false;
 
   bool get getTrackLoopState => _trackLoopState;
+
+  playOnly(AssetsAudioPlayer assetsAudioPlayer) {
+    assetsAudioPlayer.playlistPlayAtIndex(_currentTrackIndex);
+    notifyListeners();
+  }
+
+  setCurrentIndex(int index) {
+    _currentTrackIndex = index;
+    notifyListeners();
+  }
 
   ItemScrollController get getItemScrollController => _itemScrollController;
 
@@ -28,7 +39,7 @@ class MainPlayerState with ChangeNotifier {
     notifyListeners();
   }
 
-  setCurrentIndex() {
+  setCurrentIndexToDefault() {
     _currentTrackIndex = -1;
     notifyListeners();
   }
