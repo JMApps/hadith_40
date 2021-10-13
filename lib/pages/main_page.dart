@@ -23,6 +23,7 @@ class MainPage extends StatelessWidget {
           BottomNavigationBarItem(
               icon: Icon(Icons.bookmark_border), label: 'Избранное'),
         ],
+        backgroundColor: Colors.grey[200],
         selectedItemColor: Colors.grey[700],
         unselectedItemColor: Colors.grey,
         currentIndex: context.read<NavigatorIndexState>().getSelectedIndex,
