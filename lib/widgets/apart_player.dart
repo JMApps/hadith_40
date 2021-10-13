@@ -101,7 +101,7 @@ class _ApartPlayerState extends State<ApartPlayer> {
                 icon: Icon(
                   CupertinoIcons.arrow_2_squarepath,
                   color: context.watch<ApartPlayerState>().getTrackLoopState
-                      ? Colors.red
+                      ? Colors.purple[200]
                       : Colors.white,
                   size: 25,
                 ),

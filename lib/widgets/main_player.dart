@@ -82,7 +82,7 @@ class _MainPlayerState extends State<MainPlayer> {
               icon: Icon(
                 CupertinoIcons.arrow_2_squarepath,
                 color: context.watch<MainPlayerState>().getTrackLoopState
-                    ? Colors.red
+                    ? Colors.blue[200]
                     : Colors.white,
                 size: 25,
               ),
