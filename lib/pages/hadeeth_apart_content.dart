@@ -91,12 +91,10 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
                               isAlwaysShown: true,
                               showTrackOnHover: true,
                               child: ScrollablePositionedList.separated(
-                                itemScrollController: context
-                                    .read<ApartPlayerState>()
-                                    .getItemScrollController,
+                                itemScrollController: context.read<ApartPlayerState>().getItemScrollController,
                                 padding: EdgeInsets.zero,
                                 itemCount: snapshot.data!.length,
-                                physics: const BouncingScrollPhysics(),
+                                physics: const ClampingScrollPhysics(),
                                 itemBuilder: (BuildContext context, int index) {
                                   return HadeethApartListItem(
                                     item: snapshot.data[index],
