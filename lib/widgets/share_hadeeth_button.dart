@@ -36,7 +36,8 @@ class ShareHadeethButton extends StatelessWidget {
 
   String _parseHtmlString(String htmlString) {
     final documentText = parse(htmlString);
-    final String parsedString = parse(documentText.body!.text).documentElement!.text;
+    final String parsedString =
+        parse(documentText.body!.text).documentElement!.text;
     return parsedString;
   }
 }

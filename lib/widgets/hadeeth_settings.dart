@@ -42,18 +42,28 @@ class HadeethSettings extends StatelessWidget {
                           activeColor: Colors.blue,
                           min: 14,
                           max: 40,
-                          value: context.read<HadeethSettingsState>().getTextSizeCount,
+                          value: context
+                              .read<HadeethSettingsState>()
+                              .getTextSizeCount,
                           onChanged: (value) {
-                            context.read<HadeethSettingsState>().changeTextSizeCount(value);
+                            context
+                                .read<HadeethSettingsState>()
+                                .changeTextSizeCount(value);
                           },
                           onChangeEnd: (value) {
-                            context.read<HadeethSettingsState>().saveTextSizeCount(value);
+                            context
+                                .read<HadeethSettingsState>()
+                                .saveTextSizeCount(value);
                           },
                         ),
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        context.watch<HadeethSettingsState>().getTextSizeCount.toInt().toString(),
+                        context
+                            .watch<HadeethSettingsState>()
+                            .getTextSizeCount
+                            .toInt()
+                            .toString(),
                         style:
                             const TextStyle(fontSize: 20, color: Colors.blue),
                       ),
@@ -89,11 +99,17 @@ class HadeethSettings extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   OColorPicker(
-                                    selectedColor: context.read<HadeethSettingsState>().getArabicColor,
+                                    selectedColor: context
+                                        .read<HadeethSettingsState>()
+                                        .getArabicColor,
                                     colors: primaryColorsPalette,
                                     onColorChange: (color) {
-                                      context.read<HadeethSettingsState>().changeArabicTextColor(color);
-                                      context.read<HadeethSettingsState>().saveArabicTextColor(color);
+                                      context
+                                          .read<HadeethSettingsState>()
+                                          .changeArabicTextColor(color);
+                                      context
+                                          .read<HadeethSettingsState>()
+                                          .saveArabicTextColor(color);
                                       Navigator.of(context).pop();
                                     },
                                   ),
@@ -115,7 +131,9 @@ class HadeethSettings extends StatelessWidget {
                       height: 35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: context.watch<HadeethSettingsState>().getTranslationColor,
+                        color: context
+                            .watch<HadeethSettingsState>()
+                            .getTranslationColor,
                       ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(25),
@@ -131,11 +149,17 @@ class HadeethSettings extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   OColorPicker(
-                                    selectedColor: context.read<HadeethSettingsState>().getTranslationColor,
+                                    selectedColor: context
+                                        .read<HadeethSettingsState>()
+                                        .getTranslationColor,
                                     colors: primaryColorsPalette,
                                     onColorChange: (color) {
-                                      context.read<HadeethSettingsState>().changeTranslationTextColor(color);
-                                      context.read<HadeethSettingsState>().saveTranslationTextColor(color);
+                                      context
+                                          .read<HadeethSettingsState>()
+                                          .changeTranslationTextColor(color);
+                                      context
+                                          .read<HadeethSettingsState>()
+                                          .saveTranslationTextColor(color);
                                       Navigator.of(context).pop();
                                     },
                                   ),

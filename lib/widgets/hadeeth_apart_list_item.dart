@@ -4,7 +4,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:hadith_40/model/hadeeth_apart_item.dart';
 import 'package:hadith_40/provider/apart_player_state.dart';
 import 'package:hadith_40/provider/hadeeth_settings_state.dart';
-import 'package:hadith_40/provider/main_player_state.dart';
 import 'package:provider/provider.dart';
 
 class HadeethApartListItem extends StatelessWidget {

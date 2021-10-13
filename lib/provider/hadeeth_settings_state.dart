@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HadeethSettingsState with ChangeNotifier {
-
   double _textSizeCount = 18;
 
   double get getTextSizeCount => _textSizeCount;
@@ -48,12 +47,15 @@ class HadeethSettingsState with ChangeNotifier {
 
   saveTranslationTextColor(Color lastTranslationTextColor) async {
     final preferences = await SharedPreferences.getInstance();
-    preferences.setInt('key_translation_text_color', lastTranslationTextColor.value);
+    preferences.setInt(
+        'key_translation_text_color', lastTranslationTextColor.value);
   }
 
   getLastTextsColors() async {
     final preferences = await SharedPreferences.getInstance();
-    _arabicColor = Color(preferences.getInt('key_arabic_text_color') ?? Colors.black.value);
-    _translationColor = Color(preferences.getInt('key_translation_text_color') ?? Colors.black.value);
+    _arabicColor = Color(
+        preferences.getInt('key_arabic_text_color') ?? Colors.black.value);
+    _translationColor = Color(
+        preferences.getInt('key_translation_text_color') ?? Colors.black.value);
   }
 }

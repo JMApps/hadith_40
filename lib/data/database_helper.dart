@@ -42,7 +42,8 @@ class DatabaseHelper {
       await File(path).writeAsBytes(bytes, flush: true);
     }
 
-    var bomDataTable = await openDatabase(path, version: 1, onUpgrade: _onUpgrade);
+    var bomDataTable =
+        await openDatabase(path, version: 1, onUpgrade: _onUpgrade);
     return bomDataTable;
   }
 

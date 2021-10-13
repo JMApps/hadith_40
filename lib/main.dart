@@ -12,11 +12,14 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<NavigatorIndexState>(create: (_) => NavigatorIndexState()),
+        ChangeNotifierProvider<NavigatorIndexState>(
+            create: (_) => NavigatorIndexState()),
         ChangeNotifierProvider<SearchData>(create: (_) => SearchData()),
         ChangeNotifierProvider<BookmarkState>(create: (_) => BookmarkState()),
-        ChangeNotifierProvider<HadeethSettingsState>(create: (_) => HadeethSettingsState()),
-        ChangeNotifierProvider<MainPlayerState>(create: (_) => MainPlayerState()),
+        ChangeNotifierProvider<HadeethSettingsState>(
+            create: (_) => HadeethSettingsState()),
+        ChangeNotifierProvider<MainPlayerState>(
+            create: (_) => MainPlayerState()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

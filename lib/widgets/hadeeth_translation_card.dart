@@ -17,13 +17,14 @@ class HadeethTranslation extends StatelessWidget {
         data: hadeethTranslation,
         style: {
           '#': Style(
-            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount),
-            fontFamily: 'Gilroy',
-            textAlign: TextAlign.justify,
-            color: context.watch<HadeethSettingsState>().getTranslationColor
-          ),
+              fontSize: FontSize(
+                  context.watch<HadeethSettingsState>().getTextSizeCount),
+              fontFamily: 'Gilroy',
+              textAlign: TextAlign.justify,
+              color: context.watch<HadeethSettingsState>().getTranslationColor),
           'small': Style(
-            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),
+            fontSize: FontSize(
+                context.watch<HadeethSettingsState>().getTextSizeCount - 5),
             color: Colors.black54,
           ),
         },

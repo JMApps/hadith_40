@@ -62,8 +62,11 @@ class _MainPlayerState extends State<MainPlayer> {
               child: Slider(
                 min: 0,
                 max: realtimePlayingInfos.duration.inMilliseconds.toDouble(),
-                value: realtimePlayingInfos.currentPosition.inMilliseconds.toDouble(),
-                onChanged: (value) {_assetsAudioPlayer.seek(Duration(milliseconds: value.toInt()));
+                value: realtimePlayingInfos.currentPosition.inMilliseconds
+                    .toDouble(),
+                onChanged: (value) {
+                  _assetsAudioPlayer
+                      .seek(Duration(milliseconds: value.toInt()));
                 },
                 thumbColor: Colors.white,
                 activeColor: Colors.blue[300],
@@ -84,8 +87,12 @@ class _MainPlayerState extends State<MainPlayer> {
                 size: 25,
               ),
               onPressed: () {
-                context.read<MainPlayerState>().loopState(!context.read<MainPlayerState>().getTrackLoopState);
-                _assetsAudioPlayer.setLoopMode(context.read<MainPlayerState>().getTrackLoopState ? LoopMode.single : LoopMode.none);
+                context.read<MainPlayerState>().loopState(
+                    !context.read<MainPlayerState>().getTrackLoopState);
+                _assetsAudioPlayer.setLoopMode(
+                    context.read<MainPlayerState>().getTrackLoopState
+                        ? LoopMode.single
+                        : LoopMode.none);
               },
             ),
             const SizedBox(width: 16),

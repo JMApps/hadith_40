@@ -5,7 +5,8 @@ import 'package:hadith_40/provider/apart_player_state.dart';
 import 'package:provider/provider.dart';
 
 class ApartPlayer extends StatefulWidget {
-  const ApartPlayer({Key? key, required this.snapshot, required this.player}) : super(key: key);
+  const ApartPlayer({Key? key, required this.snapshot, required this.player})
+      : super(key: key);
 
   final AsyncSnapshot snapshot;
   final AssetsAudioPlayer player;
@@ -15,7 +16,6 @@ class ApartPlayer extends StatefulWidget {
 }
 
 class _ApartPlayerState extends State<ApartPlayer> {
-
   @override
   void initState() {
     initPlayer();
@@ -38,8 +38,12 @@ class _ApartPlayerState extends State<ApartPlayer> {
     return widget.player.builderRealtimePlayingInfos(
       builder: (context, realtimePlayingInfos) {
         widget.player.playlistAudioFinished.listen((event) {
-          context.read<ApartPlayerState>().setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
-          context.read<ApartPlayerState>().toIndex(context.read<ApartPlayerState>().getCurrentIndex);
+          context
+              .read<ApartPlayerState>()
+              .setCurrentIndex(widget.player.readingPlaylist!.currentIndex);
+          context
+              .read<ApartPlayerState>()
+              .toIndex(context.read<ApartPlayerState>().getCurrentIndex);
         });
         widget.player.playlistFinished.listen((playListFinished) {
           if (playListFinished) {
@@ -62,7 +66,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                 ),
                 onPressed: () {
                   widget.player.previous();
-                  apartPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
+                  apartPlayerState
+                      .toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               IconButton(
@@ -75,7 +80,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                 ),
                 onPressed: () {
                   widget.player.playOrPause();
-                  apartPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
+                  apartPlayerState
+                      .toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               IconButton(
@@ -86,7 +92,8 @@ class _ApartPlayerState extends State<ApartPlayer> {
                 ),
                 onPressed: () {
                   widget.player.next(stopIfLast: true);
-                  apartPlayerState.toIndex(widget.player.readingPlaylist!.currentIndex);
+                  apartPlayerState
+                      .toIndex(widget.player.readingPlaylist!.currentIndex);
                 },
               ),
               const Spacer(),

@@ -18,17 +18,18 @@ class HadeethArabic extends StatelessWidget {
         data: hadeethArabic,
         style: {
           '#': Style(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount + 3),
-            fontFamily: 'Arabic',
-            direction: TextDirection.rtl,
-            textAlign: TextAlign.justify,
-            lineHeight: LineHeight.rem(1.3),
-            color: context.watch<HadeethSettingsState>().getArabicColor
-          ),
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              fontSize: FontSize(
+                  context.watch<HadeethSettingsState>().getTextSizeCount + 3),
+              fontFamily: 'Arabic',
+              direction: TextDirection.rtl,
+              textAlign: TextAlign.justify,
+              lineHeight: LineHeight.rem(1.3),
+              color: context.watch<HadeethSettingsState>().getArabicColor),
           'small': Style(
-            fontSize: FontSize(context.watch<HadeethSettingsState>().getTextSizeCount - 5),
+            fontSize: FontSize(
+                context.watch<HadeethSettingsState>().getTextSizeCount - 5),
             color: Colors.black54,
             direction: TextDirection.rtl,
           ),

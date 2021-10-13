@@ -34,7 +34,8 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
     final args = ModalRoute.of(context)!.settings.arguments as HadeethArgument;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ApartPlayerState>(create: (_) => ApartPlayerState()),
+        ChangeNotifierProvider<ApartPlayerState>(
+            create: (_) => ApartPlayerState()),
       ],
       child: FutureBuilder<List>(
         future: _databaseQuery.getApartHadeeth(args.id!),
@@ -90,7 +91,9 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
                               isAlwaysShown: true,
                               showTrackOnHover: true,
                               child: ScrollablePositionedList.separated(
-                                itemScrollController: context.read<ApartPlayerState>().getItemScrollController,
+                                itemScrollController: context
+                                    .read<ApartPlayerState>()
+                                    .getItemScrollController,
                                 padding: EdgeInsets.zero,
                                 itemCount: snapshot.data!.length,
                                 physics: const BouncingScrollPhysics(),
@@ -101,7 +104,8 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
                                     player: _assetsAudioPlayer,
                                   );
                                 },
-                                separatorBuilder: (BuildContext context, int index) {
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
                                   return const Divider();
                                 },
                               ),
