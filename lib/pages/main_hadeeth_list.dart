@@ -27,15 +27,29 @@ class MainHadeethList extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.grey[800],
+          actions: [
+            IconButton(
+              icon: const Icon(
+                CupertinoIcons.info,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/about_us');
+              },
+            ),
+          ],
         ),
         body: Column(
           children: [
             const HadeethSearcher(),
             Expanded(
               child: FutureBuilder<List>(
-                future: context.watch<SearchData>().getTextFieldText.isNotEmpty || context.watch<BookmarkState>().getUpdateList
-                    ? _databaseQuery.getSearchResult(context.watch<SearchData>().getTextFieldText)
-                    : _databaseQuery.getAllHadeeths(),
+                future:
+                    context.watch<SearchData>().getTextFieldText.isNotEmpty ||
+                            context.watch<BookmarkState>().getUpdateList
+                        ? _databaseQuery.getSearchResult(
+                            context.watch<SearchData>().getTextFieldText)
+                        : _databaseQuery.getAllHadeeths(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   return snapshot.hasError
                       ? const Center(
