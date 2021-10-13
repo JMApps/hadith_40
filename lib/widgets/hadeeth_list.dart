@@ -8,6 +8,9 @@ class HadeethList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
+      thickness: 5,
+      isAlwaysShown: true,
+      showTrackOnHover: true,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: snapshot.data.length,

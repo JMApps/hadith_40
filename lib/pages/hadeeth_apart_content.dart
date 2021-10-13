@@ -8,8 +8,8 @@ import 'package:hadith_40/widgets/hadeeth_apart_list_item.dart';
 import 'package:hadith_40/widgets/hadeeth_content_title.dart';
 import 'package:hadith_40/widgets/hadeeth_settings.dart';
 import 'package:hadith_40/widgets/share_hadeeth_button.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class HadeethApartContent extends StatefulWidget {
   const HadeethApartContent({Key? key}) : super(key: key);
@@ -22,96 +22,103 @@ class _HadeethApartContentState extends State<HadeethApartContent> {
   final _databaseQuery = DatabaseQuery();
 
   @override
+  void dispose() {
+    context.read<MainPlayerState>().setCurrentIndex();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as HadeethArgument;
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        title: Text(
-          '${args.hadeethNumber}',
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.purple[800],
-        actions: [
-          IconButton(
-            onPressed: () {
-              showCupertinoModalPopup(
-                context: context,
-                builder: (BuildContext context) {
-                  return const HadeethSettings();
-                },
-              );
-            },
-            icon: const Icon(
-              CupertinoIcons.settings,
-              color: Colors.white,
-            ),
-          ),
-          ShareHadeethButton(id: args.id!),
-        ],
-      ),
-      body: Column(
-        children: [
-          HadeethContentTitle(
-            hadeethTitle: args.hadeethTitle!,
-            backgroundColor: Colors.purple[800]!,
-            textColor: Colors.white,
-            borderRadius: 50,
-          ),
-          Expanded(
-            child: FutureBuilder<List>(
-              future: _databaseQuery.getApartHadeeth(args.id!),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                return snapshot.hasError
-                    ? Center(
-                        child: Text('${snapshot.error}'),
-                      )
-                    : snapshot.hasData
-                        ? Column(
-                            children: [
-                              Expanded(
-                                child: ScrollablePositionedList.separated(
-                                  itemScrollController: context.read<MainPlayerState>().getItemScrollController,
-                                  padding: EdgeInsets.zero,
-                                  itemCount: snapshot.data!.length,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return HadeethApartListItem(
-                                        item: snapshot.data[index], index: index);
-                                  },
-                                  separatorBuilder: (BuildContext context, int index) {
-                                    return const Divider();
-                                  },
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                height: 66,
-                                decoration: BoxDecoration(
-                                  color: Colors.purple[800],
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(50),
-                                  ),
-                                ),
-                                child: ApartPlayer(snapshot: snapshot),
-                              ),
-                            ],
-                          )
-                        : const Center(
-                            child: CupertinoActivityIndicator(),
-                          );
-              },
-            ),
-          ),
-        ],
-      ),
+    return FutureBuilder<List>(
+      future: _databaseQuery.getApartHadeeth(args.id!),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return snapshot.hasError
+            ? Center(
+                child: Text('${snapshot.error}'),
+              )
+            : snapshot.hasData
+                ? Scaffold(
+                    appBar: AppBar(
+                      iconTheme: const IconThemeData(
+                        color: Colors.white,
+                      ),
+                      centerTitle: true,
+                      elevation: 0,
+                      title: Text(
+                        '${args.hadeethNumber}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      backgroundColor: Colors.purple[800],
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            showCupertinoModalPopup(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const HadeethSettings();
+                              },
+                            );
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.settings,
+                            color: Colors.white,
+                          ),
+                        ),
+                        ShareHadeethButton(id: args.id!),
+                      ],
+                    ),
+                    body: Column(
+                      children: [
+                        HadeethContentTitle(
+                          hadeethTitle: args.hadeethTitle!,
+                          backgroundColor: Colors.purple[800]!,
+                          textColor: Colors.white,
+                          borderRadius: 50,
+                        ),
+                        Expanded(
+                          child: Scrollbar(
+                            thickness: 5,
+                            isAlwaysShown: true,
+                            showTrackOnHover: true,
+                            child: ScrollablePositionedList.separated(
+                              itemScrollController: context
+                                  .read<MainPlayerState>()
+                                  .getItemScrollController,
+                              padding: EdgeInsets.zero,
+                              itemCount: snapshot.data!.length,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return HadeethApartListItem(
+                                    item: snapshot.data[index], index: index);
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const Divider();
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    bottomNavigationBar: Container(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      height: 66,
+                      decoration: BoxDecoration(
+                        color: Colors.purple[800],
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                        ),
+                      ),
+                      child: ApartPlayer(snapshot: snapshot),
+                    ),
+                  )
+                : const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+      },
     );
   }
 }

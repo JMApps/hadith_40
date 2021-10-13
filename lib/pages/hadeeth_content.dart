@@ -87,6 +87,9 @@ class _HadeethContentState extends State<HadeethContent> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 return snapshot.hasData
                     ? Scrollbar(
+                        thickness: 5,
+                        isAlwaysShown: true,
+                        showTrackOnHover: true,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
