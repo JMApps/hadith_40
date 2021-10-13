@@ -20,7 +20,9 @@ class HadeethListItem extends StatelessWidget {
             color: Colors.grey[700],
           ),
           onPressed: () {
-            provider.updateBookmarkState(item.favoriteState == 0 ? 1 : 0, item.id!);
+            provider.updateBookmarkState(
+                item.favoriteState == 0 ? 1 : 0, item.id!);
+            _showSnackBar(context);
           },
         ),
       ),
@@ -48,6 +50,25 @@ class HadeethListItem extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  _showSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor:
+            item.favoriteState == 0 ? Colors.grey[700] : Colors.red,
+        content: item.favoriteState == 0
+            ? const Text(
+                'Добавлено',
+                style: TextStyle(fontSize: 18),
+              )
+            : const Text(
+                'Удалено',
+                style: TextStyle(fontSize: 18),
+              ),
+        duration: const Duration(milliseconds: 500),
+      ),
     );
   }
 }
