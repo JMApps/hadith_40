@@ -25,25 +25,28 @@ class MainHadithItem extends StatelessWidget {
     final ToggleBookmarkState hadithsState = Provider.of<ToggleBookmarkState>(context);
     final bool isBookmark = hadithsState.isBookmarks(hadithId: model.id);
     return ListTile(
-      onTap: () {
-        hadithsState.toggleBookmarks(hadithId: model.id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: appColors.inversePrimary,
-            duration: const Duration(milliseconds: 250),
-            content: Text(
-              isBookmark ? locale.removed : locale.added,
-              style: TextStyle(
-                fontSize: 18,
-                color: appColors.mainDefault,
+      onTap: () {},
+      tileColor: index.isOdd ? oddItemColor : evenItemColor,
+      leading: IconButton(
+        onPressed: () {
+          hadithsState.toggleBookmarks(hadithId: model.id);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: appColors.inversePrimary,
+              duration: const Duration(milliseconds: 250),
+              content: Text(
+                isBookmark ? locale.removed : locale.added,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: appColors.mainDefault,
+                ),
               ),
             ),
-          ),
-        );
-      },
-      tileColor: index.isOdd ? oddItemColor : evenItemColor,
-      leading: Icon(
-        isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
+          );
+        },
+        icon: Icon(
+          isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
+        ),
         color: appColors.primary,
       ),
       title: Text(

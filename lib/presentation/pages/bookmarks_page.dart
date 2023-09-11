@@ -33,32 +33,36 @@ class _BookmarksPageState extends State<BookmarksPage> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    return FutureBuilder<List<BookmarkHadithEntity>>(
-      future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(
-        tableName: locale.tableName,
-        bookmarks: context.read<ToggleBookmarkState>().getBookmarkHadithsList,
-      ),
-      builder: (BuildContext context, AsyncSnapshot<List<BookmarkHadithEntity>> snapshot) {
-        if (snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(locale.bookmarks),
-            ),
-            body: CupertinoScrollbar(
-              child: ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final BookmarkHadithEntity bookmarkHadithEntity = snapshot.data![index];
-                  return BookmarkHadithItem(
-                    model: bookmarkHadithEntity,
-                    index: index,
-                  );
-                },
-              ),
-            ),
-          );
-        }
-        return DataIsEmptyText(message: locale.isEmptyBookmarks);
+    return Consumer<ToggleBookmarkState>(
+      builder: (BuildContext context, _, __) {
+        return FutureBuilder<List<BookmarkHadithEntity>>(
+          future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(
+            tableName: locale.tableName,
+            bookmarks: context.read<ToggleBookmarkState>().getBookmarkHadithsList,
+          ),
+          builder: (BuildContext context, AsyncSnapshot<List<BookmarkHadithEntity>> snapshot) {
+            if (snapshot.hasData) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(locale.bookmarks),
+                ),
+                body: CupertinoScrollbar(
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final BookmarkHadithEntity bookmarkHadithEntity = snapshot.data![index];
+                      return BookmarkHadithItem(
+                        model: bookmarkHadithEntity,
+                        index: index,
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+            return DataIsEmptyText(message: locale.isEmptyBookmarks);
+          },
+        );
       },
     );
   }

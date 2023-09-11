@@ -26,24 +26,28 @@ class BookmarkHadithItem extends StatelessWidget {
     final bool isBookmark = hadithsState.isBookmarks(hadithId: model.id);
     return ListTile(
       onTap: () {
-        hadithsState.toggleBookmarks(hadithId: model.id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: appColors.inversePrimary,
-            duration: const Duration(milliseconds: 250),
-            content: Text(
-              locale.removed,
-              style: TextStyle(
-                fontSize: 18,
-                color: appColors.mainDefault,
-              ),
-            ),
-          ),
-        );
       },
       tileColor: index.isOdd ? oddItemColor : evenItemColor,
-      leading: Icon(
-        isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
+      leading: IconButton(
+        onPressed: () {
+          hadithsState.toggleBookmarks(hadithId: model.id);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: appColors.inversePrimary,
+              duration: const Duration(milliseconds: 250),
+              content: Text(
+                locale.removed,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: appColors.mainDefault,
+                ),
+              ),
+            ),
+          );
+        },
+        icon: Icon(
+          isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
+        ),
         color: appColors.primary,
       ),
       title: Text(
