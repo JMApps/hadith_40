@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hadith_40/domain/entities/hadith_entity.dart';
+import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
 
 class MainHadithItem extends StatelessWidget {
   const MainHadithItem({super.key, required this.model, required this.index});
 
-  final HadithEntity model;
+  final ChapterHadithEntity model;
   final int index;
 
   @override

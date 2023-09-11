@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
-import 'package:hadith_40/data/repositories/hadith_data_repository.dart';
-import 'package:hadith_40/domain/entities/hadith_entity.dart';
-import 'package:hadith_40/domain/usecases/all_hadith_use_case.dart';
+import 'package:hadith_40/data/repositories/chapter_hadith_data_repository.dart';
+import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
+import 'package:hadith_40/domain/usecases/chapter_hadiths_use_case.dart';
 import 'package:hadith_40/presentation/items/main_hadith_item.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
 
@@ -17,23 +17,23 @@ class HadithPage extends StatefulWidget {
 
 class _HadithPageState extends State<HadithPage> {
   late final DatabaseHelper _databaseHelper;
-  late final HadithDataRepository _hadithDataRepository;
-  late final AllHadithUseCase _allHadithUseCase;
+  late final ChapterHadithDataRepository _chapterHadithDataRepository;
+  late final ChapterHadithsUseCase _chapterHadithsUseCase;
 
   @override
   void initState() {
     _databaseHelper = DatabaseHelper();
-    _hadithDataRepository = HadithDataRepository(databaseHelper: _databaseHelper);
-    _allHadithUseCase = AllHadithUseCase(hadithRepository: _hadithDataRepository);
+    _chapterHadithDataRepository = ChapterHadithDataRepository(databaseHelper: _databaseHelper);
+    _chapterHadithsUseCase = ChapterHadithsUseCase(chapterHadithRepository: _chapterHadithDataRepository);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    return FutureBuilder<List<HadithEntity>>(
-      future: _allHadithUseCase.getAllHadiths(tableName: locale.tableName),
-      builder: (BuildContext context, AsyncSnapshot<List<HadithEntity>> snapshot) {
+    return FutureBuilder<List<ChapterHadithEntity>>(
+      future: _chapterHadithsUseCase.getAllChapterHadiths(tableName: locale.tableName),
+      builder: (BuildContext context, AsyncSnapshot<List<ChapterHadithEntity>> snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
@@ -43,8 +43,8 @@ class _HadithPageState extends State<HadithPage> {
               child: ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final HadithEntity hadithEntity = snapshot.data![index];
-                  return MainHadithItem(model: hadithEntity, index: index);
+                  final ChapterHadithEntity chapterHadithEntity = snapshot.data![index];
+                  return MainHadithItem(model: chapterHadithEntity, index: index);
                 },
               ),
             ),
