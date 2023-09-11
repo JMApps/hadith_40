@@ -14,6 +14,11 @@ class AppTheme {
       centerTitle: true,
       elevation: 0,
     ),
+    textTheme: TextTheme(
+      displayMedium: TextStyle(
+        fontSize: 18,
+      ),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -28,6 +33,11 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
+    ),
+    textTheme: TextTheme(
+      displayMedium: TextStyle(
+        fontSize: 18,
+      ),
     ),
   );
 }
