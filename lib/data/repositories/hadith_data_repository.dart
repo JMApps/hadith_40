@@ -11,9 +11,9 @@ class HadithDataRepository implements HadithRepository {
   HadithDataRepository({required this.databaseHelper});
 
   @override
-  Future<List<HadithEntity>> getAllHadiths() async {
+  Future<List<HadithEntity>> getAllHadiths({required String tableName}) async {
     final Database dbClient = await databaseHelper.db;
-    var res = await dbClient.query('Table_of_hadith_ru');
+    var res = await dbClient.query(tableName);
     List<HadithEntity>? allHadiths = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(Hadith.fromMap(c))).toList() : null;
     return allHadiths!;
   }

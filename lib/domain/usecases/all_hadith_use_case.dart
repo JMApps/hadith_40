@@ -6,9 +6,9 @@ class AllHadithUseCase {
 
   AllHadithUseCase({required this.hadithRepository});
 
-  Future<List<HadithEntity>> getAllHadiths() async {
+  Future<List<HadithEntity>> getAllHadiths({required String tableName}) async {
     try {
-      final List<HadithEntity> hadiths = await hadithRepository.getAllHadiths();
+      final List<HadithEntity> hadiths = await hadithRepository.getAllHadiths(tableName: tableName);
       return hadiths;
     } catch (e) {
       throw Exception(e.toString());
