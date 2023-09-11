@@ -15,6 +15,22 @@ dependencies:
 
   intl: ^0.18.1
   cupertino_icons: ^1.0.2
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  html: ^0.15.4
+  sqflite: ^2.3.0
+  flutter_html: ^3.0.0-beta.2
+  share_plus: ^7.1.0
+  clipboard: ^0.1.3
+  scrollable_positioned_list: ^0.3.8
+  screenshot: ^2.1.0
+  just_audio: ^0.9.34
+  hive_flutter: ^2.0.0-dev
+  flip_card: ^0.7.0
+  smooth_page_indicator: ^1.1.0
+  provider: ^6.0.5
+  flutter_material_color_picker: ^1.2.0
+  wakelock_plus: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +41,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - assets/databases/
+    - assets/audios/
+    - assets/fonts/
 
   fonts:
     - family: Gilroy
