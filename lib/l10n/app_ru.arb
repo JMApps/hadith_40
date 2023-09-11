@@ -1,5 +1,9 @@
 {
   "@@locale": "ru",
   "tableName": "Table_of_hadith_ru",
-  "appName": "40 хадисов"
+  "appName": "40 хадисов",
+  "hadiths": "Хадисы",
+  "bookmarks": "Избранное",
+  "apart": "Раздельно",
+  "settings": "Настройки"
 }
