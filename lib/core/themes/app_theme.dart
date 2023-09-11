@@ -14,10 +14,16 @@ class AppTheme {
       centerTitle: true,
       elevation: 0,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayMedium: TextStyle(
         fontSize: 18,
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      showSelectedLabels: true,
+      showUnselectedLabels: false,
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.grey,
     ),
   );
 
@@ -34,10 +40,16 @@ class AppTheme {
       centerTitle: true,
       elevation: 0,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayMedium: TextStyle(
         fontSize: 18,
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      showSelectedLabels: true,
+      showUnselectedLabels: false,
+      selectedItemColor: Colors.orange,
+      unselectedItemColor: Colors.grey,
     ),
   );
 }
