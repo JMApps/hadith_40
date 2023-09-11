@@ -1,5 +1,5 @@
 name: hadith_40
-description: 40 hadith imam an-Nawawi.
+description: 40 hadith imam an-Nawawi
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -10,9 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localization:
+  flutter_localizations:
     sdk: flutter
 
+  intl: ^0.18.1
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
