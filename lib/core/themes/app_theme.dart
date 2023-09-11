@@ -6,9 +6,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: Colors.grey,
-      secondary: Colors.blue,
-      tertiary: Colors.white,
+      seedColor: Colors.blue,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -22,8 +20,8 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: Color(0xFF2196F3),
+      unselectedItemColor: Color(0xDD000000),
     ),
   );
 
@@ -32,9 +30,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: Colors.teal,
-      secondary: Colors.orange,
-      tertiary: Colors.grey,
+      seedColor: Colors.blue,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -48,8 +44,8 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      selectedItemColor: Colors.orange,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: Color(0xFF2196F3),
+      unselectedItemColor: Color(0xFFE3F2FD),
     ),
   );
 }
