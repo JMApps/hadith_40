@@ -25,3 +25,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy_medium.ttf
