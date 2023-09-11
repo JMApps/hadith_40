@@ -10,11 +10,11 @@ class ContentHadithDataRepository implements ContentHadithRepository {
   ContentHadithDataRepository({required this.databaseHelper});
 
   @override
-  Future<ContentHadithEntity> getContentHadithById({required String tableName, required int hadithId}) async {
+  Future<List<ContentHadithEntity>> getContentHadithById({required String tableName, required int hadithId}) async {
     final Database dbClient = await databaseHelper.db;
-    final List<Map<String, Object?>> res = await dbClient.query(tableName, where: 'id = $hadithId');
-    final ContentHadithEntity contentHadith = _mapToHadithEntity(ContentHadith.fromMap(res.first));
-    return contentHadith;
+    final List<Map<String, Object?>> res = await dbClient.query(tableName);
+    List<ContentHadithEntity>? contentHadith = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(ContentHadith.fromMap(c))).toList() : null;
+    return contentHadith!;
   }
 
   // Mapping to entity

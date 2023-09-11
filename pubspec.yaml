@@ -51,3 +51,6 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/gilroy_medium.ttf
+    - family: Arabic
+      fonts:
+        - asset: assets/fonts/arabic.ttf

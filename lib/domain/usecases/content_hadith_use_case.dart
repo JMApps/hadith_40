@@ -6,12 +6,12 @@ class ContentHadithUseCase {
 
   ContentHadithUseCase({required this.contentHadithRepository});
 
-  Future<ContentHadithEntity> getContentHadithById({
+  Future<List<ContentHadithEntity>> getContentHadithById({
     required String tableName,
     required int hadithId,
   }) async {
     try {
-      final ContentHadithEntity contentHadith =
+      final List<ContentHadithEntity> contentHadith =
           await contentHadithRepository.getContentHadithById(
         tableName: tableName,
         hadithId: hadithId,
