@@ -1,16 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
+import 'package:hadith_40/data/repositories/hadith_data_repository.dart';
+import 'package:hadith_40/domain/entities/hadith_entity.dart';
+import 'package:hadith_40/domain/usecases/all_hadith_use_case.dart';
+import 'package:hadith_40/presentation/widgets/error_text.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  late final HadithDataRepository hadithDataRepository;
+  late final AllHadithUseCase allHadithUseCase =
+      AllHadithUseCase(hadithRepository: hadithDataRepository);
+
+  @override
+  void initState() {
+    hadithDataRepository =
+        HadithDataRepository(databaseHelper: DatabaseHelper());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appName,),
+        title: Text(
+          AppLocalizations.of(context)!.appName,
+        ),
       ),
-      body: Container(),
+      body: FutureBuilder<List<HadithEntity>>(
+        future: allHadithUseCase.getAllHadiths(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<HadithEntity>> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                final HadithEntity hadithEntity = snapshot.data![index];
+                return Text(hadithEntity.hadithTitle);
+              },
+            );
+          } else if (snapshot.hasError) {
+            return ErrorText(errorMessage: snapshot.error.toString());
+          }
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        },
+      ),
     );
   }
 }
