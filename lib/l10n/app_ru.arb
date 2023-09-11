@@ -4,6 +4,7 @@
   "appName": "40 хадисов",
   "hadiths": "Хадисы",
   "bookmarks": "Избранное",
+  "isEmptyBookmarks": "Избранного нет",
   "apart": "Раздельно",
   "settings": "Настройки"
 }
