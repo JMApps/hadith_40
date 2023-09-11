@@ -14,14 +14,15 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  late final HadithDataRepository hadithDataRepository;
-  late final AllHadithUseCase allHadithUseCase =
-      AllHadithUseCase(hadithRepository: hadithDataRepository);
+  late final DatabaseHelper _databaseHelper;
+  late final HadithDataRepository _hadithDataRepository;
+  late final AllHadithUseCase _allHadithUseCase;
 
   @override
   void initState() {
-    hadithDataRepository =
-        HadithDataRepository(databaseHelper: DatabaseHelper());
+    _databaseHelper  = DatabaseHelper();
+    _hadithDataRepository = HadithDataRepository(databaseHelper: _databaseHelper);
+    _allHadithUseCase = AllHadithUseCase(hadithRepository: _hadithDataRepository);
     super.initState();
   }
 
@@ -34,7 +35,7 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       body: FutureBuilder<List<HadithEntity>>(
-        future: allHadithUseCase.getAllHadiths(),
+        future: _allHadithUseCase.getAllHadiths(),
         builder:
             (BuildContext context, AsyncSnapshot<List<HadithEntity>> snapshot) {
           if (snapshot.hasData) {
