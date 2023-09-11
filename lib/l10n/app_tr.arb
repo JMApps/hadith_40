@@ -1,5 +1,14 @@
 {
   "@@locale": "tr",
   "tableName": "Table_of_hadith_tr",
-  "appName": "40 hadis"
+  "appName": "40 hadis",
+  "hadiths": "Хадисы",
+  "bookmarks": "Избранное",
+  "isEmptyBookmarks": "Избранного нет",
+  "added": "Добавлено",
+  "removed": "Удалено",
+  "apart": "Раздельно",
+  "settings": "Настройки",
+  "searchHadith": "Поиск хадиса",
+  "searchIsEmpty": "По вашему запросу ничего не найдено"
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hadith_40/core/routes/route_page_names.dart';
 import 'package:hadith_40/core/themes/app_theme.dart';
 import 'package:hadith_40/data/datasources/state/toggle_bookmark_state.dart';
+import 'package:hadith_40/data/models/arguments/content_hadith_args.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +27,13 @@ class MainHadithItem extends StatelessWidget {
     final ToggleBookmarkState hadithsState = Provider.of<ToggleBookmarkState>(context);
     final bool isBookmark = hadithsState.isBookmarks(hadithId: model.id);
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RoutePageNames.pageContentHadith,
+          arguments: ContentHadithArgs(hadithId: model.id),
+        );
+      },
       tileColor: index.isOdd ? oddItemColor : evenItemColor,
       leading: IconButton(
         onPressed: () {

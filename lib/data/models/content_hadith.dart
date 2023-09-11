@@ -1,4 +1,4 @@
-class Hadith {
+class ContentHadith {
   final int id;
   final String hadithNumber;
   final String hadithTitle;
@@ -6,7 +6,7 @@ class Hadith {
   final String hadithTranslation;
   final String nameAudio;
 
-  Hadith({
+  ContentHadith({
     required this.id,
     required this.hadithNumber,
     required this.hadithTitle,
@@ -15,8 +15,8 @@ class Hadith {
     required this.nameAudio,
   });
 
-  factory Hadith.fromMap(Map<String, dynamic> map) {
-    return Hadith(
+  factory ContentHadith.fromMap(Map<String, dynamic> map) {
+    return ContentHadith(
       id: map['id'] as int,
       hadithNumber: map['hadeeth_number'] as String,
       hadithTitle: map['hadeeth_title'] as String,

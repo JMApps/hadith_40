@@ -1,4 +1,4 @@
-class HadithEntity {
+class ContentHadithEntity {
   final int id;
   final String hadithNumber;
   final String hadithTitle;
@@ -6,7 +6,7 @@ class HadithEntity {
   final String hadithTranslation;
   final String nameAudio;
 
-  HadithEntity({
+  ContentHadithEntity({
     required this.id,
     required this.hadithNumber,
     required this.hadithTitle,
