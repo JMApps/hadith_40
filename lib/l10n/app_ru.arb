@@ -5,6 +5,8 @@
   "hadiths": "Хадисы",
   "bookmarks": "Избранное",
   "isEmptyBookmarks": "Избранного нет",
+  "added": "Добавлено",
+  "removed": "Удалено",
   "apart": "Раздельно",
   "settings": "Настройки"
 }
