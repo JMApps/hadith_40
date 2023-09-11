@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hadith_40/presentation/pages/root_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -13,7 +14,6 @@ void main() {
       ),
     );
   }
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     const RootPage(),
   );

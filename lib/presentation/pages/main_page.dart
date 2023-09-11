@@ -6,6 +6,8 @@ import 'package:hadith_40/presentation/pages/apart_page.dart';
 import 'package:hadith_40/presentation/pages/bookmarks_page.dart';
 import 'package:hadith_40/presentation/pages/hadith_page.dart';
 import 'package:hadith_40/presentation/pages/settings_page.dart';
+import 'package:hadith_40/presentation/uistate/main_ui_state.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,6 +17,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
   final List<Widget> _mainScreens = [
     const HadithPage(),
     const BookmarksPage(),
@@ -25,13 +28,16 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final MainUiState mainUiState = Provider.of<MainUiState>(context);
     final AppLocalizations locale = AppLocalizations.of(context)!;
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
-        child: _mainScreens[0],
+        child: _mainScreens[mainUiState.getBottomBarIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: mainUiState.getBottomBarIndex,
+        onTap: (int? index) => mainUiState.setBottomBarIndex = index!,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(CupertinoIcons.rectangle_grid_1x2),
