@@ -7,6 +7,7 @@ import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
 import 'package:hadith_40/domain/usecases/chapter_list_use_case.dart';
 import 'package:hadith_40/presentation/items/main_hadith_item.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
+import 'package:hadith_40/presentation/widgets/search_hadith_delegate.dart';
 
 class HadithPage extends StatefulWidget {
   const HadithPage({super.key});
@@ -33,17 +34,32 @@ class _HadithPageState extends State<HadithPage> {
     final AppLocalizations locale = AppLocalizations.of(context)!;
     return FutureBuilder<List<ChapterHadithEntity>>(
       future: _chapterListUseCase.getAllChapterHadiths(tableName: locale.tableName),
-      builder: (BuildContext context, AsyncSnapshot<List<ChapterHadithEntity>> snapshot) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<ChapterHadithEntity>> snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
               title: Text(locale.appName),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: SearchHadithDelegate(
+                        hintText: locale.searchHadith,
+                      ),
+                    );
+                  },
+                  icon: const Icon(CupertinoIcons.search),
+                ),
+              ],
             ),
             body: CupertinoScrollbar(
               child: ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final ChapterHadithEntity chapterHadithEntity = snapshot.data![index];
+                  final ChapterHadithEntity chapterHadithEntity =
+                      snapshot.data![index];
                   return MainHadithItem(
                     model: chapterHadithEntity,
                     index: index,
