@@ -1,9 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hadith_40/data/datasources/state/bookmark_hadiths_state.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
+import 'package:provider/provider.dart';
 
 class MainHadithItem extends StatelessWidget {
-  const MainHadithItem({super.key, required this.model, required this.index});
+  const MainHadithItem({
+    super.key,
+    required this.model,
+    required this.index,
+  });
 
   final ChapterHadithEntity model;
   final int index;
@@ -13,11 +19,15 @@ class MainHadithItem extends StatelessWidget {
     final ColorScheme appColors = Theme.of(context).colorScheme;
     final Color oddItemColor = appColors.primary.withOpacity(0.15);
     final Color evenItemColor = appColors.primary.withOpacity(0.05);
+    final BookmarkHadithsState hadithsState = Provider.of<BookmarkHadithsState>(context);
+    final bool isBookmark = hadithsState.isBookmarks(hadithId: model.id);
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        hadithsState.toggleBookmarks(hadithId: model.id);
+      },
       tileColor: index.isOdd ? oddItemColor : evenItemColor,
       leading: Icon(
-        CupertinoIcons.bookmark,
+        isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
         color: appColors.primary,
       ),
       title: Text(

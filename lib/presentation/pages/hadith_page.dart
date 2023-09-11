@@ -44,7 +44,10 @@ class _HadithPageState extends State<HadithPage> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   final ChapterHadithEntity chapterHadithEntity = snapshot.data![index];
-                  return MainHadithItem(model: chapterHadithEntity, index: index);
+                  return MainHadithItem(
+                    model: chapterHadithEntity,
+                    index: index,
+                  );
                 },
               ),
             ),
