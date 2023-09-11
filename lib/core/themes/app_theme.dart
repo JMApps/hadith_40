@@ -16,6 +16,9 @@ class AppTheme {
       displayMedium: TextStyle(
         fontSize: 18,
       ),
+      bodyMedium: TextStyle(
+        fontSize: 18,
+      ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: true,
@@ -38,6 +41,9 @@ class AppTheme {
     ),
     textTheme: const TextTheme(
       displayMedium: TextStyle(
+        fontSize: 18,
+      ),
+      bodyMedium: TextStyle(
         fontSize: 18,
       ),
     ),
