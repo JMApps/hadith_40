@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/core/routes/app_routes.dart';
 import 'package:hadith_40/core/themes/app_theme.dart';
+import 'package:hadith_40/data/datasources/state/toggle_bookmark_state.dart';
 import 'package:hadith_40/presentation/uistate/main_ui_state.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,9 @@ class RootPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => MainUiState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ToggleBookmarkState(),
         ),
       ],
       child: MaterialApp(

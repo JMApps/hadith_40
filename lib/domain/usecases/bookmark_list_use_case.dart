@@ -1,9 +1,9 @@
-import 'package:hadith_40/domain/repositories/bookmark_hadiths_repository.dart';
+import 'package:hadith_40/domain/repositories/toggle_bookmark_repository.dart';
 
-class BookmarkHadithsUseCase {
-  final BookmarkHadithsRepository bookmarkHadithsRepository;
+class BookmarkListUseCase {
+  final ToggleBookmarkRepository bookmarkHadithsRepository;
 
-  BookmarkHadithsUseCase({required this.bookmarkHadithsRepository});
+  BookmarkListUseCase({required this.bookmarkHadithsRepository});
 
   Future<void> toggleBookmark({required int hadithId}) async {
     await bookmarkHadithsRepository.toggleBookmarks(hadithId: hadithId);

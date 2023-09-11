@@ -1,13 +1,13 @@
 import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
 import 'package:hadith_40/data/models/bookmark_hadith.dart';
 import 'package:hadith_40/domain/entities/bookmark_hadith_entity.dart';
-import 'package:hadith_40/domain/repositories/bookmark_hadith_repository.dart';
+import 'package:hadith_40/domain/repositories/bookmark_list_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
-class BookmarkHadithDataRepository implements BookmarkHadithRepository {
+class BookmarkListDataRepository implements BookmarkListRepository {
   final DatabaseHelper databaseHelper;
 
-  BookmarkHadithDataRepository({required this.databaseHelper});
+  BookmarkListDataRepository({required this.databaseHelper});
 
   @override
   Future<List<BookmarkHadithEntity>> getBookmarksChapterHadiths({

@@ -1,13 +1,13 @@
 import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
 import 'package:hadith_40/data/models/chapter_hadith.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
-import 'package:hadith_40/domain/repositories/chapter_hadith_repository.dart';
+import 'package:hadith_40/domain/repositories/chapter_list_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ChapterHadithDataRepository implements ChapterHadithRepository {
+class ChapterListDataRepository implements ChapterListRepository {
   final DatabaseHelper databaseHelper;
 
-  ChapterHadithDataRepository({required this.databaseHelper});
+  ChapterListDataRepository({required this.databaseHelper});
 
   @override
   Future<List<ChapterHadithEntity>> getAllChapterHadiths(

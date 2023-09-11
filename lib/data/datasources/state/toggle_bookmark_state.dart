@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hadith_40/core/strings/app_constraints.dart';
-import 'package:hadith_40/domain/repositories/bookmark_hadiths_repository.dart';
+import 'package:hadith_40/domain/repositories/toggle_bookmark_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class BookmarkHadithsState extends ChangeNotifier implements BookmarkHadithsRepository {
+class ToggleBookmarkState extends ChangeNotifier implements ToggleBookmarkRepository {
 
   final Box _bookmarkHadithsBox = Hive.box(AppConstraints.keyBookmarkHadithsBox);
 
@@ -11,7 +11,7 @@ class BookmarkHadithsState extends ChangeNotifier implements BookmarkHadithsRepo
 
   List<int> get getBookmarkHadithsList => _bookmarkHadithsList;
 
-  BookmarkHadithsState() {
+  ToggleBookmarkState() {
     _bookmarkHadithsList = _bookmarkHadithsBox.get(AppConstraints.keyBookmarkHadiths, defaultValue: <int>[]);
   }
 

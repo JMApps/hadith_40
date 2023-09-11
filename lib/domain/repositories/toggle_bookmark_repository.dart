@@ -1,4 +1,4 @@
-abstract class BookmarkHadithsRepository {
+abstract class ToggleBookmarkRepository {
   Future<void> toggleBookmarks({required int hadithId});
 
   bool isBookmarks({required int hadithId});

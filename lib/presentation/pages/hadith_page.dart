@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
-import 'package:hadith_40/data/repositories/chapter_hadith_data_repository.dart';
+import 'package:hadith_40/data/repositories/chapter_list_data_repository.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
-import 'package:hadith_40/domain/usecases/chapter_hadiths_use_case.dart';
+import 'package:hadith_40/domain/usecases/chapter_list_use_case.dart';
 import 'package:hadith_40/presentation/items/main_hadith_item.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
 
@@ -17,14 +17,14 @@ class HadithPage extends StatefulWidget {
 
 class _HadithPageState extends State<HadithPage> {
   late final DatabaseHelper _databaseHelper;
-  late final ChapterHadithDataRepository _chapterHadithDataRepository;
-  late final ChapterHadithsUseCase _chapterHadithsUseCase;
+  late final ChapterListDataRepository _chapterHadithDataRepository;
+  late final ChapterListUseCase _chapterListUseCase;
 
   @override
   void initState() {
     _databaseHelper = DatabaseHelper();
-    _chapterHadithDataRepository = ChapterHadithDataRepository(databaseHelper: _databaseHelper);
-    _chapterHadithsUseCase = ChapterHadithsUseCase(chapterHadithRepository: _chapterHadithDataRepository);
+    _chapterHadithDataRepository = ChapterListDataRepository(databaseHelper: _databaseHelper);
+    _chapterListUseCase = ChapterListUseCase(chapterHadithRepository: _chapterHadithDataRepository);
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _HadithPageState extends State<HadithPage> {
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
     return FutureBuilder<List<ChapterHadithEntity>>(
-      future: _chapterHadithsUseCase.getAllChapterHadiths(tableName: locale.tableName),
+      future: _chapterListUseCase.getAllChapterHadiths(tableName: locale.tableName),
       builder: (BuildContext context, AsyncSnapshot<List<ChapterHadithEntity>> snapshot) {
         if (snapshot.hasData) {
           return Scaffold(

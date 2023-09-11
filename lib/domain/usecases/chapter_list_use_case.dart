@@ -1,10 +1,10 @@
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
-import 'package:hadith_40/domain/repositories/chapter_hadith_repository.dart';
+import 'package:hadith_40/domain/repositories/chapter_list_repository.dart';
 
-class ChapterHadithsUseCase {
-  final ChapterHadithRepository chapterHadithRepository;
+class ChapterListUseCase {
+  final ChapterListRepository chapterHadithRepository;
 
-  ChapterHadithsUseCase({required this.chapterHadithRepository});
+  ChapterListUseCase({required this.chapterHadithRepository});
 
   Future<List<ChapterHadithEntity>> getAllChapterHadiths({
     required String tableName,

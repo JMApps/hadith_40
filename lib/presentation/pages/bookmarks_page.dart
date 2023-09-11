@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
-import 'package:hadith_40/data/repositories/bookmark_hadith_data_repository.dart';
+import 'package:hadith_40/data/datasources/state/toggle_bookmark_state.dart';
+import 'package:hadith_40/data/repositories/bookmark_list_data_repository.dart';
 import 'package:hadith_40/domain/entities/bookmark_hadith_entity.dart';
-import 'package:hadith_40/domain/usecases/bookmark_hadiths_use_case.dart';
+import 'package:hadith_40/domain/usecases/toggle_bookmark_use_case.dart';
 import 'package:hadith_40/presentation/items/bookmark_hadith_item.dart';
 import 'package:hadith_40/presentation/widgets/data_is_empty_text.dart';
-import 'package:hadith_40/presentation/widgets/error_text.dart';
+import 'package:provider/provider.dart';
 
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({super.key});
@@ -18,14 +19,14 @@ class BookmarksPage extends StatefulWidget {
 
 class _BookmarksPageState extends State<BookmarksPage> {
   late final DatabaseHelper _databaseHelper;
-  late final BookmarkHadithDataRepository _bookmarkHadithDataRepository;
-  late final BookmarkHadithsUseCase _bookmarkHadithsUseCase;
+  late final BookmarkListDataRepository _bookmarkHadithDataRepository;
+  late final ToggleBookmarkUseCase _bookmarkHadithsUseCase;
 
   @override
   void initState() {
     _databaseHelper = DatabaseHelper();
-    _bookmarkHadithDataRepository = BookmarkHadithDataRepository(databaseHelper: _databaseHelper);
-    _bookmarkHadithsUseCase = BookmarkHadithsUseCase(bookmarkHadithRepository: _bookmarkHadithDataRepository);
+    _bookmarkHadithDataRepository = BookmarkListDataRepository(databaseHelper: _databaseHelper);
+    _bookmarkHadithsUseCase = ToggleBookmarkUseCase(bookmarkHadithRepository: _bookmarkHadithDataRepository);
     super.initState();
   }
 
@@ -33,7 +34,10 @@ class _BookmarksPageState extends State<BookmarksPage> {
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
     return FutureBuilder<List<BookmarkHadithEntity>>(
-      future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(tableName: locale.tableName, bookmarks: [0]),
+      future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(
+        tableName: locale.tableName,
+        bookmarks: context.read<ToggleBookmarkState>().getBookmarkHadithsList,
+      ),
       builder: (BuildContext context, AsyncSnapshot<List<BookmarkHadithEntity>> snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
@@ -45,14 +49,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   final BookmarkHadithEntity bookmarkHadithEntity = snapshot.data![index];
-                  return BookmarkHadithItem(model: bookmarkHadithEntity, index: index);
+                  return BookmarkHadithItem(
+                    model: bookmarkHadithEntity,
+                    index: index,
+                  );
                 },
               ),
             ),
-          );
-        } else if (snapshot.hasError) {
-          return ErrorText(
-            errorMessage: snapshot.error.toString(),
           );
         }
         return DataIsEmptyText(message: locale.isEmptyBookmarks);
