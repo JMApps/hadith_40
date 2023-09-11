@@ -13,7 +13,7 @@ class ChapterListDataRepository implements ChapterListRepository {
   Future<List<ChapterHadithEntity>> getAllChapterHadiths(
       {required String tableName}) async {
     final Database dbClient = await databaseHelper.db;
-    var res = await dbClient.query(tableName);
+    final List<Map<String, Object?>> res = await dbClient.query(tableName);
     List<ChapterHadithEntity>? allChapterHadiths = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(ChapterHadith.fromMap(c))).toList() : null;
     return allChapterHadiths!;
   }

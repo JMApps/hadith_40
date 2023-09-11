@@ -13,7 +13,7 @@ class SearchListDataRepository implements SearchListRepository {
   Future<List<SearchHadithEntity>> getSearchChapterHadiths(
       {required String tableName}) async {
     final Database dbClient = await databaseHelper.db;
-    var res = await dbClient.query(tableName);
+    final List<Map<String, Object?>> res = await dbClient.query(tableName);
     List<SearchHadithEntity>? allChapterHadiths = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(SearchHadith.fromMap(c))).toList() : null;
     return allChapterHadiths!;
   }

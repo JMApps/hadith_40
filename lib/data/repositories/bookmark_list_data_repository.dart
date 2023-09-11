@@ -15,11 +15,7 @@ class BookmarkListDataRepository implements BookmarkListRepository {
     required List<int> bookmarks,
   }) async {
     final Database dbClient = await databaseHelper.db;
-    var res = await dbClient.query(
-      tableName,
-      where: 'id in (${bookmarks.map((id) => '?').join(', ')})',
-      whereArgs: bookmarks,
-    );
+    final List<Map<String, Object?>> res = await dbClient.query(tableName, where: 'id in (${bookmarks.map((id) => '?').join(', ')})', whereArgs: bookmarks,);
     List<BookmarkHadithEntity>? allBookmarksHadiths = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(BookmarkHadith.fromMap(c))).toList() : null;
     return allBookmarksHadiths!;
   }
