@@ -13,5 +13,19 @@
   "searchHadith": "Поиск хадиса",
   "searchIsEmpty": "По вашему запросу ничего не найдено",
   "nextPage": "Следующая",
-  "previousPage": "Предыдущая"
+  "previousPage": "Предыдущая",
+  "arabicTextFont": "Арабский шрифт",
+  "textFont": "Шрифт перевода",
+  "arabicAlignText": "Расположение арабского текста",
+  "alignText": "Расположение текста перевода",
+  "arabicTextSize": "Размер арабского текста",
+  "textSize": "Размер текста перевода",
+  "arabicTextColor": "Цвет арабского текста",
+  "textColor": "Цвет текста перевода",
+  "forLightTheme": "Для светлой темы",
+  "forDarkTheme": "Для темной темы",
+  "close": "Закрыть",
+  "adaptiveTheme": "Адаптивная тема",
+  "darkTheme": "Темная тема",
+  "displayAlways": "Дисплей всегда включён"
 }

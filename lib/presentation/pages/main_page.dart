@@ -52,7 +52,6 @@ class _MainPageState extends State<MainPage> {
             label: locale.settings,
             tooltip: locale.settings,
           ),
-          // Cделать условие для других языков
           const BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.info),
             label: 'О нас',
