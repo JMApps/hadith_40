@@ -11,7 +11,7 @@ class ContentMediaButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        OutlinedButton(
+        FilledButton(
           onPressed: () {
             pageController.previousPage(
               duration: const Duration(milliseconds: 750),
@@ -24,9 +24,12 @@ class ContentMediaButtons extends StatelessWidget {
         ),
         OutlinedButton(
           onPressed: () {},
-          child: const Icon(CupertinoIcons.play_circle, size: 35,),
+          child: const Icon(
+            CupertinoIcons.play_circle,
+            size: 35,
+          ),
         ),
-        OutlinedButton(
+        FilledButton(
           onPressed: () {
             pageController.nextPage(
               duration: const Duration(milliseconds: 750),

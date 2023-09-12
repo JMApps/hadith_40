@@ -9,13 +9,4 @@ class MainUiState extends ChangeNotifier {
     _bottomBarIndex = index;
     notifyListeners();
   }
-
-  int _contentPageIndex = 0;
-
-  int get getContentPageIndex => _contentPageIndex;
-
-  set setContentPageIndex(int pageIndex) {
-    _contentPageIndex = pageIndex;
-    notifyListeners();
-  }
 }
