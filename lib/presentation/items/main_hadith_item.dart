@@ -31,7 +31,7 @@ class MainHadithItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          RoutePageNames.pageContentHadith,
+          RoutePageNames.pageContentHadithName,
           arguments: ContentHadithArgs(hadithId: model.id),
         );
       },
@@ -53,6 +53,7 @@ class MainHadithItem extends StatelessWidget {
             ),
           );
         },
+        tooltip: locale.bookmarks,
         icon: Icon(
           isBookmark ? CupertinoIcons.bookmark_solid : CupertinoIcons.bookmark,
         ),

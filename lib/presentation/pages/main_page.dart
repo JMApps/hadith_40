@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/presentation/pages/about_us_page.dart';
-import 'package:hadith_40/presentation/pages/apart_page.dart';
 import 'package:hadith_40/presentation/pages/bookmarks_page.dart';
 import 'package:hadith_40/presentation/pages/chapters_page.dart';
 import 'package:hadith_40/presentation/pages/settings_page.dart';
@@ -21,7 +20,6 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _mainScreens = [
     const ChaptersPage(),
     const BookmarksPage(),
-    const ApartPage(),
     const SettingsPage(),
     const AboutUsPage(),
   ];
@@ -50,15 +48,11 @@ class _MainPageState extends State<MainPage> {
             tooltip: locale.bookmarks,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.layers_alt),
-            label: locale.apart,
-            tooltip: locale.apart,
-          ),
-          BottomNavigationBarItem(
             icon: const Icon(CupertinoIcons.settings),
             label: locale.settings,
             tooltip: locale.settings,
           ),
+          // Cделать условие для других языков
           const BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.info),
             label: 'О нас',

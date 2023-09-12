@@ -30,7 +30,7 @@ class SearchHadithItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          RoutePageNames.pageContentHadith,
+          RoutePageNames.pageContentHadithName,
           arguments: ContentHadithArgs(hadithId: model.id),
         );
       },
