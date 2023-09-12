@@ -31,15 +31,15 @@ class SettingsPage extends StatelessWidget {
                 CupertinoSlidingSegmentedControl(
                   thumbColor: appTheme.colorScheme.inversePrimary,
                   padding: const EdgeInsets.all(4),
-                  children: <int, Widget>{
+                  children: const <int, Widget>{
                     0: Text(
-                      'Uthmani',
+                      'Noto Naskh',
                     ),
                     1: Text(
-                      'Hafs',
+                      'Vazirmatn',
                     ),
                     2: Text(
-                      'Sch',
+                      'Scheherez.',
                     ),
                   },
                   groupValue: settingsState.getArabicFontIndex,
@@ -55,15 +55,15 @@ class SettingsPage extends StatelessWidget {
                 CupertinoSlidingSegmentedControl(
                   thumbColor: appTheme.colorScheme.inversePrimary,
                   padding: const EdgeInsets.all(4),
-                  children: <int, Widget>{
+                  children: const <int, Widget>{
                     0: Text(
-                      'Montserrat',
-                    ),
-                    1: Text(
                       'Gilroy',
                     ),
+                    1: Text(
+                      'Roboto',
+                    ),
                     2: Text(
-                      'Nexa',
+                      'Noto Serif',
                     ),
                   },
                   groupValue: settingsState.getFontIndex,

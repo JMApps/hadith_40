@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hadith_40/domain/entities/apart_hadith_entity.dart';
+import 'package:hadith_40/presentation/widgets/content_arabic_html_text.dart';
 import 'package:hadith_40/presentation/widgets/content_html_text.dart';
 
 class ApartHadithItem extends StatelessWidget {
@@ -20,14 +21,8 @@ class ApartHadithItem extends StatelessWidget {
     return ListTile(
       onTap: () {},
       tileColor: index.isOdd ? oddItemColor : evenItemColor,
-      title: Text(
-        model.hadithArabic,
-        style: TextStyle(
-          color: appColors.primary,
-          fontSize: 30,
-          fontFamily: 'Arabic',
-        ),
-        textDirection: TextDirection.rtl,
+      title: ContentArabicHtmlText(
+        content: model.hadithArabic,
       ),
       subtitle: ContentHtmlText(
         content: model.hadithTranslation,

@@ -16,7 +16,7 @@ class AppSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _fontIndex = 0;
+  int _fontIndex = 2;
 
   int get getFontIndex => _fontIndex;
 
@@ -26,7 +26,7 @@ class AppSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _textArabicAlignIndex = 0;
+  int _textArabicAlignIndex = 1;
 
   int get getTextArabicAlignIndex => _textArabicAlignIndex;
 
@@ -36,7 +36,7 @@ class AppSettingsState extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _textAlignIndex = 0;
+  int _textAlignIndex = 1;
 
   int get getTextAlignIndex => _textAlignIndex;
 
@@ -140,9 +140,9 @@ class AppSettingsState extends ChangeNotifier {
 
   AppSettingsState() {
     _arabicFontIndex = _contentSettingsBox.get(AppConstraints.keyArabicFontIndex, defaultValue: 0);
-    _fontIndex = _contentSettingsBox.get(AppConstraints.keyFontIndex, defaultValue: 0);
-    _textArabicAlignIndex = _contentSettingsBox.get(AppConstraints.keyArabicTextAlign, defaultValue: 0);
-    _textAlignIndex = _contentSettingsBox.get(AppConstraints.keyTextAlign, defaultValue: 0);
+    _fontIndex = _contentSettingsBox.get(AppConstraints.keyFontIndex, defaultValue: 2);
+    _textArabicAlignIndex = _contentSettingsBox.get(AppConstraints.keyArabicTextAlign, defaultValue: 1);
+    _textAlignIndex = _contentSettingsBox.get(AppConstraints.keyTextAlign, defaultValue: 1);
     _arabicTextSize = _contentSettingsBox.get(AppConstraints.keyArabicTextSize, defaultValue: 25.0);
     _textSize = _contentSettingsBox.get(AppConstraints.keyTextSize, defaultValue: 18.0);
     _arabicLightTextColor = Color(_contentSettingsBox.get(AppConstraints.keyArabicLightTextColor, defaultValue: Colors.teal.shade700.value));
