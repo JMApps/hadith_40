@@ -33,20 +33,20 @@ class _BookmarksPageState extends State<BookmarksPage> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    return Consumer<ToggleBookmarkState>(
-      builder: (BuildContext context, _, __) {
-        return FutureBuilder<List<BookmarkHadithEntity>>(
-          future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(
-            tableName: locale.tableName,
-            bookmarks: context.read<ToggleBookmarkState>().getBookmarkHadithsList,
-          ),
-          builder: (BuildContext context, AsyncSnapshot<List<BookmarkHadithEntity>> snapshot) {
-            if (snapshot.hasData) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(locale.bookmarks),
-                ),
-                body: CupertinoScrollbar(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(locale.bookmarks),
+      ),
+      body: Consumer<ToggleBookmarkState>(
+        builder: (BuildContext context, _, __) {
+          return FutureBuilder<List<BookmarkHadithEntity>>(
+            future: _bookmarkHadithsUseCase.getBookmarkChapterHadiths(
+              tableName: locale.tableName,
+              bookmarks: context.read<ToggleBookmarkState>().getBookmarkHadithsList,
+            ),
+            builder: (BuildContext context, AsyncSnapshot<List<BookmarkHadithEntity>> snapshot) {
+              if (snapshot.hasData) {
+                return CupertinoScrollbar(
                   child: ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -57,13 +57,14 @@ class _BookmarksPageState extends State<BookmarksPage> {
                       );
                     },
                   ),
-                ),
-              );
-            }
-            return DataIsEmptyText(message: locale.isEmptyBookmarks);
-          },
-        );
-      },
+                );
+              } else {
+                return DataIsEmptyText(message: locale.isEmptyBookmarks);
+              }
+            },
+          );
+        },
+      ),
     );
   }
 }
