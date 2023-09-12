@@ -1,7 +1,8 @@
-import 'package:hadith_40/data/models/content_hadith.dart';
+
+import 'package:hadith_40/data/models/content_hadith_model.dart';
 
 abstract class ContentHadithInterface {
-  Future<List<ContentHadith>> getContentHadith({
+  Future<List<ContentHadithModel>> getContentHadith({
     required String tableName,
     required int hadithId,
   });

@@ -1,7 +1,7 @@
-import 'package:hadith_40/data/models/chapter_hadith.dart';
+import 'package:hadith_40/data/models/chapter_hadith_model.dart';
 
 abstract class ChapterInterface {
-  Future<List<ChapterHadith>> getChapterHadiths({
+  Future<List<ChapterHadithModel>> getChapterHadiths({
     required String tableName,
   });
 }

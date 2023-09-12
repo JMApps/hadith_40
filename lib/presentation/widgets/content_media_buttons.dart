@@ -11,7 +11,7 @@ class ContentMediaButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        FilledButton(
+        FilledButton.tonal(
           onPressed: () {
             pageController.previousPage(
               duration: const Duration(milliseconds: 750),
@@ -22,14 +22,14 @@ class ContentMediaButtons extends StatelessWidget {
             CupertinoIcons.chevron_back,
           ),
         ),
-        OutlinedButton(
+        FilledButton.tonal(
           onPressed: () {},
           child: const Icon(
             CupertinoIcons.play_circle,
             size: 35,
           ),
         ),
-        FilledButton(
+        FilledButton.tonal(
           onPressed: () {
             pageController.nextPage(
               duration: const Duration(milliseconds: 750),

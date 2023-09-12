@@ -1,4 +1,4 @@
-class ContentHadith {
+class ContentHadithModel {
   final int id;
   final String hadithNumber;
   final String hadithTitle;
@@ -6,7 +6,7 @@ class ContentHadith {
   final String hadithTranslation;
   final String nameAudio;
 
-  ContentHadith({
+  const ContentHadithModel({
     required this.id,
     required this.hadithNumber,
     required this.hadithTitle,
@@ -15,8 +15,8 @@ class ContentHadith {
     required this.nameAudio,
   });
 
-  factory ContentHadith.fromMap(Map<String, dynamic> map) {
-    return ContentHadith(
+  factory ContentHadithModel.fromMap(Map<String, dynamic> map) {
+    return ContentHadithModel(
       id: map['id'] as int,
       hadithNumber: map['hadeeth_number'] as String,
       hadithTitle: map['hadeeth_title'] as String,

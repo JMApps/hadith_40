@@ -1,5 +1,5 @@
 import 'package:hadith_40/data/datasources/databases/local/queries/local_chapter_hadiths.dart';
-import 'package:hadith_40/data/models/chapter_hadith.dart';
+import 'package:hadith_40/data/models/chapter_hadith_model.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
 import 'package:hadith_40/domain/repositories/chapter_hadiths_repository.dart';
 
@@ -10,7 +10,7 @@ class ChapterHadithDataRepository implements ChapterHadithsRepository {
 
   @override
   Future<List<ChapterHadithEntity>> getChapterHadiths({required String tableName}) async {
-    final List<ChapterHadith> chapterHadiths = await localChapterHadiths.getChapterHadiths(tableName: tableName);
+    final List<ChapterHadithModel> chapterHadiths = await localChapterHadiths.getChapterHadiths(tableName: tableName);
     final List<ChapterHadithEntity> chapterHadithEntities = chapterHadiths.map((chapterHadith) {
       return _mapToHadithEntity(chapterHadith);
     }).toList();
@@ -18,7 +18,7 @@ class ChapterHadithDataRepository implements ChapterHadithsRepository {
   }
 
   // Mapping to entity
-  ChapterHadithEntity _mapToHadithEntity(ChapterHadith hadith) {
+  ChapterHadithEntity _mapToHadithEntity(ChapterHadithModel hadith) {
     return ChapterHadithEntity(
       id: hadith.id,
       hadithNumber: hadith.hadithNumber,

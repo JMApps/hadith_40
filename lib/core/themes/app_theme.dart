@@ -27,6 +27,9 @@ class AppTheme {
       selectedItemColor: Color(0xFF2196F3),
       unselectedItemColor: Color(0xDD000000),
     ),
+    sliderTheme: const SliderThemeData(
+      trackHeight: 1,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -35,7 +38,6 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
       seedColor: Colors.blue,
-      secondary: Colors.red,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -54,6 +56,9 @@ class AppTheme {
       showUnselectedLabels: false,
       selectedItemColor: Color(0xFF2196F3),
       unselectedItemColor: Color(0xFFE3F2FD),
+    ),
+    sliderTheme: const SliderThemeData(
+      trackHeight: 1,
     ),
   );
 }
