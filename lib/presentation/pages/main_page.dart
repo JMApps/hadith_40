@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/presentation/pages/about_us_page.dart';
 import 'package:hadith_40/presentation/pages/apart_page.dart';
 import 'package:hadith_40/presentation/pages/bookmarks_page.dart';
-import 'package:hadith_40/presentation/pages/hadith_page.dart';
+import 'package:hadith_40/presentation/pages/chapters_page.dart';
 import 'package:hadith_40/presentation/pages/settings_page.dart';
 import 'package:hadith_40/presentation/uistate/main_ui_state.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   final List<Widget> _mainScreens = [
-    const HadithPage(),
+    const ChaptersPage(),
     const BookmarksPage(),
     const ApartPage(),
     const SettingsPage(),

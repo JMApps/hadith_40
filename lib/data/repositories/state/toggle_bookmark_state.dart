@@ -16,7 +16,7 @@ class ToggleBookmarkState extends ChangeNotifier implements ToggleBookmarkReposi
   }
 
   @override
-  Future<void> toggleBookmarks({required int hadithId}) async {
+  Future<void> toggleBookmark({required int hadithId}) async {
     final exist = _bookmarkHadithsList.contains(hadithId);
     if (exist) {
       _bookmarkHadithsList.remove(hadithId);
@@ -28,7 +28,7 @@ class ToggleBookmarkState extends ChangeNotifier implements ToggleBookmarkReposi
   }
 
   @override
-  bool isBookmarks({required int hadithId}) {
+  bool isBookmark({required int hadithId}) {
     return _bookmarkHadithsList.contains(hadithId);
   }
 

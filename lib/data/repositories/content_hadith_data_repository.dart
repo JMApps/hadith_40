@@ -1,20 +1,20 @@
-import 'package:hadith_40/data/datasources/local/databases/database_helper.dart';
+import 'package:hadith_40/data/datasources/databases/local/queries/local_content_hadith.dart';
 import 'package:hadith_40/data/models/content_hadith.dart';
 import 'package:hadith_40/domain/entities/content_hadith_entity.dart';
 import 'package:hadith_40/domain/repositories/content_hadith_repository.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ContentHadithDataRepository implements ContentHadithRepository {
-  final DatabaseHelper databaseHelper;
+  final LocalContentHadith localContentHadith;
 
-  ContentHadithDataRepository({required this.databaseHelper});
+  ContentHadithDataRepository({required this.localContentHadith});
 
   @override
-  Future<List<ContentHadithEntity>> getContentHadithById({required String tableName, required int hadithId}) async {
-    final Database dbClient = await databaseHelper.db;
-    final List<Map<String, Object?>> res = await dbClient.query(tableName);
-    List<ContentHadithEntity>? contentHadith = res.isNotEmpty ? res.map((c) => _mapToHadithEntity(ContentHadith.fromMap(c))).toList() : null;
-    return contentHadith!;
+  Future<List<ContentHadithEntity>> getContentHadith({required String tableName, required int hadithId}) async {
+    final List<ContentHadith> hadithById = await localContentHadith.getContentHadith(tableName: tableName, hadithId: hadithId);
+    final List<ContentHadithEntity> hadithByIdEntities = hadithById.map((chapterHadith) {
+      return _mapToHadithEntity(chapterHadith);
+    }).toList();
+    return hadithByIdEntities;
   }
 
   // Mapping to entity

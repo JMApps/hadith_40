@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/core/routes/route_page_names.dart';
 import 'package:hadith_40/core/themes/app_theme.dart';
-import 'package:hadith_40/data/datasources/state/toggle_bookmark_state.dart';
 import 'package:hadith_40/data/models/arguments/content_hadith_args.dart';
-import 'package:hadith_40/domain/entities/bookmark_hadith_entity.dart';
+import 'package:hadith_40/data/repositories/state/toggle_bookmark_state.dart';
+import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
+import 'package:hadith_40/domain/usecases/toggle_bookmark_use_case.dart';
 import 'package:provider/provider.dart';
 
 class BookmarkHadithItem extends StatelessWidget {
@@ -15,7 +16,7 @@ class BookmarkHadithItem extends StatelessWidget {
     required this.index,
   });
 
-  final BookmarkHadithEntity model;
+  final ChapterHadithEntity model;
   final int index;
 
   @override
@@ -24,8 +25,8 @@ class BookmarkHadithItem extends StatelessWidget {
     final Color oddItemColor = appColors.primary.withOpacity(0.15);
     final Color evenItemColor = appColors.primary.withOpacity(0.05);
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    final ToggleBookmarkState hadithsState = Provider.of<ToggleBookmarkState>(context);
-    final bool isBookmark = hadithsState.isBookmarks(hadithId: model.id);
+    final ToggleBookmarkUseCase bookmarkUseCase = ToggleBookmarkUseCase(bookmarkHadithsRepository: Provider.of<ToggleBookmarkState>(context));
+    final bool isBookmark = bookmarkUseCase.isBookmark(hadithId: model.id);
     return ListTile(
       onTap: () {
         Navigator.pushNamed(
@@ -37,7 +38,7 @@ class BookmarkHadithItem extends StatelessWidget {
       tileColor: index.isOdd ? oddItemColor : evenItemColor,
       leading: IconButton(
         onPressed: () {
-          hadithsState.toggleBookmarks(hadithId: model.id);
+          bookmarkUseCase.toggleBookmark(hadithId: model.id);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: appColors.inversePrimary,

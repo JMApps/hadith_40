@@ -1,23 +1,19 @@
-import 'package:hadith_40/domain/entities/bookmark_hadith_entity.dart';
-import 'package:hadith_40/domain/repositories/bookmark_list_repository.dart';
+import 'package:hadith_40/domain/repositories/toggle_bookmark_repository.dart';
 
 class ToggleBookmarkUseCase {
-  final BookmarkListRepository bookmarkHadithRepository;
+  final ToggleBookmarkRepository bookmarkHadithsRepository;
 
-  ToggleBookmarkUseCase({required this.bookmarkHadithRepository});
+  ToggleBookmarkUseCase({required this.bookmarkHadithsRepository});
 
-  Future<List<BookmarkHadithEntity>> getBookmarkChapterHadiths({
-    required String tableName,
-    required List<int> bookmarks,
-  }) async {
-    try {
-      final List<BookmarkHadithEntity> bookmarkHadiths = await bookmarkHadithRepository.getBookmarksChapterHadiths(
-        tableName: tableName,
-        bookmarks: bookmarks,
-      );
-      return bookmarkHadiths;
-    } catch (e) {
-      throw Exception(e.toString());
-    }
+  Future<void> toggleBookmark({required int hadithId}) async {
+    await bookmarkHadithsRepository.toggleBookmark(hadithId: hadithId);
+  }
+
+  bool isBookmark({required int hadithId}) {
+    return bookmarkHadithsRepository.isBookmark(hadithId: hadithId);
+  }
+
+  List<int> bookmarkIds() {
+    return bookmarkHadithsRepository.bookmarkIds();
   }
 }

@@ -1,7 +1,7 @@
 abstract class ToggleBookmarkRepository {
-  Future<void> toggleBookmarks({required int hadithId});
+  Future<void> toggleBookmark({required int hadithId});
 
-  bool isBookmarks({required int hadithId});
+  bool isBookmark({required int hadithId});
 
   List<int> bookmarkIds();
 }
