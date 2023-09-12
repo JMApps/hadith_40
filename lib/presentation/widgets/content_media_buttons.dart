@@ -9,7 +9,7 @@ class ContentMediaButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         FilledButton.tonal(
           onPressed: () {
@@ -20,13 +20,6 @@ class ContentMediaButtons extends StatelessWidget {
           },
           child: const Icon(
             CupertinoIcons.chevron_back,
-          ),
-        ),
-        FilledButton.tonal(
-          onPressed: () {},
-          child: const Icon(
-            CupertinoIcons.play_circle,
-            size: 35,
           ),
         ),
         FilledButton.tonal(

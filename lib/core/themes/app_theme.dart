@@ -6,8 +6,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: Colors.blue,
-      secondary: Colors.red,
+      seedColor: Colors.teal,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -24,8 +23,8 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      selectedItemColor: Color(0xFF2196F3),
-      unselectedItemColor: Color(0xDD000000),
+      selectedItemColor: Color(0xFF00796B),
+      unselectedItemColor: Color(0xFF424242),
     ),
     sliderTheme: const SliderThemeData(
       trackHeight: 1,
@@ -37,7 +36,7 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: Colors.blue,
+      seedColor: Colors.teal,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -54,8 +53,8 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      selectedItemColor: Color(0xFF2196F3),
-      unselectedItemColor: Color(0xFFE3F2FD),
+      selectedItemColor: Color(0xFF009688),
+      unselectedItemColor: Color(0xFFB2DFDB),
     ),
     sliderTheme: const SliderThemeData(
       trackHeight: 1,
@@ -68,4 +67,3 @@ extension CustomColors on ColorScheme {
       ? const Color(0xB2000000)
       : const Color(0xFFBDBDBD);
 }
-

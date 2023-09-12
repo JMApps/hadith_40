@@ -110,9 +110,9 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                     ),
                   ),
                   bottomNavigationBar: Container(
-                    padding: AppStyles.mainMardingMini,
-                    color: appColors.inversePrimary,
-                    height: 70,
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+                    color: Colors.transparent,
+                    height: 80,
                     child: ContentMediaButtons(pageController: _pageController),
                   ),
                 );
