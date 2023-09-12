@@ -1,6 +1,7 @@
 {
   "@@locale": "ru",
   "tableName": "Table_of_hadith_ru",
+  "apartTableName": "Table_of_hadith_cut_ru",
   "appName": "40 хадисов",
   "hadiths": "Хадисы",
   "bookmarks": "Избранное",
@@ -10,5 +11,7 @@
   "apart": "Раздельно",
   "settings": "Настройки",
   "searchHadith": "Поиск хадиса",
-  "searchIsEmpty": "По вашему запросу ничего не найдено"
+  "searchIsEmpty": "По вашему запросу ничего не найдено",
+  "nextPage": "Следующая",
+  "previousPage": "Предыдущая"
 }
