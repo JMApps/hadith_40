@@ -28,13 +28,13 @@ class AboutUsPage extends StatelessWidget {
             ),
             SocialItem(
               name: 'Google Play',
-              description: 'Другие наши приложения',
+              description: 'Наши приложения в Google Play',
               iconName: 'google-play',
               link: 'https://play.google.com/store/apps/dev?id=8649252597553656018',
             ),
             SocialItem(
               name: 'App Store',
-              description: 'Другие наши приложения',
+              description: 'Наши приложения в App Store',
               iconName: 'app-store',
               link: 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953',
             ),
@@ -51,7 +51,7 @@ class AboutUsPage extends StatelessWidget {
               name: 'Instagram',
               description: '@dev_muslim',
               iconName: 'instagram',
-              link: 'https://www.instagram.com/dev_muslim/',
+              link: 'https://www.instagram.com/dev_muslimr',
             ),
             SocialItem(
               name: 'Telegram',
@@ -63,7 +63,7 @@ class AboutUsPage extends StatelessWidget {
               name: 'Facebook',
               description: '@jmappps',
               iconName: 'facebook',
-              link: 'https://www.facebook.com/jmappps/',
+              link: 'https://www.facebook.com/jmappps',
             ),
             SocialItem(
               name: 'GMail',
