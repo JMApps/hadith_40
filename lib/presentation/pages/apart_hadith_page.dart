@@ -31,8 +31,10 @@ class _ApartHadithPageState extends State<ApartHadithPage> {
   @override
   void initState() {
     _localApartHadiths = LocalApartHadiths();
-    _apartHadithsDataRepository = ApartHadithsDataRepository(localApartHadiths: _localApartHadiths);
-    _apartHadithsUseCase = ApartHadithsUseCase(apartHadithsRepository: _apartHadithsDataRepository);
+    _apartHadithsDataRepository =
+        ApartHadithsDataRepository(localApartHadiths: _localApartHadiths);
+    _apartHadithsUseCase = ApartHadithsUseCase(
+        apartHadithsRepository: _apartHadithsDataRepository);
     super.initState();
   }
 
@@ -44,18 +46,20 @@ class _ApartHadithPageState extends State<ApartHadithPage> {
       appBar: AppBar(
         title: Text(widget.hadithNumber),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                RoutePageNames.apartCardHadithName,
-                arguments: ApartCardHadithArgs(hadithId: widget.hadithId),
-              );
-            },
-            icon: const Icon(
-              CupertinoIcons.creditcard,
-            ),
-          ),
+          locale.localeName.contains('ru')
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      RoutePageNames.apartCardHadithName,
+                      arguments: ApartCardHadithArgs(hadithId: widget.hadithId),
+                    );
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.creditcard,
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
       body: FutureBuilder<List<ApartHadithEntity>>(
