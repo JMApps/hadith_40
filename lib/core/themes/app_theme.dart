@@ -63,7 +63,4 @@ class AppTheme {
 }
 
 extension CustomColors on ColorScheme {
-  Color get mainDefault => brightness == Brightness.light
-      ? const Color(0xB2000000)
-      : const Color(0xFFBDBDBD);
 }

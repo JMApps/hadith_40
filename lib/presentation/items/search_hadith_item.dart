@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/core/routes/route_page_names.dart';
-import 'package:hadith_40/core/themes/app_theme.dart';
 import 'package:hadith_40/data/models/arguments/content_hadith_args.dart';
 import 'package:hadith_40/data/repositories/state/toggle_bookmark_state.dart';
 import 'package:hadith_40/domain/entities/chapter_hadith_entity.dart';
@@ -46,7 +45,7 @@ class SearchHadithItem extends StatelessWidget {
                 isBookmark ? locale.removed : locale.added,
                 style: TextStyle(
                   fontSize: 18,
-                  color: appColors.mainDefault,
+                  color: appColors.primary,
                 ),
               ),
             ),
