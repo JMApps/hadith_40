@@ -4,15 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/core/routes/route_page_names.dart';
-import 'package:hadith_40/core/styles/app_styles.dart';
 import 'package:hadith_40/data/datasources/databases/local/queries/local_content_hadith.dart';
 import 'package:hadith_40/data/models/arguments/apart_hadith_args.dart';
 import 'package:hadith_40/data/repositories/content_hadith_data_repository.dart';
 import 'package:hadith_40/domain/entities/content_hadith_entity.dart';
 import 'package:hadith_40/domain/usecases/content_hadith_use_case.dart';
+import 'package:hadith_40/presentation/items/content_hadith_item.dart';
 import 'package:hadith_40/presentation/uistate/content_hadith_ui_state.dart';
-import 'package:hadith_40/presentation/widgets/content_arabic_html_text.dart';
-import 'package:hadith_40/presentation/widgets/content_html_text.dart';
+import 'package:hadith_40/presentation/uistate/content_player_state.dart';
+import 'package:hadith_40/presentation/widgets/content_media_buttons.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
 import 'package:provider/provider.dart';
 
@@ -43,11 +43,13 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    final ColorScheme appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => ContentHadithUiState(widget.hadithId - 1),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContentPlayerState(),
         ),
       ],
       child: Consumer<ContentHadithUiState>(
@@ -86,44 +88,20 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                         ? CupertinoTextSelectionControls()
                         : MaterialTextSelectionControls(),
                     child: PageView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       controller: _pageController,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
                         final ContentHadithEntity model = snapshot.data![index];
-                        return CupertinoScrollbar(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: AppStyles.mainMardingMini,
-                                  alignment: Alignment.center,
-                                  color: appColors.inversePrimary,
-                                  child: Text(
-                                    model.hadithTitle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                ListTile(
-                                  contentPadding: AppStyles.mainMardingMini,
-                                  title: Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: ContentArabicHtmlText(
-                                      content: model.hadithArabic,
-                                    ),
-                                  ),
-                                  subtitle: ContentHtmlText(
-                                    content: model.hadithTranslation,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                        return ContentHadithItem(model: model, index: index);
                       },
                       onPageChanged: (int? pageIndex) {
                         uiState.setContentPageIndex = pageIndex!;
                       },
                     ),
+                  ),
+                  bottomNavigationBar: ContentMediaButtons(
+                    pageController: _pageController,
                   ),
                 );
               } else if (snapshot.hasError) {
