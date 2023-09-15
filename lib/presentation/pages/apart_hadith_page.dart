@@ -31,10 +31,8 @@ class _ApartHadithPageState extends State<ApartHadithPage> {
   @override
   void initState() {
     _localApartHadiths = LocalApartHadiths();
-    _apartHadithsDataRepository =
-        ApartHadithsDataRepository(localApartHadiths: _localApartHadiths);
-    _apartHadithsUseCase = ApartHadithsUseCase(
-        apartHadithsRepository: _apartHadithsDataRepository);
+    _apartHadithsDataRepository = ApartHadithsDataRepository(localApartHadiths: _localApartHadiths);
+    _apartHadithsUseCase = ApartHadithsUseCase(apartHadithsRepository: _apartHadithsDataRepository);
     super.initState();
   }
 

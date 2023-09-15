@@ -57,7 +57,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
           return FutureBuilder<List<ContentHadithEntity>>(
             future: _contentHadithUseCase.getContentHadith(
               tableName: locale.tableName,
-              hadithId: widget.hadithId,
+              hadithId: uiState.getContentPageIndex + 1,
             ),
             builder: (BuildContext context, AsyncSnapshot<List<ContentHadithEntity>> snapshot) {
               if (snapshot.hasData) {
@@ -72,7 +72,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                             context,
                             RoutePageNames.apartContentHadithName,
                             arguments: ApartHadithArgs(
-                              hadithId: widget.hadithId,
+                              hadithId: uiState.getContentPageIndex + 1,
                               hadithNumber: model.hadithNumber,
                             ),
                           );
