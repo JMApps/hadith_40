@@ -30,13 +30,15 @@ class AboutUsPage extends StatelessWidget {
               name: 'Google Play',
               description: 'Наши приложения в Google Play',
               iconName: 'google-play',
-              link: 'https://play.google.com/store/apps/dev?id=8649252597553656018',
+              link:
+                  'https://play.google.com/store/apps/dev?id=8649252597553656018',
             ),
             SocialItem(
               name: 'App Store',
               description: 'Наши приложения в App Store',
               iconName: 'app-store',
-              link: 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953',
+              link:
+                  'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953',
             ),
             Text(
               'Мы в социальных сетях',
@@ -70,6 +72,21 @@ class AboutUsPage extends StatelessWidget {
               description: 'jmappsmuslim@gmail.com',
               iconName: 'gmail',
               link: 'https://www.gmail.com',
+            ),
+            Text(
+              'Политика конфиденциальности',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+              ),
+              textAlign: TextAlign.start,
+            ),
+            SocialItem(
+              name: 'Privacy',
+              description: 'Privacy Policy',
+              iconName: 'privacy',
+              link: 'https://www.freeprivacypolicy.com/privacy/view/4b8ad22c71a1256a000cc68a3a94c761',
             ),
           ],
         ),

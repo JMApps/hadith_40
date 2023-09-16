@@ -1,6 +1,6 @@
 {
-  "@@locale": "ru",
-  "tableName": "Table_of_hadith_ru",
+  "@@locale": "tr",
+  "tableName": "Table_of_hadith_tr",
   "apartTableName": "Table_of_hadith_cut_ru",
   "appName": "40 хадисов",
   "hadiths": "Хадисы",
