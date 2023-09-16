@@ -68,6 +68,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                     actions: [
                       IconButton(
                         onPressed: () {
+                          context.read<ContentPlayerState>().stop();
                           Navigator.pushNamed(
                             context,
                             RoutePageNames.apartContentHadithName,
@@ -97,11 +98,13 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                       },
                       onPageChanged: (int? pageIndex) {
                         uiState.setContentPageIndex = pageIndex!;
+                        context.read<ContentPlayerState>().stop();
                       },
                     ),
                   ),
                   bottomNavigationBar: ContentMediaButtons(
                     pageController: _pageController,
+                    hadithId: model.id - 1,
                   ),
                 );
               } else if (snapshot.hasError) {

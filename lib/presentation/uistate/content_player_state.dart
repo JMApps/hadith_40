@@ -3,40 +3,87 @@ import 'package:just_audio/just_audio.dart';
 
 class ContentPlayerState extends ChangeNotifier {
   final AudioPlayer _audioPlayer = AudioPlayer();
-  late ConcatenatingAudioSource _audioSource;
+  ConcatenatingAudioSource? _audioSource;
 
-  Stream<Duration?> get durationStream => _audioPlayer.durationStream;
+  bool _isPlaying = false;
 
-  Stream<Duration> get positionStream => _audioPlayer.positionStream;
+  bool get isPlaying => _isPlaying;
 
-  Stream<PlayerState> get playerStateStream => _audioPlayer.playerStateStream;
+  bool _isRepeat = false;
 
-  ContentPlayerState() {
-    _initializeAudioPlayer();
-  }
+  bool get getIsRepeat => _isRepeat;
 
-  Future<void> _initializeAudioPlayer() async {
+  int _currentTrackIndex = -1;
+
+  int get getCurrentTrackIndex => _currentTrackIndex;
+
+  Future<void> initializeAudioPlayer({required int hadithId}) async {
     final List<AudioSource> audioSources = List.generate(
       42,
       (index) => AudioSource.asset('assets/audios/hadeeth_${index + 1}.mp3'),
     );
 
-    _audioSource = ConcatenatingAudioSource(children: audioSources);
+    _audioSource = ConcatenatingAudioSource(
+      children: [
+        audioSources[hadithId],
+      ],
+    );
 
-    await _audioPlayer.setAudioSource(_audioSource);
+    await _audioPlayer.setAudioSource(_audioSource!);
+    _audioPlayer.processingStateStream.listen(
+      (event) {
+        if (event == ProcessingState.completed) {
+          _isPlaying = false;
+          _audioPlayer.stop();
+          notifyListeners();
+        }
+      },
+    );
   }
 
-  Future<void> play() async {
+  Future<void> togglePlay({required int hadithId}) async {
+    _currentTrackIndex = hadithId;
     if (_audioPlayer.processingState == ProcessingState.ready) {
-      await _audioPlayer.seek(Duration.zero, index: 11);
-      await _audioPlayer.play();
+      if (!_isPlaying) {
+        _isPlaying = true;
+        notifyListeners();
+        await _audioPlayer.play();
+      } else {
+        _isPlaying = false;
+        notifyListeners();
+        await _audioPlayer.pause();
+      }
     } else {
-      await _audioPlayer.play();
+      initializeAudioPlayer(hadithId: hadithId);
+      if (!_isPlaying) {
+        _isPlaying = true;
+        notifyListeners();
+        await _audioPlayer.play();
+      } else {
+        _isPlaying = false;
+        notifyListeners();
+        await _audioPlayer.pause();
+      }
     }
   }
 
-  Future<void> pause() async {
-    await _audioPlayer.pause();
+  Future<void> onRepeat() async {
+    _isRepeat = !_isRepeat;
+    notifyListeners();
+    if (_audioPlayer.processingState == ProcessingState.ready) {
+      if (_isRepeat) {
+        _audioPlayer.setLoopMode(LoopMode.one);
+      } else {
+        _audioPlayer.setLoopMode(LoopMode.off);
+      }
+    }
+  }
+
+  Future<void> stop() async {
+    _isPlaying = false;
+    _isRepeat = false;
+    _audioPlayer.stop();
+    notifyListeners();
   }
 
   @override

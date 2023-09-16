@@ -17,6 +17,8 @@
   "previousPage": "Предыдущая",
   "arabicTextFont": "Арабский шрифт",
   "textFont": "Шрифт перевода",
+  "repeatOn": "Повтор включён",
+  "repeatOff": "Повтор отключён",
   "arabicAlignText": "Расположение арабского текста",
   "alignText": "Расположение текста перевода",
   "arabicTextSize": "Размер арабского текста",
