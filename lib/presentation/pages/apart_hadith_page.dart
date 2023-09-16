@@ -8,13 +8,18 @@ import 'package:hadith_40/data/repositories/apart_hadiths_data_repository.dart';
 import 'package:hadith_40/domain/entities/apart_hadith_entity.dart';
 import 'package:hadith_40/domain/usecases/apart_hadiths_use_case.dart';
 import 'package:hadith_40/presentation/items/apart_hadith_item.dart';
+import 'package:hadith_40/presentation/uistate/apart_player_state.dart';
 import 'package:hadith_40/presentation/widgets/data_is_empty_text.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
+import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ApartHadithPage extends StatefulWidget {
-  const ApartHadithPage(
-      {super.key, required this.hadithId, required this.hadithNumber});
+  const ApartHadithPage({
+    super.key,
+    required this.hadithId,
+    required this.hadithNumber,
+  });
 
   final int hadithId;
   final String hadithNumber;
@@ -40,57 +45,77 @@ class _ApartHadithPageState extends State<ApartHadithPage> {
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
     final ColorScheme appColors = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.hadithNumber),
-        actions: [
-          locale.localeName.contains('ru')
-              ? IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutePageNames.apartCardHadithName,
-                      arguments: ApartCardHadithArgs(hadithId: widget.hadithId),
-                    );
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.creditcard,
-                  ),
-                )
-              : const SizedBox(),
-        ],
-      ),
-      body: FutureBuilder<List<ApartHadithEntity>>(
-        future: _apartHadithsUseCase.getApartHadithsById(
-          tableName: locale.apartTableName,
-          hadithId: widget.hadithId,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ApartPlayerState(),
         ),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ApartHadithEntity>> snapshot) {
-          if (snapshot.hasData) {
-            return ScrollablePositionedList.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (BuildContext context, int index) {
-                final ApartHadithEntity model = snapshot.data![index];
-                return ApartHadithItem(
-                  model: model,
-                  index: index,
-                );
+      ],
+      child: Consumer<ApartPlayerState>(
+        builder: (BuildContext context, apartPlayer, Widget? child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.hadithNumber),
+              actions: [
+                locale.localeName.contains('ru')
+                    ? IconButton(
+                        onPressed: () {
+                          apartPlayer.stop();
+                          Navigator.pushNamed(
+                            context,
+                            RoutePageNames.apartCardHadithName,
+                            arguments: ApartCardHadithArgs(hadithId: widget.hadithId),
+                          );
+                        },
+                        icon: const Icon(
+                          CupertinoIcons.creditcard,
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+            body: FutureBuilder<List<ApartHadithEntity>>(
+              future: _apartHadithsUseCase.getApartHadithsById(
+                tableName: locale.apartTableName,
+                hadithId: widget.hadithId,
+              ),
+              builder: (BuildContext context, AsyncSnapshot<List<ApartHadithEntity>> snapshot) {
+                if (snapshot.hasData) {
+                  apartPlayer.initializeAudioPlayer(snapshot: snapshot);
+                  return ScrollablePositionedList.builder(
+                    physics: const ClampingScrollPhysics(),
+                    itemScrollController: apartPlayer.itemScrollController,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final ApartHadithEntity model = snapshot.data![index];
+                      return ApartHadithItem(
+                        model: model,
+                        index: index,
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return ErrorText(
+                    errorMessage: snapshot.error.toString(),
+                  );
+                } else {
+                  return DataIsEmptyText(message: locale.isEmptyBookmarks);
+                }
               },
-            );
-          } else if (snapshot.hasError) {
-            return ErrorText(
-              errorMessage: snapshot.error.toString(),
-            );
-          } else {
-            return DataIsEmptyText(message: locale.isEmptyBookmarks);
-          }
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                apartPlayer.togglePlay();
+              },
+              backgroundColor: appColors.inversePrimary,
+              child: Icon(
+                apartPlayer.isPlaying
+                    ? CupertinoIcons.stop
+                    : CupertinoIcons.play,
+              ),
+            ),
+          );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: appColors.inversePrimary,
-        child: const Icon(CupertinoIcons.play),
       ),
     );
   }

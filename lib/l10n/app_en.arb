@@ -30,5 +30,6 @@
   "close": "Закрыть",
   "adaptiveTheme": "Адаптивная тема",
   "darkTheme": "Темная тема",
-  "displayAlways": "Дисплей всегда включён"
+  "displayAlways": "Дисплей всегда включён",
+  "privacyPolicy": "Политика конфиденциальности"
 }
