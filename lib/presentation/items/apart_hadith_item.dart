@@ -20,18 +20,29 @@ class ApartHadithItem extends StatelessWidget {
     final ColorScheme appColors = Theme.of(context).colorScheme;
     final Color oddItemColor = appColors.primary.withOpacity(0.15);
     final Color evenItemColor = appColors.primary.withOpacity(0.05);
+    final Color currentTrackColor = appColors.primary.withOpacity(0.50);
     return Consumer<ApartPlayerState>(
       builder: (BuildContext context, apartPlayer, Widget? child) {
-        return ListTile(
-          tileColor:
-              apartPlayer.isPlaying && apartPlayer.getCurrentTrackIndex == index
-                  ? Colors.red.shade50 : index.isOdd ? oddItemColor : evenItemColor,
-          title: ContentArabicHtmlText(
-            content: model.hadithArabic,
-          ),
-          subtitle: ContentHtmlText(
-            content: model.hadithTranslation,
-          ),
+        return StreamBuilder<int?>(
+          stream: apartPlayer.currentIndexStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final currentIndex = snapshot.data ?? -1;
+              if (currentIndex >= 0) {
+                final isPlaying = currentIndex == index && apartPlayer.isPlaying;
+                return ListTile(
+                  tileColor: isPlaying ? currentTrackColor : index.isOdd ? oddItemColor : evenItemColor,
+                  title: ContentArabicHtmlText(
+                    content: model.hadithArabic,
+                  ),
+                  subtitle: ContentHtmlText(
+                    content: model.hadithTranslation,
+                  ),
+                );
+              }
+            }
+            return const CircularProgressIndicator();
+          },
         );
       },
     );
