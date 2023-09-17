@@ -9,8 +9,8 @@ class ContentHadithDataRepository implements ContentHadithRepository {
   ContentHadithDataRepository({required this.localContentHadith});
 
   @override
-  Future<List<ContentHadithEntity>> getContentHadith({required String tableName, required int hadithId}) async {
-    final List<ContentHadithModel> hadithById = await localContentHadith.getContentHadith(tableName: tableName, hadithId: hadithId);
+  Future<List<ContentHadithEntity>> getContentHadith({required String tableName}) async {
+    final List<ContentHadithModel> hadithById = await localContentHadith.getContentHadith(tableName: tableName);
     final List<ContentHadithEntity> hadithByIdEntities = hadithById.map((chapterHadith) {
       return _mapToHadithEntity(chapterHadith);
     }).toList();

@@ -7,7 +7,7 @@ class LocalContentHadith implements ContentHadithInterface {
   final DatabaseHelper databaseHelper = DatabaseHelper();
 
   @override
-  Future<List<ContentHadithModel>> getContentHadith({required String tableName, required int hadithId}) async {
+  Future<List<ContentHadithModel>> getContentHadith({required String tableName}) async {
     final Database dbClient = await databaseHelper.db;
     final List<Map<String, Object?>> res = await dbClient.query(tableName);
     List<ContentHadithModel>? contentHadith = res.isNotEmpty ? res.map((c) => ContentHadithModel.fromMap(c)).toList() : null;

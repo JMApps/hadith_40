@@ -22,6 +22,9 @@ class ContentMediaButtons extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
       child: Wrap(
         spacing: 16,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.spaceEvenly,
+        runAlignment: WrapAlignment.spaceEvenly,
         children: [
           FilledButton.tonal(
             onPressed: () {

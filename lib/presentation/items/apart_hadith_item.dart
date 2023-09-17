@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_40/domain/entities/apart_hadith_entity.dart';
 import 'package:hadith_40/presentation/uistate/apart_player_state.dart';
 import 'package:hadith_40/presentation/widgets/content_arabic_html_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hadith_40/presentation/widgets/content_html_text.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class ApartHadithItem extends StatelessWidget {
     final Color oddItemColor = appColors.primary.withOpacity(0.15);
     final Color evenItemColor = appColors.primary.withOpacity(0.05);
     final Color currentTrackColor = appColors.primary.withOpacity(0.50);
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return Consumer<ApartPlayerState>(
       builder: (BuildContext context, apartPlayer, Widget? child) {
         return StreamBuilder<int?>(
@@ -35,13 +37,13 @@ class ApartHadithItem extends StatelessWidget {
                   title: ContentArabicHtmlText(
                     content: model.hadithArabic,
                   ),
-                  subtitle: ContentHtmlText(
+                  subtitle: locale.localeName.contains('ru') ? ContentHtmlText(
                     content: model.hadithTranslation,
-                  ),
+                  ) : const SizedBox(),
                 );
               }
             }
-            return const CircularProgressIndicator();
+            return const CircularProgressIndicator.adaptive();
           },
         );
       },

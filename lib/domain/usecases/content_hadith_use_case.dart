@@ -13,7 +13,6 @@ class ContentHadithUseCase {
     try {
       final List<ContentHadithEntity> contentHadith = await contentHadithRepository.getContentHadith(
         tableName: tableName,
-        hadithId: hadithId,
       );
       return contentHadith;
     } catch (e) {

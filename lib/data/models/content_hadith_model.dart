@@ -18,10 +18,10 @@ class ContentHadithModel {
   factory ContentHadithModel.fromMap(Map<String, dynamic> map) {
     return ContentHadithModel(
       id: map['id'] as int,
-      hadithNumber: map['hadeeth_number'] as String,
-      hadithTitle: map['hadeeth_title'] as String,
-      hadithArabic: map['hadeeth_arabic'] as String,
-      hadithTranslation: map['hadeeth_translation'] as String,
+      hadithNumber: map['hadith_number'] as String,
+      hadithTitle: map['hadith_title'] as String,
+      hadithArabic: map['hadith_arabic'] as String,
+      hadithTranslation: map['hadith_translation'] as String,
       nameAudio: map['name_audio'] as String,
     );
   }

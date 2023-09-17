@@ -12,8 +12,8 @@ class ChapterHadithModel {
   factory ChapterHadithModel.fromMap(Map<String, dynamic> map) {
     return ChapterHadithModel(
       id: map['id'] as int,
-      hadithNumber: map['hadeeth_number'] as String,
-      hadithTitle: map['hadeeth_title'] as String,
+      hadithNumber: map['hadith_number'] as String,
+      hadithTitle: map['hadith_title'] as String,
     );
   }
 }

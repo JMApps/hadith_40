@@ -13,8 +13,6 @@
   "settings": "Настройки",
   "searchHadith": "Поиск хадиса",
   "searchIsEmpty": "По вашему запросу ничего не найдено",
-  "nextPage": "Следующая",
-  "previousPage": "Предыдущая",
   "arabicTextFont": "Арабский шрифт",
   "textFont": "Шрифт перевода",
   "repeatOn": "Повтор включён",

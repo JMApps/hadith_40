@@ -69,11 +69,9 @@ class ApartPlayerState extends ChangeNotifier {
   }
 
   Future<void> stop() async {
-    if (_isPlaying) {
-      await _audioPlayer.stop();
-      _isPlaying = false;
-      notifyListeners();
-    }
+    await _audioPlayer.stop();
+    _isPlaying = false;
+    notifyListeners();
   }
 
   @override
