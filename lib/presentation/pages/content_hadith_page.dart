@@ -14,7 +14,9 @@ import 'package:hadith_40/presentation/uistate/content_hadith_ui_state.dart';
 import 'package:hadith_40/presentation/uistate/content_player_state.dart';
 import 'package:hadith_40/presentation/widgets/content_media_buttons.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
+import 'package:html/parser.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ContentHadithPage extends StatefulWidget {
   const ContentHadithPage({super.key, required this.hadithId});
@@ -66,6 +68,19 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   appBar: AppBar(
                     title: Text(model.hadithNumber),
                     actions: [
+                      IconButton(
+                        onPressed: () {
+                          Share.share(
+                            _parseHtmlText(
+                              '${model.hadithNumber}\n\n${model.hadithArabic}\n\n${model.hadithTranslation}',
+                            ),
+                            sharePositionOrigin:
+                            const Rect.fromLTWH(0, 0, 10, 10 / 2),
+                          );
+                        },
+                        tooltip: locale.share,
+                        icon: const Icon(CupertinoIcons.share),
+                      ),
                       IconButton(
                         onPressed: () {
                           context.read<ContentPlayerState>().stop();
@@ -121,5 +136,10 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
         },
       ),
     );
+  }
+  String _parseHtmlText(String htmlText) {
+    final documentText = parse(htmlText);
+    final String parsedString = parse(documentText.body!.text).documentElement!.text;
+    return parsedString;
   }
 }
