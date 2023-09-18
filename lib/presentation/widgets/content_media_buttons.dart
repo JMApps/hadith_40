@@ -18,8 +18,9 @@ class ContentMediaButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme appColors = Theme.of(context).colorScheme;
     final AppLocalizations locale = AppLocalizations.of(context)!;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+      color: appColors.inversePrimary,
       child: Wrap(
         spacing: 16,
         crossAxisAlignment: WrapCrossAlignment.center,
