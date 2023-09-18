@@ -9,6 +9,7 @@ import 'package:hadith_40/domain/entities/apart_hadith_entity.dart';
 import 'package:hadith_40/domain/usecases/apart_hadiths_use_case.dart';
 import 'package:hadith_40/presentation/items/apart_hadith_item.dart';
 import 'package:hadith_40/presentation/uistate/apart_player_state.dart';
+import 'package:hadith_40/presentation/widgets/apart_media_buttons.dart';
 import 'package:hadith_40/presentation/widgets/data_is_empty_text.dart';
 import 'package:hadith_40/presentation/widgets/error_text.dart';
 import 'package:provider/provider.dart';
@@ -103,17 +104,7 @@ class _ApartHadithPageState extends State<ApartHadithPage> {
                 }
               },
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                apartPlayer.togglePlay();
-              },
-              backgroundColor: appColors.inversePrimary,
-              child: Icon(
-                apartPlayer.isPlaying
-                    ? CupertinoIcons.stop
-                    : CupertinoIcons.play,
-              ),
-            ),
+            bottomNavigationBar: const ApartMediaButtons(),
           );
         },
       ),

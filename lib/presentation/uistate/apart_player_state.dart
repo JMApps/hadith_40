@@ -20,6 +20,9 @@ class ApartPlayerState extends ChangeNotifier {
 
   bool get isPlaying => _isPlaying;
 
+  bool _isRepeat = false;
+
+  bool get isRepeat => _isRepeat;
 
   Future<void> initializeAudioPlayer(
       {required AsyncSnapshot<List<ApartHadithEntity>> snapshot}) async {
@@ -32,7 +35,7 @@ class ApartPlayerState extends ChangeNotifier {
       children: audioSources,
     );
 
-    await _audioPlayer.setAudioSource(_audioSource!);
+    await _audioPlayer.setAudioSource(_audioSource!, initialIndex: 0, initialPosition: Duration.zero);
 
     _audioPlayer.currentIndexStream.listen((trackIndex) {
         if (trackIndex != null) {
@@ -72,6 +75,24 @@ class ApartPlayerState extends ChangeNotifier {
     await _audioPlayer.stop();
     _isPlaying = false;
     notifyListeners();
+  }
+
+  Future<void> onRepeat() async {
+    _isRepeat = !_isRepeat;
+    notifyListeners();
+    if (_isRepeat) {
+      await _audioPlayer.setLoopMode(LoopMode.all);
+    } else {
+      await _audioPlayer.setLoopMode(LoopMode.off);
+    }
+  }
+
+  Future<void> next() async {
+    await _audioPlayer.seekToNext();
+  }
+
+  Future<void> previous() async {
+    await _audioPlayer.seekToPrevious();
   }
 
   @override
