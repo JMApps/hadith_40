@@ -71,6 +71,10 @@ class ApartPlayerState extends ChangeNotifier {
     }
   }
 
+  Future<void> selectOne({required int hadithIndex}) async {
+    await _audioPlayer.seek(Duration.zero, index: hadithIndex);
+  }
+
   Future<void> stop() async {
     await _audioPlayer.stop();
     _isPlaying = false;

@@ -33,6 +33,9 @@ class ApartHadithItem extends StatelessWidget {
               if (currentIndex >= 0) {
                 final isPlaying = currentIndex == index && apartPlayer.isPlaying;
                 return ListTile(
+                  onTap: () {
+                    apartPlayer.selectOne(hadithIndex: index);
+                  },
                   tileColor: isPlaying ? currentTrackColor : index.isOdd ? oddItemColor : evenItemColor,
                   title: ContentArabicHtmlText(
                     content: model.hadithArabic,
