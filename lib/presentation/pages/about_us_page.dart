@@ -53,7 +53,7 @@ class AboutUsPage extends StatelessWidget {
               name: 'Instagram',
               description: '@dev_muslim',
               iconName: 'instagram',
-              link: 'https://www.instagram.com/dev_muslimr',
+              link: 'https://www.instagram.com/dev_muslim',
             ),
             SocialItem(
               name: 'Telegram',
