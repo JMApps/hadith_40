@@ -1,21 +1,27 @@
-import '../../data/models/apart_hadith_model.dart';
+import '../../data/models/content_hadith_model.dart';
 
-class ApartHadithEntity {
+class HadithEntity {
   final int id;
+  final String hadithNumber;
+  final String hadithTitle;
   final String hadithArabic;
   final String hadithTranslation;
   final String nameAudio;
 
-  const ApartHadithEntity({
+  HadithEntity({
     required this.id,
+    required this.hadithNumber,
+    required this.hadithTitle,
     required this.hadithArabic,
     required this.hadithTranslation,
     required this.nameAudio,
   });
 
-  factory ApartHadithEntity.fromModel(ApartHadithModel model) {
-    return ApartHadithEntity(
+  factory HadithEntity.fromModel(HadithModel model) {
+    return HadithEntity(
       id: model.id,
+      hadithNumber: model.hadithNumber,
+      hadithTitle: model.hadithTitle,
       hadithArabic: model.hadithArabic,
       hadithTranslation: model.hadithTranslation,
       nameAudio: model.nameAudio,
