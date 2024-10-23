@@ -1,7 +1,7 @@
-class ApartCardHadithArgs {
+class HadithArgs {
   final int hadithId;
 
-  const ApartCardHadithArgs({
+  const HadithArgs({
     required this.hadithId,
   });
 }

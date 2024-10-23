@@ -1,4 +1,4 @@
-import '../../data/models/content_hadith_model.dart';
+import '../../data/models/hadith_model.dart';
 
 class HadithEntity {
   final int id;
