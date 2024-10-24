@@ -1,39 +1,44 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hadith_40/core/strings/app_constraints.dart';
-import 'package:hadith_40/data/repositories/state/toggle_bookmark_state.dart';
-import 'package:hadith_40/presentation/pages/root_page.dart';
-import 'package:hadith_40/presentation/uistate/app_settings_state.dart';
-import 'package:hadith_40/presentation/uistate/main_ui_state.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'core/strings/app_constraints.dart';
+import 'data/repositories/hadith_data_repository.dart';
+import 'data/services/database_service.dart';
+import 'data/services/notification/notification_service.dart';
+import 'domain/usecases/hadiths_use_case.dart';
+import 'presentation/pages/root_page.dart';
+import 'presentation/state/app_settings_state.dart';
+import 'presentation/state/hadiths_state.dart';
+import 'presentation/state/main_state.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isAndroid) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-    );
-  }
+
   await Hive.initFlutter();
   await Hive.openBox(AppConstraints.keyMainAppSettingsBox);
   await Hive.openBox(AppConstraints.keyBookmarkHadithsBox);
+
+  await NotificationService().setupNotification();
+
+  final DatabaseService databaseService = DatabaseService();
+  await databaseService.initializeDatabase();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MainUiState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ToggleBookmarkState(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => AppSettingsState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MainState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HadithsState(
+            HadithsUseCase(
+              hadithsRepository: HadithDataRepository(databaseService),
+            ),
+          ),
         ),
       ],
       child: const RootPage(),

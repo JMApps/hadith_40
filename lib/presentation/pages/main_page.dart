@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hadith_40/presentation/pages/about_us_page.dart';
-import 'package:hadith_40/presentation/pages/bookmarks_page.dart';
-import 'package:hadith_40/presentation/pages/chapters_page.dart';
-import 'package:hadith_40/presentation/pages/settings_page.dart';
-import 'package:hadith_40/presentation/uistate/main_ui_state.dart';
 import 'package:provider/provider.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import '../../core/styles/app_styles.dart';
+import '../apart/pages/apart_hadiths_page.dart';
+import '../main/pages/favorite_hadiths_page.dart';
+import '../main/pages/main_hadiths_page.dart';
+import '../settings/pages/app_settings_page.dart';
+import '../state/main_state.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,48 +19,67 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   final List<Widget> _mainScreens = [
-    const ChaptersPage(),
-    const BookmarksPage(),
-    const SettingsPage(),
-    const AboutUsPage(),
+    MainHadithsPage(),
+    FavoriteHadithsPage(),
+    ApartHadithsPage(),
+    AppSettingsPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final MainUiState mainUiState = Provider.of<MainUiState>(context);
+    final appColors = Theme.of(context).colorScheme;
+    final MainState mainState = Provider.of<MainState>(context);
     final AppLocalizations locale = AppLocalizations.of(context)!;
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
-        child: _mainScreens[mainUiState.getBottomBarIndex],
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        child: _mainScreens[mainState.getBottomIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: mainUiState.getBottomBarIndex,
-        onTap: (int? index) => mainUiState.setBottomBarIndex = index!,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.rectangle_grid_1x2),
-            label: locale.hadiths,
-            tooltip: locale.hadiths,
+      bottomNavigationBar: Card(
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        shape: AppStyles.shapeTop,
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          removeBottom: true,
+          child: Padding(
+            padding: AppStyles.paddingMini,
+            child: SalomonBottomBar(
+              selectedItemColor: appColors.primary,
+              unselectedItemColor: appColors.secondary,
+              items: [
+                SalomonBottomBarItem(
+                  icon: const Icon(CupertinoIcons.square_fill_on_square_fill),
+                  title: Text(locale.hadiths, style: AppStyles.mainTextStyle16),
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.bookmarks),
+                  title: Text(locale.bookmarks, style: AppStyles.mainTextStyle16),
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(CupertinoIcons.layers_alt_fill),
+                  title: Text(locale.apart, style: AppStyles.mainTextStyle16),
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.settings),
+                  title: Text(locale.settings, style: AppStyles.mainTextStyle16),
+                ),
+              ],
+              currentIndex: mainState.getBottomIndex,
+              onTap: (int index) {
+                mainState.setBottomIndex = index;
+              },
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.bookmark),
-            label: locale.bookmarks,
-            tooltip: locale.bookmarks,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.settings),
-            label: locale.settings,
-            tooltip: locale.settings,
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.info),
-            label: 'О нас',
-            tooltip: 'О нас',
-          ),
-        ],
+        ),
       ),
     );
   }
