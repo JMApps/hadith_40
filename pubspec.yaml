@@ -13,29 +13,54 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  intl: ^0.18.1
-  cupertino_icons: ^1.0.6
-  path_provider: ^2.1.1
-  path: ^1.8.3
-  sqflite: ^2.3.0
-  flutter_html: ^3.0.0-beta.2
-  html: ^0.15.4
-  share_plus: ^7.1.0
-  clipboard: ^0.1.3
+  # Design
   scrollable_positioned_list: ^0.3.8
-  just_audio: ^0.9.35
-  hive_flutter: ^2.0.0-dev
   flip_card: ^0.7.0
-  provider: ^6.0.5
+  cupertino_icons: ^1.0.8
+  flutter_html: ^3.0.0-beta.2
+  html: 0.15.4
+  step_progress_indicator: ^1.0.2
   flutter_material_color_picker: ^1.2.0
-  wakelock_plus: ^1.1.1
-  url_launcher: ^6.1.14
+  responsive_builder: ^0.7.1
+  salomon_bottom_bar: ^3.3.2
+
+  # Databases
+  sqflite: ^2.4.0
+  hive_flutter: ^1.1.0
+
+  # System
+  wakelock_plus: ^1.2.8
+  vibration: ^2.0.1
+
+  # Path
+  path: ^1.9.0
+  path_provider: ^2.1.4
+
+  # Copy/Share
+  clipboard: ^0.1.3
+  share_plus: ^10.1.1
+
+  # Notifications
+  flutter_local_notifications: ^17.2.3
+
+  # State management
+  provider: ^6.1.2
+
+  # Times
+  intl: ^0.19.0
+  timezone: ^0.9.4
+
+  # Audio
+  just_audio: ^0.9.41
+
+  # Url
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
@@ -50,19 +75,19 @@ flutter:
   fonts:
     - family: Gilroy
       fonts:
-        - asset: assets/fonts/gilroy_medium.ttf
+        - asset: assets/fonts/gilroy_regular.ttf
+    - family: SF Pro
+      fonts:
+        - asset: assets/fonts/sf_pro_regular.ttf
     - family: Roboto
       fonts:
         - asset: assets/fonts/roboto_regular.ttf
-    - family: Noto Serif
+    - family: Hafs
       fonts:
-        - asset: assets/fonts/noto_serif_regular.ttf
+        - asset: assets/fonts/hafs.ttf
     - family: Noto Naskh
       fonts:
-        - asset: assets/fonts/noto_naskh_medium.ttf
-    - family: Vazirmatn
-      fonts:
-        - asset: assets/fonts/vazirmatn_regular.ttf
+        - asset: assets/fonts/noto_naskh_regular.ttf
     - family: Scheherazade
       fonts:
-        - asset: assets/fonts/scheherazade_regular.ttf
+        - asset: assets/fonts/scheherazade.ttf
