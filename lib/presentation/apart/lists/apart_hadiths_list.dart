@@ -33,38 +33,33 @@ class _ApartHadithsListState extends State<ApartHadithsList> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ScrollPageState(_scrollController),),
-      ],
-      child: FutureBuilder<List<HadithEntity>>(
-        future: _futureHadiths,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Scrollbar(
+    return FutureBuilder<List<HadithEntity>>(
+      future: _futureHadiths,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scrollbar(
+            controller: _scrollController,
+            child: ListView.builder(
               controller: _scrollController,
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: AppStyles.withoutBottomMini,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  final HadithEntity hadithModel = snapshot.data![index];
-                  return ApartHadithItem(
-                    hadithModel: hadithModel,
-                    hadithIndex: index,
-                  );
-                },
-              ),
-            );
-          }
-          if (snapshot.hasError) {
-            return MainErrorTextData(errorText: snapshot.error.toString());
-          }
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+              padding: AppStyles.withoutBottomMini,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final HadithEntity hadithModel = snapshot.data![index];
+                return ApartHadithItem(
+                  hadithModel: hadithModel,
+                  hadithIndex: index,
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
+      },
     );
   }
 }

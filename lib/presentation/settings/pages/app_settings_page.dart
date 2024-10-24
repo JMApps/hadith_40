@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/services/notification/notification_service.dart';
 import '../../state/app_settings_state.dart';
 import '../widgets/about_us_list_tile.dart';
 import '../widgets/app_setting_list_tile.dart';
@@ -20,9 +21,6 @@ class AppSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppStrings.settings),
-      ),
       body: SingleChildScrollView(
         child: Consumer<AppSettingsState>(
           builder: (context, settingsState, _) {
@@ -41,6 +39,9 @@ class AppSettingsPage extends StatelessWidget {
                       if (notificationTime != null) {
                         settingsState.setNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
                       }
+                      if (settingsState.getNotificationState) {
+                        NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: AppStrings.appName, body: AppStrings.notificationBody, dateTime: settingsState.getNotificationTime);
+                      }
                     },
                     icon: Icon(
                       Icons.access_time_rounded,
@@ -50,6 +51,11 @@ class AppSettingsPage extends StatelessWidget {
                   trailing: IconButton.filledTonal(
                     onPressed: () {
                       settingsState.setNotificationState = !settingsState.getNotificationState;
+                      if (settingsState.getNotificationState) {
+                        NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: AppStrings.appName, body: AppStrings.notificationBody, dateTime: settingsState.getNotificationTime);
+                      } else {
+                        NotificationService().cancelNotificationWithId(NotificationService.dailyNotificationId);
+                      }
                     },
                     icon: Icon(
                       settingsState.getNotificationState ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,

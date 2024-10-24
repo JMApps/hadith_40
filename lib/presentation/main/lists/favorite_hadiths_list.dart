@@ -29,7 +29,7 @@ class _FavoriteHadithsListState extends State<FavoriteHadithsList> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
+    _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
   }
 
   @override
@@ -43,43 +43,38 @@ class _FavoriteHadithsListState extends State<FavoriteHadithsList> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ScrollPageState(_scrollController),),
-      ],
-      child: FutureBuilder<List<HadithEntity>>(
-        future: _futureFavoriteHadiths,
-        builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            return Scrollbar(
+    return FutureBuilder<List<HadithEntity>>(
+      future: _futureFavoriteHadiths,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          return Scrollbar(
+            controller: _scrollController,
+            child: ListView.builder(
               controller: _scrollController,
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: AppStyles.withoutBottomMini,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  final HadithEntity hadithModel = snapshot.data![index];
-                  return FavoriteHadithItem(
-                    hadithModel: hadithModel,
-                    hadithIndex: index,
-                  );
-                },
-              ),
-            );
-          }
-          if (snapshot.hasData && snapshot.data!.isEmpty) {
-            return const FavoriteIsEmpty(
-              text: AppStrings.favoriteIsEmpty,
-            );
-          }
-          if (snapshot.hasError) {
-            return MainErrorTextData(errorText: snapshot.error.toString());
-          }
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+              padding: AppStyles.withoutBottomMini,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final HadithEntity hadithModel = snapshot.data![index];
+                return FavoriteHadithItem(
+                  hadithModel: hadithModel,
+                  hadithIndex: index,
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
+        if (snapshot.hasData && snapshot.data!.isEmpty) {
+          return const FavoriteIsEmpty(
+            text: AppStrings.favoriteIsEmpty,
+          );
+        }
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
+      },
     );
   }
 }

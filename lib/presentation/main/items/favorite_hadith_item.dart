@@ -56,34 +56,30 @@ class FavoriteHadithItem extends StatelessWidget {
             fontSize: 17.0,
           ),
         ),
-        leading: Consumer<HadithsState>(
-          builder: (context, hadithsState, _) {
-            return IconButton.filledTonal(
-              onPressed: () {
-                hadithsState.toggleFavorite(hadithId: hadithModel.id);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: appColors.secondaryContainer,
-                    duration: const Duration(milliseconds: 500),
-                    shape: AppStyles.shapeTop,
-                    elevation: 0,
-                    content: Text(
-                      hadithsState.isFavorite(hadithId: hadithModel.id) ? AppStrings.removed : AppStrings.added,
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        color: appColors.onSurface,
-                      ),
-                    ),
+        leading: IconButton.filledTonal(
+          onPressed: () {
+            Provider.of<HadithsState>(context, listen: false).toggleFavorite(hadithId: hadithModel.id);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: appColors.secondaryContainer,
+                duration: const Duration(milliseconds: 500),
+                shape: AppStyles.shapeTop,
+                elevation: 0,
+                content: Text(
+                  AppStrings.removed,
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    color: appColors.onSurface,
                   ),
-                );
-              },
-              padding: EdgeInsets.zero,
-              icon: Icon(
-                hadithsState.isFavorite(hadithId: hadithModel.id) ? Icons.bookmark : Icons.bookmark_outline_outlined,
-                color: appColors.secondary,
+                ),
               ),
             );
           },
+          padding: EdgeInsets.zero,
+          icon: Icon(
+            Icons.bookmark,
+            color: appColors.secondary,
+          ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios_rounded,

@@ -10,8 +10,7 @@ import 'package:timezone/timezone.dart';
 class NotificationService {
   static final NotificationService _localNoticeService = NotificationService._internal();
 
-  static const int morningNotificationID = 395;
-  static const int eveningNotificationID = 376;
+  static const int dailyNotificationId = 595;
 
   factory NotificationService() {
     return _localNoticeService;

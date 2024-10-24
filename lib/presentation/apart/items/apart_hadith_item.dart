@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/styles/app_styles.dart';
 import '../../../core/routes/route_page_names.dart';
 import '../../../data/models/arguments/hadith_args.dart';
 import '../../../domain/entities/hadith_entity.dart';
+import '../../state/hadiths_state.dart';
 
 class ApartHadithItem extends StatelessWidget {
   const ApartHadithItem({
@@ -25,6 +27,7 @@ class ApartHadithItem extends StatelessWidget {
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () async {
+          Provider.of<HadithsState>(context, listen: false).saveLastHadithId(hadithModel.id);
           HapticFeedback.lightImpact();
           await Navigator.pushNamed(
             context,

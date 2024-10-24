@@ -17,6 +17,12 @@ class _ApartHadithsPageState extends State<ApartHadithsPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppLocalizations locale = AppLocalizations.of(context)!;
     return MultiProvider(
@@ -26,9 +32,6 @@ class _ApartHadithsPageState extends State<ApartHadithsPage> {
         ),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(locale.appName),
-        ),
         body: ApartHadithsList(tableName: locale.tableName),
         floatingActionButton: FabTopStart(),
       ),
