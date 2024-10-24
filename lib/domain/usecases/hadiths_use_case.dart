@@ -1,14 +1,14 @@
 import '../entities/hadith_entity.dart';
 import '../repositories/hadiths_repository.dart';
 
-class ChapterHadithsUseCase {
-  final HadithsRepository chapterHadithsRepository;
+class HadithsUseCase {
+  final HadithsRepository hadithsRepository;
 
-  ChapterHadithsUseCase({required this.chapterHadithsRepository});
+  HadithsUseCase({required this.hadithsRepository});
 
   Future<List<HadithEntity>> fetchAllHadiths({required String tableName}) async {
     try {
-      final List<HadithEntity> allHadiths = await chapterHadithsRepository.getAllHadiths(tableName: tableName);
+      final List<HadithEntity> allHadiths = await hadithsRepository.getAllHadiths(tableName: tableName);
       return allHadiths;
     } catch (e) {
       throw Exception(e.toString());
@@ -17,7 +17,7 @@ class ChapterHadithsUseCase {
 
   Future<HadithEntity> fetchHadithById({required String tableName, required int hadithId}) async {
     try {
-      final HadithEntity hadithById = await chapterHadithsRepository.getHadithById(tableName: tableName, hadithId: hadithId);
+      final HadithEntity hadithById = await hadithsRepository.getHadithById(tableName: tableName, hadithId: hadithId);
       return hadithById;
     } catch (e) {
       throw Exception(e.toString());
@@ -26,7 +26,7 @@ class ChapterHadithsUseCase {
 
   Future<List<HadithEntity>> fetchFavoriteHadiths({required String tableName, required List<int> favorites}) async {
     try {
-      final List<HadithEntity> favoriteHadiths = await chapterHadithsRepository.getFavoriteHadiths(tableName: tableName, favorites: favorites);
+      final List<HadithEntity> favoriteHadiths = await hadithsRepository.getFavoriteHadiths(tableName: tableName, favorites: favorites);
       return favoriteHadiths;
     } catch (e) {
       throw Exception(e.toString());

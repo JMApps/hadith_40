@@ -9,7 +9,6 @@ import '../../state/scroll_page_state.dart';
 import '../../widgets/favorite_is_empty.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/favorite_hadith_item.dart';
-import '../items/main_hadith_item.dart';
 
 class FavoriteHadithsList extends StatefulWidget {
   const FavoriteHadithsList({
