@@ -33,10 +33,10 @@ class ContentSettingsState extends ChangeNotifier {
     _translationFontSizeIndex = _getSetting(AppConstraints.keyTranslationFontSizeIndex, 1);
 
     _arabicFontAlignIndex = _getSetting(AppConstraints.keyArabicFontAlignIndex, 1);
-    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 1);
+    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 3);
 
-    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blue.shade900.value);
-    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.blue.shade100.value);
+    _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.value);
+    _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.blueGrey.shade100.value);
 
     _translationLightTextColor = _getSetting(AppConstraints.keyTranslationLightColor, Colors.blueGrey.shade900.value);
     _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.blueGrey.shade100.value);
@@ -126,8 +126,8 @@ class ContentSettingsState extends ChangeNotifier {
     setArabicFontAlignIndex = 0;
     setTranslationFontAlignIndex = 0;
 
-    setArabicLightTextColor = Colors.blue.shade900.value;
-    setArabicDarkTextColor = Colors.blue.shade100.value;
+    setArabicLightTextColor = Colors.blueGrey.shade900.value;
+    setArabicDarkTextColor = Colors.blueGrey.shade100.value;
 
     setTranslationLightTextColor = Colors.blueGrey.shade900.value;
     setTranslationDarkTextColor = Colors.blueGrey.shade100.value;

@@ -46,7 +46,10 @@ class _MainPageState extends State<MainPage> {
               await Navigator.pushNamed(
                 context,
                 RoutePageNames.contentHadithPage,
-                arguments: HadithArgs(hadithId: Provider.of<HadithsState>(context, listen: false).getLastHadithId),
+                arguments: HadithArgs(
+                  tableName: locale.tableName,
+                  hadithId: Provider.of<HadithsState>(context, listen: false).getLastHadithId,
+                ),
               );
             },
             tooltip: AppStrings.continueRead,
@@ -117,6 +120,7 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+
   Text _itemText({required String title}) {
     return Text(title, style: AppStyles.mainTextStyle16);
   }

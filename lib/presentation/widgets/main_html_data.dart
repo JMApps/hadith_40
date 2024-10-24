@@ -12,6 +12,8 @@ class MainHtmlData extends StatelessWidget {
     required this.fontSize,
     required this.textAlign,
     required this.fontColor,
+    required this.textDirection,
+    required this.textHeight,
   });
 
   final String htmlData;
@@ -20,6 +22,8 @@ class MainHtmlData extends StatelessWidget {
   final double fontSize;
   final TextAlign textAlign;
   final Color fontColor;
+  final TextDirection textDirection;
+  final double textHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +36,15 @@ class MainHtmlData extends StatelessWidget {
           fontFamily: font,
           fontSize: FontSize(fontSize),
           textAlign: textAlign,
-          color: fontColor
+          color: fontColor,
+          direction: textDirection,
+          lineHeight: LineHeight(textHeight),
         ),
         'small': Style(
-          fontSize: FontSize(12.0)
+          fontSize: FontSize(fontSize - 5),
+          color: fontColor.withOpacity(0.5),
+          direction: textDirection,
+          lineHeight: LineHeight(textHeight),
         ),
         'a': Style(
           margin: Margins.zero,

@@ -9,6 +9,7 @@ import 'data/services/notification/notification_service.dart';
 import 'domain/usecases/hadiths_use_case.dart';
 import 'presentation/pages/root_page.dart';
 import 'presentation/state/app_settings_state.dart';
+import 'presentation/state/content_settings_state.dart';
 import 'presentation/state/hadiths_state.dart';
 import 'presentation/state/main_state.dart';
 
@@ -29,6 +30,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AppSettingsState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContentSettingsState(),
         ),
         ChangeNotifierProvider(
           create: (_) => MainState(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
@@ -21,6 +22,7 @@ class MainHadithItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
@@ -33,7 +35,10 @@ class MainHadithItem extends StatelessWidget {
           await Navigator.pushNamed(
             context,
             RoutePageNames.contentHadithPage,
-            arguments: HadithArgs(hadithId: hadithModel.id),
+            arguments: HadithArgs(
+              tableName: locale.tableName,
+              hadithId: hadithModel.id,
+            ),
           );
         },
         horizontalTitleGap: 8,
