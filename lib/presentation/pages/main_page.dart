@@ -8,7 +8,7 @@ import '../../core/routes/route_page_names.dart';
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/models/arguments/hadith_args.dart';
-import '../apart/pages/apart_hadiths_page.dart';
+import '../apart/pages/list_apart_hadiths_page.dart';
 import '../main/pages/favorite_hadiths_page.dart';
 import '../main/pages/main_hadiths_page.dart';
 import '../main/widgets/search_hadiths_delegate.dart';
@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _mainScreens = [
     MainHadithsPage(),
     FavoriteHadithsPage(),
-    ApartHadithsPage(),
+    ListApartHadithsPage(),
     AppSettingsPage(),
   ];
 

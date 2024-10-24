@@ -6,14 +6,14 @@ import '../lists/apart_hadiths_list.dart';
 import '../../state/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 
-class ApartHadithsPage extends StatefulWidget {
-  const ApartHadithsPage({super.key});
+class ListApartHadithsPage extends StatefulWidget {
+  const ListApartHadithsPage({super.key});
 
   @override
-  State<ApartHadithsPage> createState() => _ApartHadithsPageState();
+  State<ListApartHadithsPage> createState() => _ListApartHadithsPageState();
 }
 
-class _ApartHadithsPageState extends State<ApartHadithsPage> {
+class _ListApartHadithsPageState extends State<ListApartHadithsPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
