@@ -1,25 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hadith_40/domain/entities/hadith_entity.dart';
+import 'package:hadith_40/presentation/state/hadiths_state.dart';
 import 'package:provider/provider.dart';
+import 'package:html/parser.dart' as html_parser;
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../domain/entities/hadith_entity.dart';
-import '../../state/content_settings_state.dart';
-import '../../state/hadiths_state.dart';
+import '../../state/content_index_state.dart';
 import '../../state/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
-import '../../widgets/main_error_text_data.dart';
-import '../../widgets/main_html_data.dart';
+import '../lists/content_page_list.dart';
 
 class ContentHadithPage extends StatefulWidget {
   const ContentHadithPage({
     super.key,
-    required this.tableName,
     required this.hadithId,
   });
 
-  final String tableName;
   final int hadithId;
 
   @override
@@ -27,114 +28,129 @@ class ContentHadithPage extends StatefulWidget {
 }
 
 class _ContentHadithPageState extends State<ContentHadithPage> {
+  late PageController _pageController;
   final ScrollController _scrollController = ScrollController();
-  late final Future<HadithEntity> _futureHadiths;
 
   @override
   void initState() {
     super.initState();
-    _futureHadiths = Provider.of<HadithsState>(context, listen: false).fetchHadithById(tableName: widget.tableName, hadithId: widget.hadithId);
+    _pageController = PageController(initialPage: widget.hadithId - 1);
   }
 
   @override
   void dispose() {
+    _pageController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appColors = theme.colorScheme;
-    final bool isLight = theme.brightness == Brightness.light;
+    AppLocalizations locale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => ScrollPageState(_scrollController),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ContentIndexState(widget.hadithId),
+        ),
       ],
-      child: FutureBuilder<HadithEntity>(
-        future: _futureHadiths,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final HadithEntity hadithModel = snapshot.data!;
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(hadithModel.hadithNumber),
-                actions: [
-                  IconButton(
-                    onPressed: () async {
-                      Navigator.pushNamed(
-                        context,
-                        RoutePageNames.contentSettingsPage,
-                      );
-                    },
-                    icon: Icon(Icons.settings),
-                  ),
-                ],
-              ),
-              body: Scrollbar(
-                controller: _scrollController,
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  padding: AppStyles.paddingMini,
-                  child: Consumer<ContentSettingsState>(
-                    builder: (context, contentSettings, _) {
-                      return Card(
-                        elevation: 0,
-                        margin: EdgeInsets.zero,
-                        color: appColors.onSecondary.withOpacity(0.5),
-                        child: Padding(
-                          padding: AppStyles.paddingMini,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              MainHtmlData(
-                                htmlData: hadithModel.hadithArabic,
-                                footnoteColor: appColors.primary,
-                                font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
-                                fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
-                                textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
-                                fontColor: isLight ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
-                                textDirection: TextDirection.rtl,
-                                textHeight: 1.75,
-                              ),
-                              const Divider(indent: 16, endIndent: 16),
-                              MainHtmlData(
-                                htmlData: hadithModel.hadithTranslation,
-                                footnoteColor: appColors.primary,
-                                font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
-                                fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
-                                textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
-                                fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
-                                textDirection: TextDirection.ltr,
-                                textHeight: 1.35,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              floatingActionButton: FabTopStart(),
-            );
-          }
-          if (snapshot.hasError) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: MainErrorTextData(errorText: snapshot.error.toString()),
-            );
-          }
-          return Scaffold(
-            appBar: AppBar(),
-            body: Center(
-              child: CircularProgressIndicator.adaptive(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Consumer<ContentIndexState>(
+            builder: (context, contentIndex, _) {
+              return Text('${AppStrings.hadith} ${contentIndex.getContentIndex}');
+            },
+          ),
+          actions: [
+            IconButton.filledTonal(
+              onPressed: () async {
+                await Navigator.pushNamed(
+                  context,
+                  RoutePageNames.contentSettingsPage,
+                );
+              },
+              icon: Icon(Icons.settings),
             ),
-          );
-        },
+            IconButton.filledTonal(
+              onPressed: () async {
+                await Navigator.pushNamed(
+                  context,
+                  RoutePageNames.contentApartHadith,
+                );
+              },
+              icon: Icon(CupertinoIcons.layers_alt_fill),
+            ),
+          ],
+        ),
+        body: ContentPageList(pageController: _pageController, tableName: locale.tableName),
+        floatingActionButton: FabTopStart(),
+        bottomNavigationBar: Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          child: Padding(
+            padding: AppStyles.bottomTopMini,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton.filledTonal(
+                  onPressed: () {
+                    _pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                  },
+                  icon: Icon(CupertinoIcons.arrow_turn_up_left),
+                ),
+                IconButton.filledTonal(
+                  onPressed: () {},
+                  icon: Icon(CupertinoIcons.play),
+                ),
+                IconButton.filledTonal(
+                  onPressed: () {},
+                  icon: Icon(CupertinoIcons.arrow_2_squarepath),
+                ),
+                IconButton.filledTonal(
+                  onPressed: () {
+                    _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                  },
+                  icon: Icon(CupertinoIcons.arrow_turn_up_right),
+                ),
+                Consumer<ContentIndexState>(
+                  builder: (context, contentIndex, _) {
+                    return FutureBuilder<HadithEntity>(
+                      future: Provider.of<HadithsState>(context, listen: false).fetchHadithById(tableName: locale.tableName, hadithId: contentIndex.getContentIndex),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final HadithEntity hadithModel = snapshot.data!;
+                          return IconButton.outlined(
+                            onPressed: () async {
+                              final shareContent = await _hadithForShare(hadithNumber: hadithModel.hadithNumber, hadithArabic: hadithModel.hadithArabic, hadithTranslation: hadithModel.hadithTranslation);
+                              await Share.share(shareContent);
+                            },
+                            icon: Icon(Icons.ios_share_rounded),
+                          );
+                        }
+                        return Padding(
+                          padding: AppStyles.paddingHorizontalMini,
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+  Future<String> _hadithForShare({required String hadithNumber, required String hadithArabic, required String hadithTranslation}) async {
+    final arabic = html_parser.parse(hadithArabic);
+    final translation = html_parser.parse(hadithTranslation);
+    return [
+      hadithNumber,
+      arabic.body!.text,
+      translation.body!.text,
+    ].join('\n\n');
   }
 }

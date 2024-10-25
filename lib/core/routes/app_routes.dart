@@ -11,7 +11,6 @@ import 'route_page_names.dart';
 class AppRoutes {
   static Route<dynamic> onRouteGenerator(RouteSettings routeSettings) {
     final builder = routes[routeSettings.name];
-
     if (builder != null) {
       return MaterialPageRoute(
         builder: (context) {
@@ -19,22 +18,21 @@ class AppRoutes {
         },
       );
     }
-
     throw Exception('Invalid route');
   }
 
   static Map<String, Widget Function(BuildContext, dynamic)> routes = {
     RoutePageNames.contentHadithPage: (context, args) {
       final HadithArgs hadithArgs = args;
-      return ContentHadithPage(tableName: hadithArgs.tableName,hadithId: hadithArgs.hadithId);
+      return ContentHadithPage(hadithId: hadithArgs.hadithId);
     },
     RoutePageNames.contentApartHadith: (context, args) {
       final HadithArgs hadithArgs = args;
-      return ContentApartHadithPage(tableName: hadithArgs.tableName,hadithId: hadithArgs.hadithId);
+      return ContentApartHadithPage(hadithId: hadithArgs.hadithId);
     },
     RoutePageNames.contentCardHadithPage: (context, args) {
       final HadithArgs hadithArgs = args;
-      return ContentCardHadithPage(tableName: hadithArgs.tableName,hadithId: hadithArgs.hadithId);
+      return ContentCardHadithPage(hadithId: hadithArgs.hadithId);
     },
     RoutePageNames.contentSettingsPage: (context, args) => ContentSettingsPage(),
   };

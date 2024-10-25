@@ -7,6 +7,7 @@ class AppStyles {
   static const EdgeInsets paddingMini = EdgeInsets.all(8);
 
   static const EdgeInsets withoutBottomMini = EdgeInsets.only(left: 8, top: 8, right: 8);
+  static const EdgeInsets bottomTopMini = EdgeInsets.only(left: 8, bottom: 16, right: 8, top: 8);
 
   static const EdgeInsets paddingBottomMini = EdgeInsets.only(bottom: 8);
   static const EdgeInsets paddingRightMini = EdgeInsets.only(right: 8);
@@ -46,9 +47,9 @@ class AppStyles {
   static const textSizes = <double>[
     16.0,
     18.0,
-    20.0,
-    25.0,
+    22.0,
     35.0,
+    50.0,
   ];
 
   static const List<TextAlign> textAligns = [

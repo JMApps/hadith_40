@@ -47,7 +47,6 @@ class _MainPageState extends State<MainPage> {
                 context,
                 RoutePageNames.contentHadithPage,
                 arguments: HadithArgs(
-                  tableName: locale.tableName,
                   hadithId: Provider.of<HadithsState>(context, listen: false).getLastHadithId,
                 ),
               );

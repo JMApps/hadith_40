@@ -2,6 +2,7 @@ class AppStrings {
   static const String appName = '40 хадисов';
   static const String notificationBody = 'Выучите 1 один хадис!';
 
+  static const String hadith = 'Хадис';
   static const String hadiths = 'Хадисы';
   static const String favorites = 'Избранное';
   static const String apart = 'Раздельно';
