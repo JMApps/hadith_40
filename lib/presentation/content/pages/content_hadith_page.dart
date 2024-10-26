@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hadith_40/domain/entities/hadith_entity.dart';
-import 'package:hadith_40/presentation/state/hadiths_state.dart';
 import 'package:provider/provider.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';
@@ -10,7 +8,9 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/hadith_entity.dart';
 import '../../state/content_index_state.dart';
+import '../../state/hadiths_state.dart';
 import '../../state/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../lists/content_page_list.dart';
@@ -94,7 +94,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton.filledTonal(
+                IconButton.filled(
                   onPressed: () {
                     _pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
                   },
@@ -108,12 +108,6 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   onPressed: () {},
                   icon: Icon(CupertinoIcons.arrow_2_squarepath),
                 ),
-                IconButton.filledTonal(
-                  onPressed: () {
-                    _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
-                  },
-                  icon: Icon(CupertinoIcons.arrow_turn_up_right),
-                ),
                 Consumer<ContentIndexState>(
                   builder: (context, contentIndex, _) {
                     return FutureBuilder<HadithEntity>(
@@ -121,12 +115,12 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final HadithEntity hadithModel = snapshot.data!;
-                          return IconButton.outlined(
+                          return IconButton.filledTonal(
                             onPressed: () async {
                               final shareContent = await _hadithForShare(hadithNumber: hadithModel.hadithNumber, hadithArabic: hadithModel.hadithArabic, hadithTranslation: hadithModel.hadithTranslation);
                               await Share.share(shareContent);
                             },
-                            icon: Icon(Icons.ios_share_rounded),
+                            icon: Icon(CupertinoIcons.share_up),
                           );
                         }
                         return Padding(
@@ -136,6 +130,12 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                       },
                     );
                   },
+                ),
+                IconButton.filled(
+                  onPressed: () {
+                    _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                  },
+                  icon: Icon(CupertinoIcons.arrow_turn_up_right),
                 ),
               ],
             ),
