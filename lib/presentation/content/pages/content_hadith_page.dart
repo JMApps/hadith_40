@@ -71,6 +71,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   RoutePageNames.contentSettingsPage,
                 );
               },
+              tooltip: AppStrings.settings,
               icon: Icon(Icons.settings),
             ),
             IconButton.filledTonal(
@@ -80,6 +81,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   RoutePageNames.contentApartHadith,
                 );
               },
+              tooltip: AppStrings.apartMode,
               icon: Icon(CupertinoIcons.layers_alt_fill),
             ),
           ],
