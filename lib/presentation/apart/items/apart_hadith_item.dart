@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/styles/app_styles.dart';
 import '../../../core/routes/route_page_names.dart';
-import '../../../data/models/arguments/hadith_args.dart';
+import '../../../data/models/arguments/apart_hadith_args.dart';
 import '../../../domain/entities/hadith_entity.dart';
 import '../../state/hadiths_state.dart';
 
@@ -20,6 +21,7 @@ class ApartHadithItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
@@ -32,7 +34,8 @@ class ApartHadithItem extends StatelessWidget {
           await Navigator.pushNamed(
             context,
             RoutePageNames.contentApartHadith,
-            arguments: HadithArgs(
+            arguments: ApartHadithArgs(
+              tableName: locale.tableName,
               hadithId: hadithModel.id,
             ),
           );

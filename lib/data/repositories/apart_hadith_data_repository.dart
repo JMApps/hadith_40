@@ -14,7 +14,7 @@ class ApartHadithDataRepository implements ApartHadithsRepository {
   @override
   Future<List<ApartHadithEntity>> getApartByHadithId({required String tableName, required int hadithId}) async {
     final Database database = await _databaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(tableName, where: '${DatabaseValues.dbId} = ?', whereArgs: [hadithId]);
+    final List<Map<String, Object?>> resources = await database.query(tableName, where: '${DatabaseValues.dbItemPosition} = ?', whereArgs: [hadithId]);
     final List<ApartHadithEntity> apartHadithById = resources.isNotEmpty ? resources.map((e) => ApartHadithEntity.fromModel(ApartHadithModel.fromMap(e))).toList() : [];
     return apartHadithById;
   }

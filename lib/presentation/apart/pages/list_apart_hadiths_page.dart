@@ -17,12 +17,6 @@ class _ListApartHadithsPageState extends State<ListApartHadithsPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     AppLocalizations locale = AppLocalizations.of(context)!;
     return MultiProvider(
