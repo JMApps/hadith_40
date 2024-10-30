@@ -6,15 +6,8 @@ import '../../state/scroll_page_state.dart';
 import '../../widgets/fab_to_start.dart';
 import '../lists/main_hadiths_list.dart';
 
-class MainHadithsPage extends StatefulWidget {
+class MainHadithsPage extends StatelessWidget {
   const MainHadithsPage({super.key});
-
-  @override
-  State<MainHadithsPage> createState() => _MainHadithsPageState();
-}
-
-class _MainHadithsPageState extends State<MainHadithsPage> {
-  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,7 @@ class _MainHadithsPageState extends State<MainHadithsPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ScrollPageState(_scrollController),
+          create: (_) => ScrollPageState(),
         ),
       ],
       child: Scaffold(

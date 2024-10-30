@@ -18,6 +18,7 @@ class ContentPageList extends StatefulWidget {
 
   final PageController pageController;
   final String tableName;
+
   @override
   State<ContentPageList> createState() => _ContentPageListState();
 }
@@ -34,13 +35,8 @@ class _ContentPageListState extends State<ContentPageList> {
   }
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     return FutureBuilder<List<HadithEntity>>(
       future: _futureHadiths,
       builder: (context, snapshot) {
@@ -56,9 +52,36 @@ class _ContentPageListState extends State<ContentPageList> {
                 child: SingleChildScrollView(
                   controller: _scrollController,
                   padding: AppStyles.paddingMini,
-                  child: ContentItem(
-                    hadithModel: hadithModel,
-                    contentIndex: index,
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 0,
+                    shape: AppStyles.shape,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 8),
+                        const Divider(indent: 16, endIndent: 16),
+                        Container(
+                          margin: AppStyles.withoutBottomMini,
+                          padding: AppStyles.paddingMini,
+                          decoration: BoxDecoration(
+                            borderRadius: AppStyles.borderMini,
+                            color: appColors.inversePrimary,
+                          ),
+                          child: Text(
+                            hadithModel.hadithTitle,
+                            style: AppStyles.mainTextStyle18Bold,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Divider(indent: 16, endIndent: 16),
+                        ContentItem(
+                          hadithModel: hadithModel,
+                          contentIndex: index,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

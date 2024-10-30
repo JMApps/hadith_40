@@ -5,18 +5,15 @@ import 'package:provider/provider.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
-import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/apart_hadith_args.dart';
 import '../../../data/repositories/apart_hadith_data_repository.dart';
 import '../../../data/services/database_service.dart';
-import '../../../domain/entities/hadith_entity.dart';
 import '../../../domain/usecases/apart_hadiths_use_case.dart';
 import '../../state/apart_hadiths_state.dart';
-import '../../state/hadiths_state.dart';
-import '../../widgets/main_error_text_data.dart';
+import '../../widgets/future_chapter_title.dart';
 import '../lists/content_apart_hadiths_list.dart';
 
-class ContentApartHadithPage extends StatefulWidget {
+class ContentApartHadithPage extends StatelessWidget {
   const ContentApartHadithPage({
     super.key,
     required this.tableName,
@@ -25,22 +22,6 @@ class ContentApartHadithPage extends StatefulWidget {
 
   final String tableName;
   final int hadithId;
-
-  @override
-  State<ContentApartHadithPage> createState() => _ContentApartHadithPageState();
-}
-
-class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
-  late Future<HadithEntity> _futureHadith;
-
-  @override
-  void initState() {
-    super.initState();
-    _futureHadith = Provider.of<HadithsState>(context, listen: false).fetchHadithById(
-      tableName: widget.tableName,
-      hadithId: widget.hadithId,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +40,7 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('${AppStrings.hadith} ${widget.hadithId}'),
+          title: Text('${AppStrings.hadith} $hadithId'),
           actions: [
             IconButton.filledTonal(
               onPressed: () async {
@@ -76,7 +57,10 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                 await Navigator.pushNamed(
                   context,
                   RoutePageNames.contentCardHadithPage,
-                  arguments: ApartHadithArgs(tableName: locale.tableName, hadithId: widget.hadithId),
+                  arguments: ApartHadithArgs(
+                    tableName: locale.tableName,
+                    hadithId: hadithId,
+                  ),
                 );
               },
               tooltip: AppStrings.cardsMode,
@@ -89,38 +73,13 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                FutureBuilder<HadithEntity>(
-                  future: _futureHadith,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final HadithEntity hadithModel = snapshot.data!;
-                      return Container(
-                        margin: AppStyles.withoutBottomMini,
-                        padding: AppStyles.paddingMini,
-                        decoration: BoxDecoration(
-                            borderRadius: AppStyles.borderMini,
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                        ),
-                        child: Text(
-                          hadithModel.hadithTitle,
-                          style: AppStyles.mainTextStyle18Bold,
-                          textAlign: TextAlign.center,
-                        ),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return MainErrorTextData(
-                          errorText: snapshot.error.toString(),
-                      );
-                    }
-                    return Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  },
+                FutureChapterTitle(
+                  tableName: tableName,
+                  hadithId: hadithId,
                 ),
                 ContentApartHadithsList(
                   tableName: locale.apartTableName,
-                  hadithId: widget.hadithId,
+                  hadithId: hadithId,
                 ),
               ],
             ),

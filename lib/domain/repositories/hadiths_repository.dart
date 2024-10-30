@@ -6,5 +6,4 @@ abstract class HadithsRepository {
   Future<HadithEntity> getHadithById({required String tableName, required int hadithId});
 
   Future<List<HadithEntity>> getFavoriteHadiths({required String tableName, required List<int> favorites});
-
 }

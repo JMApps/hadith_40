@@ -29,8 +29,8 @@ class ApartHadithItem extends StatelessWidget {
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () async {
-          Provider.of<HadithsState>(context, listen: false).saveLastHadithId(hadithModel.id);
           HapticFeedback.lightImpact();
+          Provider.of<HadithsState>(context, listen: false).saveLastHadithId(hadithModel.id);
           await Navigator.pushNamed(
             context,
             RoutePageNames.contentApartHadith,
@@ -40,9 +40,10 @@ class ApartHadithItem extends StatelessWidget {
             ),
           );
         },
+        contentPadding: AppStyles.apartListTile,
+        splashColor: appColors.inversePrimary.withOpacity(0.5),
         tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
         title: Text(
           hadithModel.hadithNumber,
           style: TextStyle(

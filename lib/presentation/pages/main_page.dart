@@ -40,19 +40,22 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(locale.appName),
         actions: [
-          IconButton.filledTonal(
-            onPressed: () async {
-              // Load last hadith
-              await Navigator.pushNamed(
-                context,
-                RoutePageNames.contentHadithPage,
-                arguments: HadithArgs(
-                  hadithId: Provider.of<HadithsState>(context, listen: false).getLastHadithId,
-                ),
+          Consumer<HadithsState>(
+            builder: (context, hadithsState, _) {
+              return IconButton.filledTonal(
+                onPressed: () async {
+                  await Navigator.pushNamed(
+                    context,
+                    RoutePageNames.contentHadithPage,
+                    arguments: HadithArgs(
+                      hadithId: hadithsState.getLastHadithId,
+                    ),
+                  );
+                },
+                tooltip: AppStrings.continueRead,
+                icon: Icon(CupertinoIcons.app_badge_fill),
               );
             },
-            tooltip: AppStrings.continueRead,
-            icon: Icon(CupertinoIcons.app_badge_fill),
           ),
           IconButton.filledTonal(
             onPressed: () {

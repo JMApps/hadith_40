@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class ScrollPageState extends ChangeNotifier {
   double _previousScrollPosition = 0.0;
-  final ScrollController _scrollController;
+  final ScrollController _scrollController = ScrollController();
 
   ScrollController get getScrollController => _scrollController;
 
   final ValueNotifier<double> _buttonOpacityNotifier = ValueNotifier(0.0);
   ValueNotifier<double> get getButtonOpacity => _buttonOpacityNotifier;
 
-  ScrollPageState(this._scrollController) {
+  ScrollPageState() {
     _scrollController.addListener(_onScroll);
   }
 
@@ -33,5 +33,11 @@ class ScrollPageState extends ChangeNotifier {
         _previousScrollPosition = currentPixels;
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }

@@ -20,40 +20,34 @@ class ContentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final appColors = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
-        return Card(
-          elevation: 0,
-          margin: EdgeInsets.zero,
-          color: appColors.onSecondary.withOpacity(0.5),
-          child: Padding(
-            padding: AppStyles.paddingMini,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                MainHtmlData(
-                  htmlData: hadithModel.hadithArabic,
-                  font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
-                  fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
-                  textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
-                  fontColor: isLight ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
-                  textDirection: TextDirection.rtl,
-                  textHeight: 1.75,
-                ),
-                const Divider(indent: 16, endIndent: 16),
-                MainHtmlData(
-                  htmlData: hadithModel.hadithTranslation,
-                  font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
-                  fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
-                  textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
-                  fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
-                  textDirection: TextDirection.ltr,
-                  textHeight: 1.35,
-                ),
-              ],
-            ),
+        return Padding(
+          padding: AppStyles.paddingMini,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              MainHtmlData(
+                htmlData: hadithModel.hadithArabic,
+                font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
+                fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
+                textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
+                fontColor: isLight ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
+                textDirection: TextDirection.rtl,
+                textHeight: 1.75,
+              ),
+              const Divider(indent: 16, endIndent: 16),
+              MainHtmlData(
+                htmlData: hadithModel.hadithTranslation,
+                font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
+                fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
+                textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
+                fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
+                textDirection: TextDirection.ltr,
+                textHeight: 1.35,
+              ),
+            ],
           ),
         );
       },

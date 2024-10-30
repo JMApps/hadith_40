@@ -21,7 +21,6 @@ class CardMainHadith extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CardModeState>(
       builder: (context, cardMode, _) {
-        print(cardMode.getReverseCard);
         return FlipCard(
           direction: FlipDirection.VERTICAL,
           front: cardMode.getReverseCard

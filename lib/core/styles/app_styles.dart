@@ -9,6 +9,7 @@ class AppStyles {
   static const EdgeInsets withoutBottomMini = EdgeInsets.only(left: 8, top: 8, right: 8);
   static const EdgeInsets bottomTopMini = EdgeInsets.only(left: 8, bottom: 16, right: 8, top: 8);
   static const EdgeInsets bottomMini = EdgeInsets.only(bottom: 8);
+  static const EdgeInsets apartListTile = EdgeInsets.fromLTRB(16, 8, 8, 8);
 
   static const EdgeInsets paddingBottomMini = EdgeInsets.only(bottom: 8);
   static const EdgeInsets paddingRightMini = EdgeInsets.only(right: 8);
@@ -16,14 +17,10 @@ class AppStyles {
   static const EdgeInsets paddingHorizontal = EdgeInsets.symmetric(horizontal: 16);
   static const EdgeInsets paddingHorizontalMini = EdgeInsets.symmetric(horizontal: 8);
 
-  static const EdgeInsets paddingVertical = EdgeInsets.symmetric(vertical: 16);
-  static const EdgeInsets paddingVerticalMini = EdgeInsets.symmetric(vertical: 8);
-
   static const BorderRadius border = BorderRadius.all(Radius.circular(25));
   static const BorderRadius borderMini = BorderRadius.all(Radius.circular(12.5));
 
   static const RoundedRectangleBorder shape = RoundedRectangleBorder(borderRadius: border);
-  static const RoundedRectangleBorder shapeMini = RoundedRectangleBorder(borderRadius: borderMini);
 
   static const RoundedRectangleBorder shapeTop = RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)));
 

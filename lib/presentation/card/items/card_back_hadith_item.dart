@@ -27,8 +27,8 @@ class CardBackHadithItem extends StatelessWidget {
       builder: (context, contentSettings, _) {
         return Container(
           padding: AppStyles.padding,
-          margin: AppStyles.bottomMini,
           alignment: Alignment.center,
+          margin: AppStyles.bottomMini,
           decoration: BoxDecoration(
             color: apartHadithIndex.isOdd ? itemEvenColor : itemOddColor,
             borderRadius: AppStyles.borderMini,

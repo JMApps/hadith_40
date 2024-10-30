@@ -15,6 +15,9 @@ class AppStrings {
   static const String added = 'Добавлено';
   static const String removed = 'Удалено';
 
+  static const String repeatOn = 'Повтор включён';
+  static const String repeatOff = 'Повтор отключён';
+
   static const String continueRead = 'Продолжить чтение';
   static const String search = 'Поиск';
   static const String startSearch = 'Начните поиск';
@@ -74,6 +77,7 @@ class AppStrings {
     'Система',
   ];
 
+  static const String share = 'Поделиться';
   static const String versionAndroid = 'Версия Android:';
   static const String versionIOS = 'Версия iOS:';
   static const String ourApps = 'Наши приложения';
@@ -88,8 +92,8 @@ class AppStrings {
   static const String devMuslim = '@dev_muslim';
   static const String linkGooglePlay = 'https://play.google.com/store/apps/dev?id=8649252597553656018';
   static const String linkAppStore = 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
-  static const String linkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
-  static const String linkIOS = 'https://apps.apple.com/ru/app/крепость-верующего/id1564920951';
+  static const String linkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.hadith40';
+  static const String linkIOS = 'https://apps.apple.com/app/40-хадисов/id1590150115';
   static const String linkTelegram = 'https://t.me/jmapps';
   static const String linkInstagram = 'https://instagram.com/dev_muslim';
   static const String linkUmmaLife = 'https://ummalife.com/jmapps';

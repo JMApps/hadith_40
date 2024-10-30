@@ -12,7 +12,7 @@ class FabTopStart extends StatelessWidget {
       builder: (context, scrollPageState, _) {
         return ValueListenableBuilder<double>(
           valueListenable: scrollPageState.getButtonOpacity,
-          builder: (context, buttonOpacity, child) {
+          builder: (context, buttonOpacity, _) {
             return AnimatedOpacity(
               opacity: buttonOpacity,
               duration: const Duration(milliseconds: 150),

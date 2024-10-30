@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/styles/app_styles.dart';
+
 class FavoriteIsEmpty extends StatelessWidget {
   const FavoriteIsEmpty({
     super.key,
@@ -22,9 +24,7 @@ class FavoriteIsEmpty extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
+            style: AppStyles.mainTextStyle18,
             textAlign: TextAlign.center,
           )
         ],

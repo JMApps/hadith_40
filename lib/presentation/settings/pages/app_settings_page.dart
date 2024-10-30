@@ -20,6 +20,8 @@ class AppSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
+    final notificationService = NotificationService();
+    final timeFormatter = DateFormat('HH:mm', Localizations.localeOf(context).languageCode);
     return Scaffold(
       body: SingleChildScrollView(
         child: Consumer<AppSettingsState>(
@@ -29,21 +31,25 @@ class AppSettingsPage extends StatelessWidget {
               children: [
                 AppSettingListTile(
                   title: AppStrings.dailyNotifications,
-                  subTitle: DateFormat('HH:mm').format(settingsState.getNotificationTime),
+                  subTitle: timeFormatter.format(settingsState.getNotificationTime),
                   leading: IconButton(
                     onPressed: () async {
                       final notificationTime = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: settingsState.getNotificationTime.hour, minute: settingsState.getNotificationTime.minute),
+                        initialTime: TimeOfDay(
+                          hour: settingsState.getNotificationTime.hour,
+                          minute: settingsState.getNotificationTime.minute,
+                        ),
                       );
                       if (notificationTime != null) {
-                        settingsState.setNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
-                      }
-                      if (settingsState.getNotificationState) {
-                        NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: AppStrings.appName, body: AppStrings.notificationBody, dateTime: settingsState.getNotificationTime);
+                        final newNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
+                        settingsState.setNotificationTime = newNotificationTime;
+                        if (settingsState.getNotificationState) {
+                          _scheduleNotification(notificationService, settingsState);
+                        }
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.access_time_rounded,
                       size: 30,
                     ),
@@ -51,11 +57,7 @@ class AppSettingsPage extends StatelessWidget {
                   trailing: IconButton.filledTonal(
                     onPressed: () {
                       settingsState.setNotificationState = !settingsState.getNotificationState;
-                      if (settingsState.getNotificationState) {
-                        NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: AppStrings.appName, body: AppStrings.notificationBody, dateTime: settingsState.getNotificationTime);
-                      } else {
-                        NotificationService().cancelNotificationWithId(NotificationService.dailyNotificationId);
-                      }
+                      settingsState.getNotificationState ? _scheduleNotification(notificationService, settingsState) : notificationService.cancelNotificationWithId(NotificationService.dailyNotificationId);
                     },
                     icon: Icon(
                       settingsState.getNotificationState ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
@@ -68,26 +70,18 @@ class AppSettingsPage extends StatelessWidget {
                 AppSettingListTile(
                   title: AppStrings.display,
                   subTitle: AppStrings.displayAlwaysOn,
-                  leading: Icon(Icons.light_mode_outlined),
+                  leading: const Icon(Icons.light_mode_outlined),
                   trailing: AppSettingSwitch(
                     value: settingsState.getDisplayAlwaysOn,
                     onChanged: (onChanged) => settingsState.setDisplayAlwaysOn = onChanged,
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
-                AppThemeColorListTile(),
+                const AppThemeColorListTile(),
                 const Divider(indent: 16, endIndent: 16),
-                ThemeModeDropDown(),
+                const ThemeModeDropDown(),
                 const Divider(indent: 16, endIndent: 16),
-                Padding(
-                  padding: AppStyles.paddingHorizontal,
-                  child: Text(
-                    AppStrings.ourApps,
-                    style: AppStyles.mainTextStyle18Bold,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                const SizedBox(height: 8),
+                _sectionHeader(AppStrings.ourApps),
                 AboutUsListTile(
                   title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
                   subTitle: AppStrings.moreOurApps,
@@ -95,16 +89,7 @@ class AppSettingsPage extends StatelessWidget {
                   link: Platform.isAndroid ? AppStrings.linkGooglePlay : AppStrings.linkAppStore,
                 ),
                 const Divider(indent: 16, endIndent: 16),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: AppStyles.paddingHorizontal,
-                  child: Text(
-                    AppStrings.ourSocials,
-                    style: AppStyles.mainTextStyle18Bold,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                const SizedBox(height: 8),
+                _sectionHeader(AppStrings.ourSocials),
                 AboutUsListTile(
                   title: AppStrings.telegram,
                   subTitle: AppStrings.jmapps,
@@ -130,6 +115,26 @@ class AppSettingsPage extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  void _scheduleNotification(NotificationService notificationService, AppSettingsState settingsState) {
+    notificationService.timeNotifications(
+      id: NotificationService.dailyNotificationId,
+      title: AppStrings.appName,
+      body: AppStrings.notificationBody,
+      dateTime: settingsState.getNotificationTime,
+    );
+  }
+
+  Widget _sectionHeader(String title) {
+    return Padding(
+      padding: AppStyles.paddingHorizontal,
+      child: Text(
+        title,
+        style: AppStyles.mainTextStyle18Bold,
+        textAlign: TextAlign.start,
       ),
     );
   }
