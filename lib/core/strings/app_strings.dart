@@ -9,6 +9,7 @@ class AppStrings {
   static const String apartMode = 'Раздельный режим';
   static const String cards = 'Карточки';
   static const String cardsMode = 'Режим карточек';
+  static const String reverseCard = 'Перевернуть карточки';
   static const String settings = 'Настройки';
 
   static const String added = 'Добавлено';

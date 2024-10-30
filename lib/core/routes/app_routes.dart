@@ -32,8 +32,8 @@ class AppRoutes {
       return ContentApartHadithPage(tableName: apartHadithArgs.tableName, hadithId: apartHadithArgs.hadithId);
     },
     RoutePageNames.contentCardHadithPage: (context, args) {
-      final HadithArgs hadithArgs = args;
-      return ContentCardHadithPage(hadithId: hadithArgs.hadithId);
+      final ApartHadithArgs apartHadithArgs = args;
+      return ContentCardHadithPage(tableName: apartHadithArgs.tableName, hadithId: apartHadithArgs.hadithId);
     },
     RoutePageNames.contentSettingsPage: (context, args) => ContentSettingsPage(),
   };

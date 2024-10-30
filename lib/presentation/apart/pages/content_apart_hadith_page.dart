@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/apart_hadith_args.dart';
 import '../../../data/repositories/apart_hadith_data_repository.dart';
 import '../../../data/services/database_service.dart';
 import '../../../domain/entities/hadith_entity.dart';
@@ -75,6 +76,7 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                 await Navigator.pushNamed(
                   context,
                   RoutePageNames.contentCardHadithPage,
+                  arguments: ApartHadithArgs(tableName: locale.tableName, hadithId: widget.hadithId),
                 );
               },
               tooltip: AppStrings.cardsMode,

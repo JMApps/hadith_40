@@ -4,7 +4,7 @@ import '../../core/strings/app_constraints.dart';
 
 class ContentSettingsState extends ChangeNotifier {
 
-  final _contentSettings = Hive.box(AppConstraints.keyMainAppSettingsBox);
+  final _contentSettings = Hive.box(AppConstraints.keyContentSettingsBox);
 
   late int _arabicFontIndex;
   late int _translationFontIndex;

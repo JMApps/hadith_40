@@ -18,6 +18,7 @@ void main() async {
 
   await Hive.initFlutter();
   await Hive.openBox(AppConstraints.keyMainAppSettingsBox);
+  await Hive.openBox(AppConstraints.keyContentSettingsBox);
   await Hive.openBox(AppConstraints.keyBookmarkHadithsBox);
 
   await NotificationService().setupNotification();
