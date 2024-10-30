@@ -105,11 +105,11 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                 ),
                 IconButton.filledTonal(
                   onPressed: () {},
-                  icon: Icon(CupertinoIcons.play),
+                  icon: Icon(CupertinoIcons.arrow_2_squarepath),
                 ),
                 IconButton.filledTonal(
                   onPressed: () {},
-                  icon: Icon(CupertinoIcons.arrow_2_squarepath),
+                  icon: Icon(CupertinoIcons.play),
                 ),
                 Consumer<ContentIndexState>(
                   builder: (context, contentIndex, _) {

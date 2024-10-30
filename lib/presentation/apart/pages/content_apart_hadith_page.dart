@@ -97,11 +97,11 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                         padding: AppStyles.paddingMini,
                         decoration: BoxDecoration(
                             borderRadius: AppStyles.borderMini,
-                            color: Theme.of(context).colorScheme.primary.withOpacity(0.35),
+                            color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                         child: Text(
                           hadithModel.hadithTitle,
-                          style: AppStyles.mainTextStyle18,
+                          style: AppStyles.mainTextStyle18Bold,
                           textAlign: TextAlign.center,
                         ),
                       );
