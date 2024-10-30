@@ -33,7 +33,7 @@ class ContentSettingsState extends ChangeNotifier {
     _translationFontSizeIndex = _getSetting(AppConstraints.keyTranslationFontSizeIndex, 1);
 
     _arabicFontAlignIndex = _getSetting(AppConstraints.keyArabicFontAlignIndex, 1);
-    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 3);
+    _translationFontAlignIndex = _getSetting(AppConstraints.keyTranslationFontAlignIndex, 1);
 
     _arabicLightTextColor = _getSetting(AppConstraints.keyArabicLightColor, Colors.blueGrey.shade900.value);
     _arabicDarkTextColor = _getSetting(AppConstraints.keyArabicDarkColor, Colors.blueGrey.shade100.value);

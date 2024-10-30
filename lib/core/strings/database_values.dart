@@ -8,4 +8,5 @@ class DatabaseValues {
   static const String dbHadithArabic = 'hadith_arabic';
   static const String dbHadithTranslation = 'hadith_translation';
   static const String dbNameAudio = 'name_audio';
+  static const String dbItemPosition = 'item_position';
 }

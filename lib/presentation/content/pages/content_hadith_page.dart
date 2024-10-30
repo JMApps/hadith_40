@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hadith_40/data/models/arguments/apart_hadith_args.dart';
 import 'package:provider/provider.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';
@@ -40,7 +41,6 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
   @override
   void dispose() {
     _pageController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -79,6 +79,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                 await Navigator.pushNamed(
                   context,
                   RoutePageNames.contentApartHadith,
+                  arguments: ApartHadithArgs(tableName: locale.tableName, hadithId: widget.hadithId),
                 );
               },
               tooltip: AppStrings.apartMode,

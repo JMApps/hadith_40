@@ -35,7 +35,6 @@ class ContentItem extends StatelessWidget {
               children: [
                 MainHtmlData(
                   htmlData: hadithModel.hadithArabic,
-                  footnoteColor: appColors.primary,
                   font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
                   textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
@@ -46,7 +45,6 @@ class ContentItem extends StatelessWidget {
                 const Divider(indent: 16, endIndent: 16),
                 MainHtmlData(
                   htmlData: hadithModel.hadithTranslation,
-                  footnoteColor: appColors.primary,
                   font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
                   fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                   textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],

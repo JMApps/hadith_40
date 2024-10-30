@@ -7,7 +7,6 @@ class MainHtmlData extends StatelessWidget {
   const MainHtmlData({
     super.key,
     required this.htmlData,
-    required this.footnoteColor,
     required this.font,
     required this.fontSize,
     required this.textAlign,
@@ -17,7 +16,6 @@ class MainHtmlData extends StatelessWidget {
   });
 
   final String htmlData;
-  final Color footnoteColor;
   final String font;
   final double fontSize;
   final TextAlign textAlign;
@@ -51,7 +49,7 @@ class MainHtmlData extends StatelessWidget {
           padding: HtmlPaddings.zero,
           fontSize: FontSize(fontSize - 3),
           letterSpacing: 1.5,
-          color: footnoteColor,
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,
           fontFamily: AppConstraints.fontGilroy,
         ),
