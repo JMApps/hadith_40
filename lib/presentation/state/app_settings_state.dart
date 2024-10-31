@@ -8,12 +8,12 @@ class AppSettingsState extends ChangeNotifier {
   final _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
 
   AppSettingsState() {
-    _notificationState = _getSetting(AppConstraints.keyNotificationState, false);
-    _notificationTime = _getSetting(AppConstraints.keyNotificationTime, DateTime(2024, 12, 31, 10, 0).toIso8601String());
-    _displayAlwaysOn = _getSetting(AppConstraints.keyDisplayAlwaysOn, true);
+    _notificationState = _mainSettingsBox.get(AppConstraints.keyNotificationState, defaultValue: false);
+    _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2024, 12, 31, 10, 0).toIso8601String());
+    _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
-    _appThemeColor = _getSetting(AppConstraints.keyAppThemeColor, Colors.blue.value);
-    _themeModeIndex = _getSetting(AppConstraints.keyThemeModeIndex, 2);
+    _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.blue.value);
+    _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
   }
 
   late bool _notificationState;
@@ -30,39 +30,52 @@ class AppSettingsState extends ChangeNotifier {
 
   int get getAppThemeColor => _appThemeColor;
 
-  ThemeMode get getThemeMode {
-    return ThemeMode.values[_themeModeIndex.clamp(0, ThemeMode.values.length - 1)];
-  }
-
   int get getThemeModeIndex => _themeModeIndex;
 
-  set setNotificationState(bool value) => _updateSetting(AppConstraints.keyNotificationState, value, () {
-    _notificationState = value;
-  });
-
-  set setNotificationTime(DateTime time) => _updateSetting(AppConstraints.keyNotificationTime, time.toIso8601String(), () {
-    _notificationTime = time.toIso8601String();
-  });
-
-  set setDisplayAlwaysOn(bool value) => _updateSetting(AppConstraints.keyDisplayAlwaysOn, value, () {
-    _displayAlwaysOn = value;
-    value ? WakelockPlus.enable() : WakelockPlus.disable();
-  });
-
-  set setAppThemeColor(int color) => _updateSetting(AppConstraints.keyAppThemeColor, color, () {
-    _appThemeColor = color;
-  });
-
-  set setThemeModeIndex(int themeIndex) => _updateSetting(AppConstraints.keyThemeModeIndex, themeIndex, () {
-    _themeModeIndex = themeIndex;
-  });
-
-  T _getSetting<T>(String key, T defaultValue) {
-    return _mainSettingsBox.get(key, defaultValue: defaultValue) as T;
+  ThemeMode get getThemeMode {
+    late ThemeMode currentTheme;
+    switch(_themeModeIndex) {
+      case 0:
+        currentTheme = ThemeMode.light;
+        break;
+      case 1:
+        currentTheme = ThemeMode.dark;
+        break;
+      case 2:
+        currentTheme = ThemeMode.system;
+        break;
+      default: currentTheme = ThemeMode.system;
+    }
+    return currentTheme;
   }
 
-  void _updateSetting<T>(String key, T value, VoidCallback updateLocalValue) async {
-    updateLocalValue();
+  set setThemeModeIndex(int value) {
+    _themeModeIndex = value;
+    _saveSetting(AppConstraints.keyThemeModeIndex, value);
+  }
+
+  set setAppThemeColor(int value) {
+    _appThemeColor = value;
+    _saveSetting(AppConstraints.keyAppThemeColor, value);
+  }
+
+  set setDisplayAlwaysOn(bool value) {
+    _displayAlwaysOn = value;
+    _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
+    _saveSetting(AppConstraints.keyDisplayAlwaysOn, value);
+  }
+
+  set setNotificationTime(DateTime time) {
+    _notificationTime = time.toIso8601String();
+    _saveSetting(AppConstraints.keyNotificationTime, time.toIso8601String());
+  }
+
+  set setNotificationState(bool value) {
+    _notificationState = value;
+    _saveSetting(AppConstraints.keyNotificationState, value);
+  }
+
+  void _saveSetting(String key, dynamic value) async {
     await _mainSettingsBox.put(key, value);
     notifyListeners();
   }
