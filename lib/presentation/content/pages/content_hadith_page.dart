@@ -104,72 +104,78 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
         bottomNavigationBar: Card(
           margin: EdgeInsets.zero,
           elevation: 0,
-          child: Padding(
-            padding: AppStyles.bottomTopMini,
-            child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              runAlignment: WrapAlignment.spaceEvenly,
-              alignment: WrapAlignment.spaceEvenly,
-              children: [
-                IconButton.filled(
-                  onPressed: () {
-                    _pageController.previousPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  icon: Icon(CupertinoIcons.arrow_turn_up_left),
-                ),
-                Consumer2<HadithPlayerState, ContentIndexState>(
-                  builder: (context, hadithPlayer, contentIndex, _) {
-                    return IconButton.filledTonal(
+          child: Consumer<HadithPlayerState>(
+            builder: (context, hadithPlayer, _) {
+              return Padding(
+                padding: AppStyles.bottomTopMini,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runAlignment: WrapAlignment.spaceEvenly,
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    IconButton.filled(
                       onPressed: () {
-                        hadithPlayer.toggleRepeatMode();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: appColors.secondaryContainer,
-                            duration: const Duration(milliseconds: 500),
-                            shape: AppStyles.shapeTop,
-                            elevation: 0,
-                            content: Text(
-                              hadithPlayer.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
-                              style: TextStyle(
-                                fontSize: 17.0,
-                                color: appColors.onSurface,
+                        hadithPlayer.stopTrack();
+                        _pageController.previousPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      icon: Icon(CupertinoIcons.arrow_turn_up_left),
+                    ),
+                    Consumer<ContentIndexState>(
+                      builder: (context, contentIndex, _) {
+                        return IconButton.filledTonal(
+                          onPressed: () {
+                            hadithPlayer.toggleRepeatMode();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: appColors.secondaryContainer,
+                                duration: const Duration(milliseconds: 500),
+                                shape: AppStyles.shapeTop,
+                                elevation: 0,
+                                content: Text(
+                                  hadithPlayer.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: appColors.onSurface,
+                                  ),
+                                ),
                               ),
-                            ),
+                            );
+                          },
+                          icon: Icon(
+                            CupertinoIcons.arrow_2_squarepath,
+                            color: hadithPlayer.isRepeating ? appColors.error : appColors.onSurface,
                           ),
                         );
                       },
-                      icon: Icon(
-                        CupertinoIcons.arrow_2_squarepath,
-                        color: hadithPlayer.isRepeating ? appColors.error : appColors.onSurface,
-                      ),
-                    );
-                  },
-                ),
-                Consumer2<HadithPlayerState, ContentIndexState>(
-                  builder: (context, hadithPlayer, contentIndex, _) {
-                    return IconButton.filledTonal(
-                      onPressed: () {
-                        hadithPlayer.playTrack(audioName: 'hadeeth_${contentIndex.getContentIndex}', trackId: contentIndex.getContentIndex);
+                    ),
+                    Consumer<ContentIndexState>(
+                      builder: (context, contentIndex, _) {
+                        return IconButton.filledTonal(
+                          onPressed: () {
+                            hadithPlayer.playTrack(audioName: 'hadeeth_${contentIndex.getContentIndex}', trackId: contentIndex.getContentIndex);
+                          },
+                          icon: Icon(hadithPlayer.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
+                        );
                       },
-                      icon: Icon(hadithPlayer.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
-                    );
-                  },
+                    ),
+                    ShareHadithButton(),
+                    IconButton.filled(
+                      onPressed: () {
+                        hadithPlayer.stopTrack();
+                        _pageController.nextPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      icon: Icon(CupertinoIcons.arrow_turn_up_right),
+                    ),
+                  ],
                 ),
-                ShareHadithButton(),
-                IconButton.filled(
-                  onPressed: () {
-                    _pageController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  icon: Icon(CupertinoIcons.arrow_turn_up_right),
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

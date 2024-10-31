@@ -5,15 +5,13 @@ import 'package:provider/provider.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/apart_hadith_args.dart';
-import '../../../data/repositories/apart_hadith_data_repository.dart';
-import '../../../data/services/database_service.dart';
-import '../../../domain/usecases/apart_hadiths_use_case.dart';
+import '../../state/apart_hadith_player_state.dart';
 import '../../state/apart_hadiths_state.dart';
-import '../../widgets/future_chapter_title.dart';
 import '../lists/content_apart_hadiths_list.dart';
 
-class ContentApartHadithPage extends StatelessWidget {
+class ContentApartHadithPage extends StatefulWidget {
   const ContentApartHadithPage({
     super.key,
     required this.tableName,
@@ -24,23 +22,31 @@ class ContentApartHadithPage extends StatelessWidget {
   final int hadithId;
 
   @override
+  State<ContentApartHadithPage> createState() => _ContentApartHadithPageState();
+}
+
+class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
+  late final Future<List<String>> _futureTrackList;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureTrackList = Provider.of<ApartHadithsState>(context, listen: false).fetchTrackList(hadithId: widget.hadithId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppLocalizations locale = AppLocalizations.of(context)!;
+    final appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ApartHadithsState(
-            ApartHadithsUseCase(
-              apartHadithsRepository: ApartHadithDataRepository(
-                DatabaseService(),
-              ),
-            ),
-          ),
+          create: (_) => ApartHadithPlayerState(futureTrackList: _futureTrackList),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('${AppStrings.hadith} $hadithId'),
+          title: Text('${AppStrings.hadith} ${widget.hadithId}'),
           actions: [
             IconButton.filledTonal(
               onPressed: () async {
@@ -54,12 +60,13 @@ class ContentApartHadithPage extends StatelessWidget {
             ),
             IconButton.filledTonal(
               onPressed: () async {
+                Provider.of<ApartHadithPlayerState>(context, listen: false).stopTrack();
                 await Navigator.pushNamed(
                   context,
                   RoutePageNames.contentCardHadithPage,
                   arguments: ApartHadithArgs(
                     tableName: locale.tableName,
-                    hadithId: hadithId,
+                    hadithId: widget.hadithId,
                   ),
                 );
               },
@@ -68,21 +75,68 @@ class ContentApartHadithPage extends StatelessWidget {
             ),
           ],
         ),
-        body: Scrollbar(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                FutureChapterTitle(
-                  tableName: tableName,
-                  hadithId: hadithId,
+        body: ContentApartHadithsList(
+          tableName: locale.apartTableName,
+          hadithId: widget.hadithId,
+        ),
+        bottomNavigationBar: Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          child: Consumer<ApartHadithPlayerState>(
+            builder: (context, hadithPlayer, _) {
+              return Padding(
+                padding: AppStyles.bottomTopMini,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runAlignment: WrapAlignment.spaceEvenly,
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    IconButton.outlined(
+                      onPressed: hadithPlayer.isPlaying ? () {
+                        hadithPlayer.previousTrack();
+                      } : null,
+                      icon: Icon(CupertinoIcons.arrow_up),
+                    ),
+                    IconButton.filledTonal(
+                      onPressed: () {
+                        hadithPlayer.playTrack();
+                      },
+                      icon: Icon(hadithPlayer.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
+                    ),
+                    IconButton.filledTonal(
+                      onPressed: () {
+                        hadithPlayer.toggleRepeatMode();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: appColors.secondaryContainer,
+                            duration: const Duration(milliseconds: 500),
+                            shape: AppStyles.shapeTop,
+                            elevation: 0,
+                            content: Text(
+                              hadithPlayer.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                              style: TextStyle(
+                                fontSize: 17.0,
+                                color: appColors.onSurface,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        CupertinoIcons.arrow_2_squarepath,
+                        color: hadithPlayer.isRepeating ? appColors.error : appColors.onSurface,
+                      ),
+                    ),
+                    IconButton.outlined(
+                      onPressed: hadithPlayer.isPlaying ? () {
+                        hadithPlayer.nextTrack();
+                      } : null,
+                      icon: Icon(CupertinoIcons.arrow_down),
+                    ),
+                  ],
                 ),
-                ContentApartHadithsList(
-                  tableName: locale.apartTableName,
-                  hadithId: hadithId,
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

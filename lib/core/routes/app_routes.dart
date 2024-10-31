@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/arguments/apart_hadith_args.dart';
+import '../../data/models/arguments/card_hadith_args.dart';
 import '../../data/models/arguments/hadith_args.dart';
 import '../../presentation/apart/pages/content_apart_hadith_page.dart';
 import '../../presentation/card/pages/content_card_hadith_page.dart';
@@ -32,8 +33,8 @@ class AppRoutes {
       return ContentApartHadithPage(tableName: apartHadithArgs.tableName, hadithId: apartHadithArgs.hadithId);
     },
     RoutePageNames.contentCardHadithPage: (context, args) {
-      final ApartHadithArgs apartHadithArgs = args;
-      return ContentCardHadithPage(tableName: apartHadithArgs.tableName, hadithId: apartHadithArgs.hadithId);
+      final CardHadithArgs cardHadithArgs = args;
+      return ContentCardHadithPage(tableName: cardHadithArgs.tableName, hadithId: cardHadithArgs.hadithId);
     },
     RoutePageNames.contentSettingsPage: (context, args) => ContentSettingsPage(),
   };

@@ -3,11 +3,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'core/strings/app_constraints.dart';
+import 'data/repositories/apart_hadith_data_repository.dart';
 import 'data/repositories/hadith_data_repository.dart';
 import 'data/services/database_service.dart';
 import 'data/services/notification/notification_service.dart';
+import 'domain/usecases/apart_hadiths_use_case.dart';
 import 'domain/usecases/hadiths_use_case.dart';
 import 'presentation/pages/root_page.dart';
+import 'presentation/state/apart_hadiths_state.dart';
 import 'presentation/state/app_settings_state.dart';
 import 'presentation/state/content_settings_state.dart';
 import 'presentation/state/hadiths_state.dart';
@@ -42,6 +45,13 @@ void main() async {
           create: (_) => HadithsState(
             HadithsUseCase(
               hadithsRepository: HadithDataRepository(databaseService),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ApartHadithsState(
+            ApartHadithsUseCase(
+              apartHadithsRepository: ApartHadithDataRepository(databaseService),
             ),
           ),
         ),

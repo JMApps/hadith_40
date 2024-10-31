@@ -11,4 +11,8 @@ class ApartHadithsState extends ChangeNotifier {
   Future<List<ApartHadithEntity>> fetchApartHadithById({required String tableName, required int hadithId}) async {
     return await _apartHadithsUseCase.fetchApartHadithsById(tableName: tableName, hadithId: hadithId);
   }
+
+  Future<List<String>> fetchTrackList({required int hadithId}) async {
+    return await _apartHadithsUseCase.fetchListTrack(hadithId: hadithId);
+  }
 }

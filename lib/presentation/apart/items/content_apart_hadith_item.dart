@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/styles/app_styles.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../domain/entities/apart_hadith_entity.dart';
+import '../../state/apart_hadith_player_state.dart';
 import '../../state/content_settings_state.dart';
 import '../../widgets/main_html_data.dart';
 
@@ -29,8 +30,10 @@ class ContentApartHadithItem extends StatelessWidget {
       child: Consumer<ContentSettingsState>(
         builder: (context, contentSettings, _) {
           return ListTile(
-            onTap: () async {},
-            tileColor: apartHadithIndex.isOdd ? itemOddColor : itemEvenColor,
+            onTap: () async {
+              Provider.of<ApartHadithPlayerState>(context, listen: false).playTrackIndex(apartHadithIndex);
+            },
+            tileColor: Provider.of<ApartHadithPlayerState>(context).currentTrackIndex == apartHadithIndex ? appColors.inversePrimary.withOpacity(0.75) : apartHadithIndex.isOdd ? itemOddColor : itemEvenColor,
             shape: AppStyles.shape,
             splashColor: appColors.inversePrimary.withOpacity(0.5),
             title: MainHtmlData(
