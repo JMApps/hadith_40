@@ -9,7 +9,7 @@ class AppSettingsState extends ChangeNotifier {
 
   AppSettingsState() {
     _notificationState = _getSetting(AppConstraints.keyNotificationState, false);
-    _notificationTime = _getSetting(AppConstraints.keyNotificationTime, DateTime(2024, 12, 31, 4, 0));
+    _notificationTime = _getSetting(AppConstraints.keyNotificationTime, DateTime(2024, 12, 31, 10, 0).toIso8601String());
     _displayAlwaysOn = _getSetting(AppConstraints.keyDisplayAlwaysOn, true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appThemeColor = _getSetting(AppConstraints.keyAppThemeColor, Colors.blue.value);
@@ -17,14 +17,14 @@ class AppSettingsState extends ChangeNotifier {
   }
 
   late bool _notificationState;
-  late DateTime _notificationTime;
+  late String _notificationTime;
   late bool _displayAlwaysOn;
   late int _appThemeColor;
   late int _themeModeIndex;
 
   bool get getNotificationState => _notificationState;
 
-  DateTime get getNotificationTime => _notificationTime;
+  DateTime get getNotificationTime => DateTime.parse(_notificationTime);
 
   bool get getDisplayAlwaysOn => _displayAlwaysOn;
 
@@ -41,7 +41,7 @@ class AppSettingsState extends ChangeNotifier {
   });
 
   set setNotificationTime(DateTime time) => _updateSetting(AppConstraints.keyNotificationTime, time.toIso8601String(), () {
-    _notificationTime = time;
+    _notificationTime = time.toIso8601String();
   });
 
   set setDisplayAlwaysOn(bool value) => _updateSetting(AppConstraints.keyDisplayAlwaysOn, value, () {
@@ -63,7 +63,7 @@ class AppSettingsState extends ChangeNotifier {
 
   void _updateSetting<T>(String key, T value, VoidCallback updateLocalValue) async {
     updateLocalValue();
-    notifyListeners();
     await _mainSettingsBox.put(key, value);
+    notifyListeners();
   }
 }

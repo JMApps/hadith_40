@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hadith_40/presentation/state/apart_hadith_player_state.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/apart_hadith_entity.dart';
+import '../../state/apart_hadith_player_state.dart';
 import '../../state/apart_hadiths_state.dart';
 import '../../widgets/main_error_text_data.dart';
 import '../items/content_apart_hadith_item.dart';
@@ -39,6 +39,7 @@ class _ContentApartHadithsListState extends State<ContentApartHadithsList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ScrollablePositionedList.builder(
+            physics: ClampingScrollPhysics(),
             itemScrollController: Provider.of<ApartHadithPlayerState>(context, listen: false).getItemScrollController,
             padding: AppStyles.withoutBottomMini,
             itemCount: snapshot.data!.length,
