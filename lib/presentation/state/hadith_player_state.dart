@@ -7,9 +7,9 @@ class HadithPlayerState extends ChangeNotifier {
   AudioPlayer get audioPlayer => _audioPlayer;
 
   bool _isPlaying = false;
-  bool get isPlaying => _isPlaying;
-
   bool _isRepeating = false;
+
+  bool get isPlaying => _isPlaying;
   bool get isRepeating => _isRepeating;
 
   int _currentTrackId = -1;
@@ -25,6 +25,7 @@ class HadithPlayerState extends ChangeNotifier {
   Future<void> playTrack({required String audioName, required int trackId}) async {
     if (_currentTrackId != trackId) {
       await _audioPlayer.setAsset('assets/audios/$audioName.mp3');
+      _currentTrackId = trackId;
       _audioPlayer.play();
     } else {
       if (_audioPlayer.playing) {
@@ -33,8 +34,13 @@ class HadithPlayerState extends ChangeNotifier {
         _audioPlayer.play();
       }
     }
-
     _isPlaying = _audioPlayer.playing;
+    notifyListeners();
+  }
+
+  void toggleRepeatMode() {
+    _isRepeating = !_isRepeating;
+    _audioPlayer.setLoopMode(_isRepeating ? LoopMode.one : LoopMode.off);
     notifyListeners();
   }
 
@@ -48,13 +54,8 @@ class HadithPlayerState extends ChangeNotifier {
 
   void _resetPlayerState() {
     if (!hasListeners) return;
+    _currentTrackId = -1;
     _isPlaying = false;
-    notifyListeners();
-  }
-
-  void toggleRepeatMode() {
-    _isRepeating = !_isRepeating;
-    _audioPlayer.setLoopMode(_isRepeating ? LoopMode.one : LoopMode.off);
     notifyListeners();
   }
 
