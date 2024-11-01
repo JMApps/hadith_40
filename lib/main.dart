@@ -33,13 +33,10 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AppSettingsState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ContentSettingsState(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => MainState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppSettingsState(),
         ),
         ChangeNotifierProvider(
           create: (_) => HadithsState(
@@ -54,6 +51,9 @@ void main() async {
               apartHadithsRepository: ApartHadithDataRepository(databaseService),
             ),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContentSettingsState(),
         ),
       ],
       child: const RootPage(),

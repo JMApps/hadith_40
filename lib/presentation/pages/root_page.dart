@@ -15,7 +15,7 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppSettingsState>(
-      builder: (BuildContext context, appSettings, _) {
+      builder: (context, appSettings, _) {
         final appThemes = AppThemes(Color(appSettings.getAppThemeColor));
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -35,7 +35,7 @@ class RootPage extends StatelessWidget {
           locale: AppConstraints.appLocales[appSettings.getLocaleIndex],
           theme: appThemes.lightTheme,
           darkTheme: appThemes.darkTheme,
-          themeMode: ThemeMode.system,
+          themeMode: appSettings.getThemeMode,
           home: const MainPage(),
         );
       },

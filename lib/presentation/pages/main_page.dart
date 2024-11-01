@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../core/routes/route_page_names.dart';
 import '../../core/strings/app_strings.dart';
@@ -33,12 +34,17 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
-    final MainState mainState = Provider.of<MainState>(context);
     final AppLocalizations locale = AppLocalizations.of(context)!;
+    final appColors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(locale.appName),
+        leading: IconButton.filledTonal(
+          onPressed: () async {
+            await Share.share([locale.appName,AppStrings.versionIOS, AppStrings.linkIOS, AppStrings.versionAndroid, AppStrings.linkAndroid].join('\n\n'));
+          },
+          icon: Icon(CupertinoIcons.share),
+        ),
         actions: [
           Consumer<HadithsState>(
             builder: (context, hadithsState, _) {
@@ -53,13 +59,16 @@ class _MainPageState extends State<MainPage> {
                   );
                 },
                 tooltip: AppStrings.continueRead,
-                icon: Icon(CupertinoIcons.app_badge_fill),
+                icon: Text(
+                  Provider.of<HadithsState>(context).getLastHadithId.toString(),
+                  style: AppStyles.mainTextStyle18Bold,
+                ),
               );
             },
           ),
           IconButton.filledTonal(
-            onPressed: () {
-              showSearch(
+            onPressed: () async {
+              await showSearch(
                 context: context,
                 delegate: SearchHadithsDelegate(
                   tableName: locale.tableName,
@@ -73,14 +82,18 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 350),
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(
             opacity: animation,
             child: child,
           );
         },
-        child: _mainScreens[mainState.getBottomIndex],
+        child: Consumer<MainState>(
+          builder: (context, mainState, _) {
+            return _mainScreens[mainState.getBottomIndex];
+          },
+        ),
       ),
       bottomNavigationBar: Card(
         margin: EdgeInsets.zero,
@@ -91,30 +104,34 @@ class _MainPageState extends State<MainPage> {
           removeBottom: true,
           child: Padding(
             padding: AppStyles.paddingMini,
-            child: SalomonBottomBar(
-              selectedItemColor: appColors.primary,
-              unselectedItemColor: appColors.secondary,
-              items: [
-                SalomonBottomBarItem(
-                  icon: const Icon(CupertinoIcons.square_fill_on_square_fill),
-                  title: _itemText(title: AppStrings.hadiths),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(Icons.bookmarks),
-                  title: _itemText(title: AppStrings.favorites),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(CupertinoIcons.layers_alt_fill),
-                  title: _itemText(title: AppStrings.apart),
-                ),
-                SalomonBottomBarItem(
-                  icon: const Icon(Icons.settings),
-                  title: _itemText(title: AppStrings.settings),
-                ),
-              ],
-              currentIndex: mainState.getBottomIndex,
-              onTap: (int index) {
-                mainState.setBottomIndex = index;
+            child: Consumer<MainState>(
+              builder: (context, mainState, _) {
+                return SalomonBottomBar(
+                  selectedItemColor: appColors.primary,
+                  unselectedItemColor: appColors.secondary,
+                  items: [
+                    SalomonBottomBarItem(
+                      icon: const Icon(CupertinoIcons.square_stack_fill),
+                      title: _itemText(title: AppStrings.hadiths),
+                    ),
+                    SalomonBottomBarItem(
+                      icon: const Icon(Icons.bookmarks),
+                      title: _itemText(title: AppStrings.favorites),
+                    ),
+                    SalomonBottomBarItem(
+                      icon: const Icon(CupertinoIcons.layers_alt_fill),
+                      title: _itemText(title: AppStrings.apart),
+                    ),
+                    SalomonBottomBarItem(
+                      icon: const Icon(Icons.settings),
+                      title: _itemText(title: AppStrings.settings),
+                    ),
+                  ],
+                  currentIndex: mainState.getBottomIndex,
+                  onTap: (int index) {
+                    mainState.setBottomIndex = index;
+                  },
+                );
               },
             ),
           ),
