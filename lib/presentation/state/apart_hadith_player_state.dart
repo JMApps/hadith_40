@@ -29,7 +29,7 @@ class ApartHadithPlayerState extends ChangeNotifier {
       if (index != null && _isPlaying) {
         _currentTrackIndex = index;
         if (_itemScrollController.isAttached) {
-          _itemScrollController.jumpTo(index: _currentTrackIndex, alignment: 0.75);
+          _itemScrollController.jumpTo(index: _currentTrackIndex, alignment: 0.5);
         }
         notifyListeners();
       }

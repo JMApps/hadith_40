@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/services/notification/notification_service.dart';
@@ -33,36 +35,70 @@ class AppSettingsPage extends StatelessWidget {
                   title: AppStrings.dailyNotifications,
                   subTitle: timeFormatter.format(settingsState.getNotificationTime),
                   leading: IconButton(
-                    onPressed: () async {
-                      final notificationTime = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay(
-                          hour: settingsState.getNotificationTime.hour,
-                          minute: settingsState.getNotificationTime.minute,
-                        ),
-                      );
-                      if (notificationTime != null) {
-                        final newNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
-                        settingsState.setNotificationTime = newNotificationTime;
-                        if (settingsState.getNotificationState) {
-                          _scheduleNotification(notificationService, settingsState);
+                      onPressed: () async {
+                        final notificationTime = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay(
+                            hour: settingsState.getNotificationTime.hour,
+                            minute: settingsState.getNotificationTime.minute,
+                          ),
+                        );
+                        if (notificationTime != null) {
+                          final newNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
+                          settingsState.setNotificationTime = newNotificationTime;
+                          if (settingsState.getNotificationState) {
+                            _scheduleNotification(notificationService, settingsState);
+                          }
                         }
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.access_time_rounded,
-                      size: 30,
-                    ),
-                  ),
+                      },
+                      icon: Icon(Icons.access_time_rounded)),
                   trailing: IconButton.filledTonal(
                     onPressed: () {
                       settingsState.setNotificationState = !settingsState.getNotificationState;
                       settingsState.getNotificationState ? _scheduleNotification(notificationService, settingsState) : notificationService.cancelNotificationWithId(NotificationService.dailyNotificationId);
                     },
-                    icon: Icon(
-                      settingsState.getNotificationState ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
-                      color: settingsState.getNotificationState ? appColors.primary : appColors.onSurface,
+                    icon: Icon(settingsState.getNotificationState
+                          ? Icons.notifications_on_outlined
+                          : Icons.notifications_off_outlined,
+                      color: settingsState.getNotificationState
+                          ? appColors.primary
+                          : appColors.onSurface,
                       size: 30,
+                    ),
+                  ),
+                ),
+                const Divider(indent: 16, endIndent: 16),
+                AppSettingListTile(
+                  title: AppStrings.interfaceLang,
+                  subTitle: AppStrings.changeLang,
+                  leading: const Icon(CupertinoIcons.globe),
+                  trailing: IconButton(
+                    onPressed: () {
+                      showMenu(
+                        context: context,
+                        position: RelativeRect.fromLTRB(100, 100, 100, 100),
+                        items: AppConstraints.appLanguages.map((String value) {
+                          return PopupMenuItem<String>(
+                            value: value,
+                            child: Center(
+                              child: Text(
+                                value,
+                                style: AppStyles.mainTextStyle16,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ).then(
+                        (selectedValue) {
+                          if (selectedValue != null) {
+                            settingsState.setLocaleIndex = AppConstraints.appLanguages.indexOf(selectedValue);
+                          }
+                        },
+                      );
+                    },
+                    icon: Text(
+                      AppConstraints.appLanguages[settingsState.getLocaleIndex],
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
@@ -119,7 +155,8 @@ class AppSettingsPage extends StatelessWidget {
     );
   }
 
-  void _scheduleNotification(NotificationService notificationService, AppSettingsState settingsState) {
+  void _scheduleNotification(
+      NotificationService notificationService, AppSettingsState settingsState) {
     notificationService.timeNotifications(
       id: NotificationService.dailyNotificationId,
       title: AppStrings.appName,

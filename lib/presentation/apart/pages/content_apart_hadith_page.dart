@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/models/arguments/apart_hadith_args.dart';
+import '../../../data/models/arguments/card_hadith_args.dart';
 import '../../state/apart_hadith_player_state.dart';
 import '../../state/apart_hadiths_state.dart';
 import '../lists/content_apart_hadiths_list.dart';
@@ -60,11 +60,10 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
             ),
             IconButton.filledTonal(
               onPressed: () async {
-                Provider.of<ApartHadithPlayerState>(context, listen: false).stopTrack();
                 await Navigator.pushNamed(
                   context,
                   RoutePageNames.contentCardHadithPage,
-                  arguments: ApartHadithArgs(
+                  arguments: CardHadithArgs(
                     tableName: locale.tableName,
                     hadithId: widget.hadithId,
                   ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class AppConstraints {
   static const String fontGilroy = 'Gilroy';
 
@@ -21,9 +23,22 @@ class AppConstraints {
   static const String keyTranslationLightColor = 'key_translation_light_color_index';
   static const String keyTranslationDarkColor = 'key_translation_dark_color_index';
 
+  static const String keyLocaleIndex = 'key_locale_index';
   static const String keyNotificationState = 'key_notification_state';
   static const String keyNotificationTime = 'key_notification_time';
   static const String keyDisplayAlwaysOn = 'key_display_on_off';
   static const String keyAppThemeColor = 'key_app_theme_color';
   static const String keyThemeModeIndex = 'key_theme_mode_index';
+
+  static const List<String> appLanguages = [
+    'English',
+    'Türkçe',
+    'Русский',
+  ];
+
+  static const List<Locale> appLocales = [
+    Locale('en', 'EN'),
+    Locale('tr', 'TR'),
+    Locale('ru', 'RU'),
+  ];
 }

@@ -63,6 +63,9 @@ class AppStrings {
 
   static const String dailyNotifications = 'Ежедневные уведомления';
 
+  static const String interfaceLang = 'Язык системы';
+  static const String changeLang = 'Сменить язык';
+
   static const String display = 'Дисплей';
   static const String displayAlwaysOn = 'Дисплей всегда включён';
 

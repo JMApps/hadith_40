@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "40_512 1.jpg",
+      "filename" : "40_main_512 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "40_512.jpg",
+      "filename" : "40_main_512.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "40_512 2.jpg",
+      "filename" : "40_main_512 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

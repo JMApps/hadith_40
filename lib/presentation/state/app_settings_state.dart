@@ -8,6 +8,7 @@ class AppSettingsState extends ChangeNotifier {
   final _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
 
   AppSettingsState() {
+    _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: 0);
     _notificationState = _mainSettingsBox.get(AppConstraints.keyNotificationState, defaultValue: false);
     _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2024, 12, 31, 10, 0).toIso8601String());
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
@@ -16,11 +17,14 @@ class AppSettingsState extends ChangeNotifier {
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
   }
 
+  late int _localeIndex;
   late bool _notificationState;
   late String _notificationTime;
   late bool _displayAlwaysOn;
   late int _appThemeColor;
   late int _themeModeIndex;
+
+  int get getLocaleIndex => _localeIndex;
 
   bool get getNotificationState => _notificationState;
 
@@ -31,6 +35,14 @@ class AppSettingsState extends ChangeNotifier {
   int get getAppThemeColor => _appThemeColor;
 
   int get getThemeModeIndex => _themeModeIndex;
+
+  set setLocaleIndex(int localeIndex) {
+    if (_localeIndex != localeIndex) {
+      _localeIndex = localeIndex;
+      _saveSetting(AppConstraints.keyLocaleIndex, localeIndex);
+      notifyListeners();
+    }
+  }
 
   ThemeMode get getThemeMode {
     late ThemeMode currentTheme;
