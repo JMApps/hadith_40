@@ -12,9 +12,13 @@ class AppStrings {
   static const String reverseCard = 'Перевернуть карточки';
   static const String settings = 'Настройки';
 
+  static const String previous = 'Предыдущий';
+  static const String next = 'Следующий';
+
   static const String added = 'Добавлено';
   static const String removed = 'Удалено';
 
+  static const String repeat = 'Повтор';
   static const String repeatOn = 'Повтор включён';
   static const String repeatOff = 'Повтор отключён';
 
