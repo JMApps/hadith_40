@@ -61,14 +61,18 @@ class AppSettingsState extends ChangeNotifier {
     return currentTheme;
   }
 
-  set setThemeModeIndex(int value) {
-    _themeModeIndex = value;
-    _saveSetting(AppConstraints.keyThemeModeIndex, value);
+  set setThemeModeIndex(int themeModeIndex) {
+    if (_themeModeIndex != themeModeIndex) {
+      _themeModeIndex = themeModeIndex;
+      _saveSetting(AppConstraints.keyThemeModeIndex, themeModeIndex);
+    }
   }
 
-  set setAppThemeColor(int value) {
-    _appThemeColor = value;
-    _saveSetting(AppConstraints.keyAppThemeColor, value);
+  set setAppThemeColor(int appThemeColor) {
+    if (_appThemeColor != appThemeColor) {
+      _appThemeColor = appThemeColor;
+      _saveSetting(AppConstraints.keyAppThemeColor, appThemeColor);
+    }
   }
 
   set setDisplayAlwaysOn(bool value) {
@@ -77,9 +81,9 @@ class AppSettingsState extends ChangeNotifier {
     _saveSetting(AppConstraints.keyDisplayAlwaysOn, value);
   }
 
-  set setNotificationTime(DateTime time) {
-    _notificationTime = time.toIso8601String();
-    _saveSetting(AppConstraints.keyNotificationTime, time.toIso8601String());
+  set setNotificationTime(DateTime notificationTime) {
+    _notificationTime = notificationTime.toIso8601String();
+    _saveSetting(AppConstraints.keyNotificationTime, notificationTime.toIso8601String());
   }
 
   set setNotificationState(bool value) {

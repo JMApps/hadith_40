@@ -28,8 +28,8 @@ class ApartHadithPlayerState extends ChangeNotifier {
     _audioPlayer.currentIndexStream.listen((index) {
       if (index != null && _isPlaying) {
         _currentTrackIndex = index;
+          _itemScrollController.scrollTo(index: _currentTrackIndex, duration: Duration(milliseconds: 500));
         if (_itemScrollController.isAttached) {
-          _itemScrollController.jumpTo(index: _currentTrackIndex, alignment: 0.5);
         }
         notifyListeners();
       }
@@ -40,7 +40,7 @@ class ApartHadithPlayerState extends ChangeNotifier {
         _currentTrackIndex = -1;
         stopTrack();
         if (_itemScrollController.isAttached) {
-          _itemScrollController.jumpTo(index: 0, alignment: 0);
+          _itemScrollController.jumpTo(index: 0);
         }
         notifyListeners();
       }
@@ -80,15 +80,17 @@ class ApartHadithPlayerState extends ChangeNotifier {
   }
 
   void stopTrack() {
-    if (_isPlaying) {
+    if (!hasListeners) return;
+    if (isPlaying) {
       _audioPlayer.stop();
       _resetPlayerState();
     }
   }
 
   void _resetPlayerState() {
-    _isPlaying = false;
+    if (!hasListeners) return;
     _currentTrackIndex = -1;
+    _isPlaying = false;
     notifyListeners();
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../widgets/default_settings_button.dart';
 import '../widgets/text_aligns_drop_down.dart';
@@ -13,9 +13,10 @@ class ContentSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.settings),
+        title: Text(locale.settings),
       ),
       body: const SingleChildScrollView(
         padding: AppStyles.padding,

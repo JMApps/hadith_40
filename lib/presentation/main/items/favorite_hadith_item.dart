@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/hadith_args.dart';
 import '../../../domain/entities/hadith_entity.dart';
@@ -21,12 +21,18 @@ class FavoriteHadithItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.150);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.075);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
+        horizontalTitleGap: 8,
+        contentPadding: AppStyles.paddingMini,
+        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
+        shape: AppStyles.shape,
         onTap: () async {
           HapticFeedback.lightImpact();
           Provider.of<HadithsState>(context, listen: false).saveLastHadithId(hadithModel.id);
@@ -38,11 +44,6 @@ class FavoriteHadithItem extends StatelessWidget {
             ),
           );
         },
-        horizontalTitleGap: 8,
-        contentPadding: AppStyles.paddingMini,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
-        tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
-        shape: AppStyles.shape,
         title: Text(
           hadithModel.hadithNumber,
           style: TextStyle(
@@ -68,10 +69,10 @@ class FavoriteHadithItem extends StatelessWidget {
                 shape: AppStyles.shapeTop,
                 elevation: 0,
                 content: Text(
-                  AppStrings.removed,
+                  locale.removed,
                   style: TextStyle(
-                    fontSize: 17.0,
                     color: appColors.onSurface,
+                    fontSize: 17.0,
                   ),
                 ),
               ),

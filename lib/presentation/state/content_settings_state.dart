@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../core/strings/app_constraints.dart';
 
 class ContentSettingsState extends ChangeNotifier {
-
   final _contentSettings = Hive.box(AppConstraints.keyContentSettingsBox);
 
   late int _arabicFontIndex;
@@ -42,15 +41,6 @@ class ContentSettingsState extends ChangeNotifier {
     _translationDarkTextColor = _getSetting(AppConstraints.keyTranslationDarkColor, Colors.blueGrey.shade100.value);
   }
 
-  int _getSetting(String key, int defaultValue) {
-    return _contentSettings.get(key, defaultValue: defaultValue);
-  }
-
-  void _setSetting(int value, String key) async {
-    await _contentSettings.put(key, value);
-    notifyListeners();
-  }
-
   int get getArabicFontIndex => _arabicFontIndex;
   int get getTranslationFontIndex => _translationFontIndex;
 
@@ -66,54 +56,74 @@ class ContentSettingsState extends ChangeNotifier {
   int get getTranslationLightTextColor => _translationLightTextColor;
   int get getTranslationDarkTextColor => _translationDarkTextColor;
 
-  set setArabicFontIndex(int index) {
-    _arabicFontIndex = index;
-    _setSetting(index, AppConstraints.keyArabicFontIndex);
+  set setArabicFontIndex(int fontIndex) {
+    if (_arabicFontIndex != fontIndex) {
+      _arabicFontIndex = fontIndex;
+      _setSetting(AppConstraints.keyArabicFontIndex, fontIndex);
+    }
   }
 
-  set setTranslationFontIndex(int index) {
-    _translationFontIndex = index;
-    _setSetting(index, AppConstraints.keyTranslationFontIndex);
+  set setTranslationFontIndex(int fontIndex) {
+    if (_translationFontIndex != fontIndex) {
+      _translationFontIndex = fontIndex;
+      _setSetting(AppConstraints.keyTranslationFontIndex, fontIndex);
+    }
   }
 
-  set setArabicFontSizeIndex(int index) {
-    _arabicFontSizeIndex = index;
-    _setSetting(index, AppConstraints.keyArabicFontSizeIndex);
+  set setArabicFontSizeIndex(int fontSizedIndex) {
+    if (_arabicFontSizeIndex != fontSizedIndex) {
+      _arabicFontSizeIndex = fontSizedIndex;
+      _setSetting(AppConstraints.keyArabicFontSizeIndex, fontSizedIndex);
+    }
   }
 
-  set setTranslationFontSizeIndex(int index) {
-    _translationFontSizeIndex = index;
-    _setSetting(index, AppConstraints.keyTranslationFontSizeIndex);
+  set setTranslationFontSizeIndex(int fontSizeIndex) {
+    if (_translationFontSizeIndex != fontSizeIndex) {
+      _translationFontSizeIndex = fontSizeIndex;
+      _setSetting(AppConstraints.keyTranslationFontSizeIndex, fontSizeIndex);
+    }
   }
 
-  set setArabicFontAlignIndex(int index) {
-    _arabicFontAlignIndex = index;
-    _setSetting(index, AppConstraints.keyArabicFontAlignIndex);
+  set setArabicFontAlignIndex(int fontAlignIndex) {
+    if (_arabicFontAlignIndex != fontAlignIndex) {
+      _arabicFontAlignIndex = fontAlignIndex;
+      _setSetting(AppConstraints.keyArabicFontAlignIndex, fontAlignIndex);
+    }
   }
 
-  set setTranslationFontAlignIndex(int index) {
-    _translationFontAlignIndex = index;
-    _setSetting(index, AppConstraints.keyTranslationFontAlignIndex);
+  set setTranslationFontAlignIndex(int fontAlignIndex) {
+    if (_translationFontAlignIndex != fontAlignIndex) {
+      _translationFontAlignIndex = fontAlignIndex;
+      _setSetting(AppConstraints.keyTranslationFontAlignIndex, fontAlignIndex);
+    }
   }
 
   set setArabicLightTextColor(int color) {
-    _arabicLightTextColor = color;
-    _setSetting(color, AppConstraints.keyArabicLightColor);
+    if (_arabicLightTextColor != color) {
+      _arabicLightTextColor = color;
+      _setSetting(AppConstraints.keyArabicLightColor, color);
+    }
   }
 
   set setArabicDarkTextColor(int color) {
-    _arabicDarkTextColor = color;
-    _setSetting(color, AppConstraints.keyArabicDarkColor);
+    if (_arabicDarkTextColor != color) {
+      _arabicDarkTextColor = color;
+      _setSetting(AppConstraints.keyArabicDarkColor, color);
+    }
   }
 
   set setTranslationLightTextColor(int color) {
-    _translationLightTextColor = color;
-    _setSetting(color, AppConstraints.keyTranslationLightColor);
+    if (_translationLightTextColor != color) {
+      _translationLightTextColor = color;
+      _setSetting(AppConstraints.keyTranslationLightColor, color);
+    }
   }
 
   set setTranslationDarkTextColor(int color) {
-    _translationDarkTextColor = color;
-    _setSetting(color, AppConstraints.keyTranslationDarkColor);
+    if (_translationDarkTextColor != color) {
+      _translationDarkTextColor = color;
+      _setSetting(AppConstraints.keyTranslationDarkColor, color);
+    }
   }
 
   void setDefault() {
@@ -123,8 +133,8 @@ class ContentSettingsState extends ChangeNotifier {
     setArabicFontSizeIndex = 1;
     setTranslationFontSizeIndex = 1;
 
-    setArabicFontAlignIndex = 0;
-    setTranslationFontAlignIndex = 0;
+    setArabicFontAlignIndex = 1;
+    setTranslationFontAlignIndex = 1;
 
     setArabicLightTextColor = Colors.blueGrey.shade900.value;
     setArabicDarkTextColor = Colors.blueGrey.shade100.value;
@@ -132,5 +142,14 @@ class ContentSettingsState extends ChangeNotifier {
     setTranslationLightTextColor = Colors.blueGrey.shade900.value;
     setTranslationDarkTextColor = Colors.blueGrey.shade100.value;
     notifyListeners();
+  }
+
+  void _setSetting(String key, int value) async {
+    await _contentSettings.put(key, value);
+    notifyListeners();
+  }
+  
+  int _getSetting(String key, int defaultValue) {
+    return _contentSettings.get(key, defaultValue: defaultValue);
   }
 }

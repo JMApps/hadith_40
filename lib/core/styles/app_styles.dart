@@ -42,6 +42,18 @@ class AppStyles {
     Icon(Icons.format_align_justify_rounded),
   ];
 
+  static const List<String> arabicFonts = [
+    'Hafs',
+    'Noto Naskh',
+    'Scheherazade',
+  ];
+
+  static const List<String> translationFonts = [
+    'Gilroy',
+    'SF Pro',
+    'Roboto',
+  ];
+
   static const textSizes = <double>[
     16.0,
     18.0,

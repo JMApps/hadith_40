@@ -5,7 +5,6 @@ import 'package:share_plus/share_plus.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/hadith_entity.dart';
 import '../state/content_index_state.dart';
@@ -21,13 +20,13 @@ class ShareHadithButton extends StatefulWidget {
 class _ShareHadithButtonState extends State<ShareHadithButton> {
   @override
   Widget build(BuildContext context) {
-    AppLocalizations locale = AppLocalizations.of(context)!;
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return Consumer2<ContentIndexState, HadithsState>(
       builder: (context, contentIndex, hadithState, _) {
         return FutureBuilder<HadithEntity>(
           future: hadithState.fetchHadithById(
             tableName: locale.tableName,
-            hadithId: contentIndex.getContentIndex,
+            hadithId: contentIndex.getHadithId,
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -41,7 +40,7 @@ class _ShareHadithButtonState extends State<ShareHadithButton> {
                   );
                   await Share.share(shareContent);
                 },
-                tooltip: AppStrings.share,
+                tooltip: locale.share,
                 icon: Icon(CupertinoIcons.share_up),
               );
             }

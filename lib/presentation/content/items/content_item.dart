@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/hadith_entity.dart';
 import '../../state/content_settings_state.dart';
@@ -30,7 +29,7 @@ class ContentItem extends StatelessWidget {
             children: [
               MainHtmlData(
                 htmlData: hadithModel.hadithArabic,
-                font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
+                font: AppStyles.arabicFonts[contentSettings.getArabicFontIndex],
                 fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
                 textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
                 fontColor: isLight ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
@@ -38,9 +37,10 @@ class ContentItem extends StatelessWidget {
                 textHeight: 1.75,
               ),
               const Divider(indent: 16, endIndent: 16),
+              const SizedBox(height: 6),
               MainHtmlData(
                 htmlData: hadithModel.hadithTranslation,
-                font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
+                font: AppStyles.translationFonts[contentSettings.getTranslationFontIndex],
                 fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
                 textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
                 fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),

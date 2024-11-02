@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/styles/app_styles.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../state/content_settings_state.dart';
 import '../../widgets/main_html_data.dart';
 
@@ -35,7 +34,7 @@ class CardBackHadithItem extends StatelessWidget {
           ),
           child: MainHtmlData(
             htmlData: hadithArabic,
-            font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
+            font: AppStyles.translationFonts[contentSettings.getTranslationFontIndex],
             fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
             textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
             fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),

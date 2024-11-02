@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/styles/app_styles.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../domain/entities/apart_hadith_entity.dart';
 import '../../state/apart_hadith_player_state.dart';
 import '../../state/content_settings_state.dart';
@@ -20,6 +20,7 @@ class ContentApartHadithItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final appColors = theme.colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
@@ -38,21 +39,24 @@ class ContentApartHadithItem extends StatelessWidget {
             splashColor: appColors.inversePrimary.withOpacity(0.5),
             title: MainHtmlData(
               htmlData: apartHadithModel.hadithArabic,
-              font: AppStrings.arabicFonts[contentSettings.getArabicFontIndex],
+              font: AppStyles.arabicFonts[contentSettings.getArabicFontIndex],
               fontSize: AppStyles.textSizes[contentSettings.getArabicFontSizeIndex] + 5,
               textAlign: AppStyles.textAligns[contentSettings.getArabicFontAlignIndex],
               fontColor: isLight ? Color(contentSettings.getArabicLightTextColor) : Color(contentSettings.getArabicDarkTextColor),
               textDirection: TextDirection.rtl,
               textHeight: 1.75,
             ),
-            subtitle: MainHtmlData(
-              htmlData: apartHadithModel.hadithTranslation,
-              font: AppStrings.translationFonts[contentSettings.getTranslationFontIndex],
-              fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
-              textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
-              fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
-              textDirection: TextDirection.ltr,
-              textHeight: 1.35,
+            subtitle: Visibility(
+              visible: locale.localeName.contains('ru'),
+              child: MainHtmlData(
+                htmlData: apartHadithModel.hadithTranslation,
+                font: AppStyles.translationFonts[contentSettings.getTranslationFontIndex],
+                fontSize: AppStyles.textSizes[contentSettings.getTranslationFontSizeIndex],
+                textAlign: AppStyles.textAligns[contentSettings.getTranslationFontAlignIndex],
+                fontColor: isLight ? Color(contentSettings.getTranslationLightTextColor) : Color(contentSettings.getTranslationDarkTextColor),
+                textDirection: TextDirection.ltr,
+                textHeight: 1.35,
+              ),
             ),
           );
         },

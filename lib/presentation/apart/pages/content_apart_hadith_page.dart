@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/card_hadith_args.dart';
 import '../../state/apart_hadith_player_state.dart';
@@ -46,7 +45,7 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('${AppStrings.hadith} ${widget.hadithId}'),
+          title: Text('${locale.hadith} ${widget.hadithId}'),
           actions: [
             IconButton.filledTonal(
               onPressed: () async {
@@ -55,22 +54,30 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                   RoutePageNames.contentSettingsPage,
                 );
               },
-              tooltip: AppStrings.settings,
-              icon: Icon(Icons.settings),
+              tooltip: locale.settings,
+              icon: Icon(Icons.settings_outlined),
             ),
-            IconButton.filledTonal(
-              onPressed: () async {
-                await Navigator.pushNamed(
-                  context,
-                  RoutePageNames.contentCardHadithPage,
-                  arguments: CardHadithArgs(
-                    tableName: locale.tableName,
-                    hadithId: widget.hadithId,
-                  ),
-                );
-              },
-              tooltip: AppStrings.cardsMode,
-              icon: Icon(CupertinoIcons.creditcard_fill),
+            Visibility(
+              visible: locale.localeName.contains('ru'),
+              child: Consumer<ApartHadithPlayerState>(
+                builder: (context, apartHadithPlayer, _) {
+                  return IconButton.filledTonal(
+                    onPressed: () async {
+                      apartHadithPlayer.stopTrack();
+                      await Navigator.pushNamed(
+                        context,
+                        RoutePageNames.contentCardHadithPage,
+                        arguments: CardHadithArgs(
+                          tableName: locale.tableName,
+                          hadithId: widget.hadithId,
+                        ),
+                      );
+                    },
+                    tooltip: locale.cardsMode,
+                    icon: Icon(Icons.credit_card_rounded),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -112,10 +119,10 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                             shape: AppStyles.shapeTop,
                             elevation: 0,
                             content: Text(
-                              hadithPlayer.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                              hadithPlayer.isRepeating ? locale.repeatOn : locale.repeatOff,
                               style: TextStyle(
-                                fontSize: 17.0,
                                 color: appColors.onSurface,
+                                fontSize: 17.0,
                               ),
                             ),
                           ),

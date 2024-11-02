@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/hadith_entity.dart';
 import '../../state/hadiths_state.dart';
@@ -36,6 +36,7 @@ class _SearchHadithFutureState extends State<SearchHadithFuture> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return FutureBuilder<List<HadithEntity>>(
       future: _futureMainHadiths,
       builder: (context, snapshot) {
@@ -43,7 +44,7 @@ class _SearchHadithFutureState extends State<SearchHadithFuture> {
           _hadiths = snapshot.data!;
           _recentHadiths = widget.query.isEmpty ? _hadiths : _hadiths.where((element) =>
           element.id.toString().contains(widget.query) || element.hadithNumber.toLowerCase().contains(widget.query) || element.hadithTitle.toLowerCase().contains(widget.query)).toList();
-          return _recentHadiths.isEmpty ? const MainDescriptionText(descriptionText: AppStrings.searchIsEmpty) : Scrollbar(
+          return _recentHadiths.isEmpty ? MainDescriptionText(descriptionText: locale.searchIsEmpty) : Scrollbar(
             child: ListView.builder(
               padding: AppStyles.paddingMini,
               itemCount: _recentHadiths.length,
@@ -56,13 +57,13 @@ class _SearchHadithFutureState extends State<SearchHadithFuture> {
             ),
           );
         }
+        if (snapshot.hasData && snapshot.data!.isEmpty) {
+          return MainDescriptionText(
+            descriptionText: locale.searchIsEmpty,
+          );
+        }
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
-        }
-        if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return const MainDescriptionText(
-            descriptionText: AppStrings.searchIsEmpty,
-          );
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

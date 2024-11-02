@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ContentIndexState extends ChangeNotifier {
-  int _contentIndex;
+  int _hadithId;
 
-  ContentIndexState(this._contentIndex);
+  ContentIndexState(this._hadithId);
 
-  int get getContentIndex => _contentIndex;
+  int get getHadithId => _hadithId;
 
-  set setContentIndex(int index) {
-    _contentIndex = index;
+  set setHadithId(int hadithId) {
+    _hadithId = hadithId;
     notifyListeners();
   }
 }

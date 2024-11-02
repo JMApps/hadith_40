@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
@@ -21,9 +21,10 @@ class AppSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final notificationService = NotificationService();
     final timeFormatter = DateFormat('HH:mm', Localizations.localeOf(context).languageCode);
+    final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     return Scaffold(
       body: SingleChildScrollView(
         child: Consumer<AppSettingsState>(
@@ -31,101 +32,101 @@ class AppSettingsPage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const Divider(indent: 16, endIndent: 16),
                 AppSettingListTile(
-                  title: AppStrings.dailyNotifications,
+                  title: locale.dailyNotifications,
                   subTitle: timeFormatter.format(settingsState.getNotificationTime),
                   leading: IconButton(
-                      onPressed: () async {
-                        final notificationTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(
-                            hour: settingsState.getNotificationTime.hour,
-                            minute: settingsState.getNotificationTime.minute,
-                          ),
-                        );
-                        if (notificationTime != null) {
-                          final newNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
-                          settingsState.setNotificationTime = newNotificationTime;
-                          if (settingsState.getNotificationState) {
-                            _scheduleNotification(notificationService, settingsState);
-                          }
+                    onPressed: () async {
+                      final notificationTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay(
+                          hour: settingsState.getNotificationTime.hour,
+                          minute: settingsState.getNotificationTime.minute,
+                        ),
+                      );
+                      if (notificationTime != null) {
+                        final newNotificationTime = DateTime(2024, 12, 31, notificationTime.hour, notificationTime.minute);
+                        settingsState.setNotificationTime = newNotificationTime;
+                        if (settingsState.getNotificationState) {
+                          NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: locale.notificationTitle, body: locale.notificationBody, dateTime: settingsState.getNotificationTime);
                         }
-                      },
-                      icon: Icon(Icons.access_time_rounded)),
+                      }
+                    },
+                    icon: Icon(
+                      Icons.access_time_rounded,
+                      size: 30,
+                      color: appColors.primary,
+                    ),
+                  ),
                   trailing: IconButton.filledTonal(
                     onPressed: () {
                       settingsState.setNotificationState = !settingsState.getNotificationState;
-                      settingsState.getNotificationState ? _scheduleNotification(notificationService, settingsState) : notificationService.cancelNotificationWithId(NotificationService.dailyNotificationId);
+                      settingsState.getNotificationState ? NotificationService().timeNotifications(id: NotificationService.dailyNotificationId, title: locale.notificationTitle, body: locale.notificationBody, dateTime: settingsState.getNotificationTime) : NotificationService().cancelNotificationWithId(NotificationService.dailyNotificationId);
                     },
-                    icon: Icon(settingsState.getNotificationState
-                          ? Icons.notifications_on_outlined
-                          : Icons.notifications_off_outlined,
-                      color: settingsState.getNotificationState
-                          ? appColors.primary
-                          : appColors.onSurface,
+                    icon: Icon(
+                      settingsState.getNotificationState ? Icons.notifications_on_outlined : Icons.notifications_off_outlined,
+                      color: settingsState.getNotificationState ? appColors.primary : appColors.onSurface,
                       size: 30,
                     ),
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
                 AppSettingListTile(
-                  title: AppStrings.interfaceLang,
-                  subTitle: AppStrings.changeLang,
-                  leading: const Icon(CupertinoIcons.globe),
-                  trailing: IconButton(
-                    onPressed: () {
-                      showMenu(
-                        context: context,
-                        position: RelativeRect.fromLTRB(100, 100, 100, 100),
-                        items: AppConstraints.appLanguages.map((String value) {
-                          return PopupMenuItem<String>(
-                            value: value,
-                            child: Center(
-                              child: Text(
-                                value,
-                                style: AppStyles.mainTextStyle16,
-                              ),
+                  title: locale.interfaceLang,
+                  subTitle: locale.changeLang,
+                  leading: const Icon(Icons.language_rounded),
+                  trailing: DropdownButton<int>(
+                    iconEnabledColor: appColors.primary,
+                    borderRadius: AppStyles.border,
+                    padding: AppStyles.paddingHorizontalMini,
+                    elevation: 1,
+                    alignment: Alignment.centerRight,
+                    value: settingsState.getLocaleIndex,
+                    items: List.generate(
+                      AppConstraints.appLanguages.length,
+                      (index) => DropdownMenuItem<int>(
+                        value: index,
+                        child: Center(
+                          child: Padding(
+                            padding: AppStyles.paddingMini,
+                            child: Text(
+                              AppConstraints.appLanguages[index],
+                              style: settingsState.getLocaleIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                             ),
-                          );
-                        }).toList(),
-                      ).then(
-                        (selectedValue) {
-                          if (selectedValue != null) {
-                            settingsState.setLocaleIndex = AppConstraints.appLanguages.indexOf(selectedValue);
-                          }
-                        },
-                      );
-                    },
-                    icon: Text(
-                      AppConstraints.appLanguages[settingsState.getLocaleIndex],
-                      style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
                     ),
+                    onChanged: (newIndex) {
+                      settingsState.setLocaleIndex = newIndex!;
+                    },
+                    underline: const SizedBox(),
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
                 AppSettingListTile(
-                  title: AppStrings.display,
-                  subTitle: AppStrings.displayAlwaysOn,
-                  leading: const Icon(Icons.light_mode_outlined),
+                  title: locale.display,
+                  subTitle: locale.displayAlwaysOn,
+                  leading: const Icon(Icons.light_mode_rounded),
                   trailing: AppSettingSwitch(
                     value: settingsState.getDisplayAlwaysOn,
                     onChanged: (onChanged) => settingsState.setDisplayAlwaysOn = onChanged,
                   ),
                 ),
                 const Divider(indent: 16, endIndent: 16),
+                const ThemeModeDropDown(),
                 const AppThemeColorListTile(),
                 const Divider(indent: 16, endIndent: 16),
-                const ThemeModeDropDown(),
-                const Divider(indent: 16, endIndent: 16),
-                _sectionHeader(AppStrings.ourApps),
+                _sectionHeader(locale.ourApps),
                 AboutUsListTile(
                   title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
-                  subTitle: AppStrings.moreOurApps,
+                  subTitle: locale.moreOurApps,
                   iconName: Platform.isAndroid ? 'google-play' : 'appstore',
                   link: Platform.isAndroid ? AppStrings.linkGooglePlay : AppStrings.linkAppStore,
                 ),
                 const Divider(indent: 16, endIndent: 16),
-                _sectionHeader(AppStrings.ourSocials),
+                _sectionHeader(locale.ourSocials),
                 AboutUsListTile(
                   title: AppStrings.telegram,
                   subTitle: AppStrings.jmapps,
@@ -152,16 +153,6 @@ class AppSettingsPage extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  void _scheduleNotification(
-      NotificationService notificationService, AppSettingsState settingsState) {
-    notificationService.timeNotifications(
-      id: NotificationService.dailyNotificationId,
-      title: AppStrings.appName,
-      body: AppStrings.notificationBody,
-      dateTime: settingsState.getNotificationTime,
     );
   }
 

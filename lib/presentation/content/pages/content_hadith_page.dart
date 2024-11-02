@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/apart_hadith_args.dart';
 import '../../state/content_index_state.dart';
@@ -48,20 +47,20 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => ContentIndexState(widget.hadithId),
+        ),
+        ChangeNotifierProvider(
           create: (_) => HadithPlayerState(),
         ),
         ChangeNotifierProvider(
           create: (_) => ScrollPageState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ContentIndexState(widget.hadithId),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
           title: Consumer<ContentIndexState>(
             builder: (context, contentIndex, _) {
-              return Text('${AppStrings.hadith} ${contentIndex.getContentIndex}');
+              return Text('${locale.hadith} ${contentIndex.getHadithId}');
             },
           ),
           actions: [
@@ -72,8 +71,8 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   RoutePageNames.contentSettingsPage,
                 );
               },
-              tooltip: AppStrings.settings,
-              icon: Icon(Icons.settings),
+              tooltip: locale.settings,
+              icon: Icon(Icons.settings_outlined),
             ),
             Consumer<ContentIndexState>(
               builder: (context, contentIndex, _) {
@@ -85,12 +84,12 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                       RoutePageNames.contentApartHadith,
                       arguments: ApartHadithArgs(
                         tableName: locale.tableName,
-                        hadithId: contentIndex.getContentIndex,
+                        hadithId: contentIndex.getHadithId,
                       ),
                     );
                   },
-                  tooltip: AppStrings.apartMode,
-                  icon: Icon(CupertinoIcons.layers_alt_fill),
+                  tooltip: locale.apartMode,
+                  icon: Icon(CupertinoIcons.layers_alt),
                 );
               },
             ),
@@ -113,14 +112,15 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   runAlignment: WrapAlignment.spaceEvenly,
                   alignment: WrapAlignment.spaceEvenly,
                   children: [
-                    IconButton.filled(
-                      onPressed: () {
+                    IconButton.filledTonal(
+                      onPressed: () async {
                         hadithPlayer.stopTrack();
-                        _pageController.previousPage(
+                        await _pageController.previousPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                         );
                       },
+                      tooltip: locale.previous,
                       icon: Icon(CupertinoIcons.arrow_turn_up_left),
                     ),
                     Consumer<ContentIndexState>(
@@ -135,15 +135,16 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                                 shape: AppStyles.shapeTop,
                                 elevation: 0,
                                 content: Text(
-                                  hadithPlayer.isRepeating ? AppStrings.repeatOn : AppStrings.repeatOff,
+                                  hadithPlayer.isRepeating ? locale.repeatOn : locale.repeatOff,
                                   style: TextStyle(
-                                    fontSize: 17.0,
                                     color: appColors.onSurface,
+                                    fontSize: 17.0,
                                   ),
                                 ),
                               ),
                             );
                           },
+                          tooltip: locale.repeat,
                           icon: Icon(
                             CupertinoIcons.arrow_2_squarepath,
                             color: hadithPlayer.isRepeating ? appColors.error : appColors.onSurface,
@@ -155,21 +156,22 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                       builder: (context, contentIndex, _) {
                         return IconButton.filledTonal(
                           onPressed: () {
-                            hadithPlayer.playTrack(audioName: 'hadeeth_${contentIndex.getContentIndex}', trackId: contentIndex.getContentIndex);
+                            hadithPlayer.playTrack(audioName: 'hadeeth_${contentIndex.getHadithId}', trackId: contentIndex.getHadithId);
                           },
                           icon: Icon(hadithPlayer.isPlaying ? CupertinoIcons.pause : CupertinoIcons.play),
                         );
                       },
                     ),
                     ShareHadithButton(),
-                    IconButton.filled(
-                      onPressed: () {
+                    IconButton.filledTonal(
+                      onPressed: () async {
                         hadithPlayer.stopTrack();
-                        _pageController.nextPage(
+                        await _pageController.nextPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                         );
                       },
+                      tooltip: locale.next,
                       icon: Icon(CupertinoIcons.arrow_turn_up_right),
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
@@ -11,6 +12,7 @@ class TextSizesDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     Widget buildDropDownRow({
@@ -30,14 +32,14 @@ class TextSizesDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
-              AppStrings.fontSizes.length,
+              AppStrings.textSizeNamesRu.length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
                     child: Text(
-                      AppStrings.fontSizes[index],
+                      AppStrings.textSizeNamesRu[index]!,
                       style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                     ),
                   ),
@@ -60,7 +62,7 @@ class TextSizesDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.textSize,
+                locale.textSize,
                 style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
@@ -69,12 +71,12 @@ class TextSizesDropDown extends StatelessWidget {
               ),
             ),
             buildDropDownRow(
-              label: AppStrings.arabic,
+              label: locale.arabic,
               selectedIndex: contentSettings.getArabicFontSizeIndex,
               onChanged: (newIndex) => contentSettings.setArabicFontSizeIndex = newIndex!,
             ),
             buildDropDownRow(
-              label: AppStrings.translation,
+              label: locale.translation,
               selectedIndex: contentSettings.getTranslationFontSizeIndex,
               onChanged: (newIndex) => contentSettings.setTranslationFontSizeIndex = newIndex!,
             ),

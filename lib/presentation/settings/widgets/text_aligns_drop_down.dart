@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/content_settings_state.dart';
 
@@ -10,8 +10,8 @@ class TextAlignsDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-
     Widget buildDropDownRow({
       required String label,
       required int selectedIndex,
@@ -57,7 +57,7 @@ class TextAlignsDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.textsAlign,
+                locale.textsAlign,
                 style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
@@ -66,13 +66,13 @@ class TextAlignsDropDown extends StatelessWidget {
               ),
             ),
             buildDropDownRow(
-              label: AppStrings.arabic,
+              label: locale.arabic,
               selectedIndex: contentSettings.getArabicFontAlignIndex,
               alignIcons: AppStyles.arabicTextAlignIcons,
               onChanged: (newIndex) => contentSettings.setArabicFontAlignIndex = newIndex!,
             ),
             buildDropDownRow(
-              label: AppStrings.translation,
+              label: locale.translation,
               selectedIndex: contentSettings.getTranslationFontAlignIndex,
               alignIcons: AppStyles.textAlignIcons,
               onChanged: (newIndex) => contentSettings.setTranslationFontAlignIndex = newIndex!,

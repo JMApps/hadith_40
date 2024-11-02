@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/content_settings_state.dart';
 
@@ -11,6 +11,7 @@ class TextFontsDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final itemSelectedTextStyle = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontGilroy, color: appColors.primary, fontWeight: FontWeight.bold);
     return Consumer<ContentSettingsState>(
@@ -22,7 +23,7 @@ class TextFontsDropDown extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.font,
+                locale.font,
                 style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
@@ -31,16 +32,16 @@ class TextFontsDropDown extends StatelessWidget {
               ),
             ),
             _buildFontRow(
-              label: AppStrings.arabic,
-              fontNames: AppStrings.arabicFonts,
+              label: locale.arabic,
+              fontNames: AppStyles.arabicFonts,
               selectedFontIndex: contentSettings.getArabicFontIndex,
               onChanged: (newIndex) => contentSettings.setArabicFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,
               appColors: appColors,
             ),
             _buildFontRow(
-              label: AppStrings.translation,
-              fontNames: AppStrings.translationFonts,
+              label: locale.translation,
+              fontNames: AppStyles.translationFonts,
               selectedFontIndex: contentSettings.getTranslationFontIndex,
               onChanged: (newIndex) => contentSettings.setTranslationFontIndex = newIndex,
               itemSelectedTextStyle: itemSelectedTextStyle,

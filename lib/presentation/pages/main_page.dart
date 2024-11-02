@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/route_page_names.dart';
 import '../../core/strings/app_strings.dart';
@@ -41,8 +41,9 @@ class _MainPageState extends State<MainPage> {
         title: Text(locale.appName),
         leading: IconButton.filledTonal(
           onPressed: () async {
-            await Share.share([locale.appName,AppStrings.versionIOS, AppStrings.linkIOS, AppStrings.versionAndroid, AppStrings.linkAndroid].join('\n\n'));
+            await Share.share([locale.appName, locale.versionIOS, AppStrings.linkIOS, locale.versionAndroid, AppStrings.linkAndroid].join('\n\n'));
           },
+          tooltip: locale.share,
           icon: Icon(CupertinoIcons.share),
         ),
         actions: [
@@ -58,7 +59,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   );
                 },
-                tooltip: AppStrings.continueRead,
+                tooltip: locale.continueRead,
                 icon: Text(
                   Provider.of<HadithsState>(context).getLastHadithId.toString(),
                   style: AppStyles.mainTextStyle18Bold,
@@ -72,11 +73,11 @@ class _MainPageState extends State<MainPage> {
                 context: context,
                 delegate: SearchHadithsDelegate(
                   tableName: locale.tableName,
-                  searchLabel: AppStrings.startSearch,
+                  searchLabel: locale.startSearch,
                 ),
               );
             },
-            tooltip: AppStrings.search,
+            tooltip: locale.search,
             icon: Icon(CupertinoIcons.search),
           ),
         ],
@@ -112,19 +113,19 @@ class _MainPageState extends State<MainPage> {
                   items: [
                     SalomonBottomBarItem(
                       icon: const Icon(CupertinoIcons.square_stack_fill),
-                      title: _itemText(title: AppStrings.hadiths),
+                      title: _itemText(title: locale.hadiths),
                     ),
                     SalomonBottomBarItem(
                       icon: const Icon(Icons.bookmarks),
-                      title: _itemText(title: AppStrings.favorites),
+                      title: _itemText(title: locale.favorites),
                     ),
                     SalomonBottomBarItem(
                       icon: const Icon(CupertinoIcons.layers_alt_fill),
-                      title: _itemText(title: AppStrings.apart),
+                      title: _itemText(title: locale.apart),
                     ),
                     SalomonBottomBarItem(
                       icon: const Icon(Icons.settings),
-                      title: _itemText(title: AppStrings.settings),
+                      title: _itemText(title: locale.settings),
                     ),
                   ],
                   currentIndex: mainState.getBottomIndex,

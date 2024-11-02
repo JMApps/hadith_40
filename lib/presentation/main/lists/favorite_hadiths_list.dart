@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/hadith_entity.dart';
 import '../../state/hadiths_state.dart';
@@ -43,6 +43,7 @@ class _FavoriteHadithsListState extends State<FavoriteHadithsList> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return FutureBuilder<List<HadithEntity>>(
       future: _futureFavoriteHadiths,
       builder: (context, snapshot) {
@@ -64,8 +65,8 @@ class _FavoriteHadithsListState extends State<FavoriteHadithsList> {
           );
         }
         if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return const FavoriteIsEmpty(
-            text: AppStrings.favoriteIsEmpty,
+          return FavoriteIsEmpty(
+            text: locale.favoriteIsEmpty,
           );
         }
         if (snapshot.hasError) {

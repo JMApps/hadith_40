@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/content_settings_state.dart';
 
@@ -15,6 +15,7 @@ class TextColors extends StatelessWidget {
     required int currentColor,
     required Function(int) onColorSelected,
   }) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -39,8 +40,8 @@ class TextColors extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              AppStrings.close,
+            child: Text(
+              locale.close,
               style: AppStyles.mainTextStyle18,
             ),
           ),
@@ -57,6 +58,7 @@ class TextColors extends StatelessWidget {
     required Function(int) onLightColorChanged,
     required Function(int) onDarkColorChanged,
   }) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     return ListTile(
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity(vertical: -4),
@@ -68,7 +70,7 @@ class TextColors extends StatelessWidget {
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
-                title: AppStrings.forLightTheme,
+                title: locale.forLightTheme,
                 currentColor: lightColor,
                 onColorSelected: onLightColorChanged,
               );
@@ -82,7 +84,7 @@ class TextColors extends StatelessWidget {
             onPressed: () {
               _showColorPickerDialog(
                 context: context,
-                title: AppStrings.forDarkTheme,
+                title: locale.forDarkTheme,
                 currentColor: darkColor,
                 onColorSelected: onDarkColorChanged,
               );
@@ -99,6 +101,7 @@ class TextColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {
@@ -109,7 +112,7 @@ class TextColors extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               visualDensity: VisualDensity(vertical: -4),
               title: Text(
-                AppStrings.textColor,
+                locale.textColor,
                 style: AppStyles.mainTextStyle18Bold,
               ),
               leading: Icon(
@@ -119,7 +122,7 @@ class TextColors extends StatelessWidget {
             ),
             _buildColorPickerTile(
               context: context,
-              title: AppStrings.arabic,
+              title: locale.arabic,
               lightColor: contentSettings.getArabicLightTextColor,
               darkColor: contentSettings.getArabicDarkTextColor,
               onLightColorChanged: (color) => contentSettings.setArabicLightTextColor = color,
@@ -128,7 +131,7 @@ class TextColors extends StatelessWidget {
             const SizedBox(height: 4),
             _buildColorPickerTile(
               context: context,
-              title: AppStrings.translation,
+              title: locale.translation,
               lightColor: contentSettings.getTranslationLightTextColor,
               darkColor: contentSettings.getTranslationDarkTextColor,
               onLightColorChanged: (color) => contentSettings.setTranslationLightTextColor = color,

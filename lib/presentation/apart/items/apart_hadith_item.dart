@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/styles/app_styles.dart';
 import '../../../core/routes/route_page_names.dart';
@@ -28,6 +28,10 @@ class ApartHadithItem extends StatelessWidget {
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
+        contentPadding: AppStyles.apartListTile,
+        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
+        shape: AppStyles.shape,
         onTap: () async {
           HapticFeedback.lightImpact();
           Provider.of<HadithsState>(context, listen: false).saveLastHadithId(hadithModel.id);
@@ -40,10 +44,6 @@ class ApartHadithItem extends StatelessWidget {
             ),
           );
         },
-        contentPadding: AppStyles.apartListTile,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
-        tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
-        shape: AppStyles.shape,
         title: Text(
           hadithModel.hadithNumber,
           style: TextStyle(

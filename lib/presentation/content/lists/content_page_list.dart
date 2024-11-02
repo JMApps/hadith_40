@@ -54,8 +54,8 @@ class _ContentPageListState extends State<ContentPageList> {
                   padding: AppStyles.paddingMini,
                   child: Card(
                     margin: EdgeInsets.zero,
-                    elevation: 0,
                     shape: AppStyles.shape,
+                    elevation: 0,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -87,7 +87,7 @@ class _ContentPageListState extends State<ContentPageList> {
               );
             },
             onPageChanged: (int pageIndex) {
-              Provider.of<ContentIndexState>(context, listen: false).setContentIndex = pageIndex + 1;
+              Provider.of<ContentIndexState>(context, listen: false).setHadithId = pageIndex + 1;
             },
           );
         }

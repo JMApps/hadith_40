@@ -56,7 +56,7 @@ class _MainHadithsListState extends State<MainHadithsList> {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator.adaptive(),
         );
       },
