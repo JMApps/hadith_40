@@ -39,6 +39,7 @@ class _ContentApartHadithsListState extends State<ContentApartHadithsList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ScrollablePositionedList.builder(
+            physics: const ClampingScrollPhysics(),
             itemScrollController: Provider.of<ApartHadithPlayerState>(context, listen: false).getItemScrollController,
             padding: AppStyles.withoutBottomMini,
             itemCount: snapshot.data!.length,

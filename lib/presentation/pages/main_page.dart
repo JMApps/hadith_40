@@ -62,7 +62,12 @@ class _MainPageState extends State<MainPage> {
                 tooltip: locale.continueRead,
                 icon: Text(
                   Provider.of<HadithsState>(context).getLastHadithId.toString(),
-                  style: AppStyles.mainTextStyle18Bold,
+                  style: TextStyle(
+                    color: appColors.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               );
             },
