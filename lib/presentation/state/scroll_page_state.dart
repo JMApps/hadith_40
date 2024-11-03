@@ -16,15 +16,25 @@ class ScrollPageState extends ChangeNotifier {
   void getToTop() => _toTop();
 
   void _toTop() {
-    _scrollController.animateTo(0, duration: Duration(milliseconds: 360), curve: Curves.easeIn);
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(0, duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+    }
+  }
+
+  void setButtonVisibility(double opacity) {
+    if (_buttonOpacityNotifier.value > 0) {
+      _buttonOpacityNotifier.value = opacity;
+    }
   }
 
   void _onScroll() {
     if (_scrollController.hasClients) {
-      final currentPixels = _scrollController.position.pixels;
-      final maxScroll = _scrollController.position.maxScrollExtent;
+      final double currentPixels = _scrollController.position.pixels;
+      final double maxScroll = _scrollController.position.maxScrollExtent;
 
-      if (maxScroll > 0 && (currentPixels - _previousScrollPosition).abs() > 10) {
+      if (currentPixels <= 0) {
+        _buttonOpacityNotifier.value = 0.0;
+      } else if (maxScroll > 0 && (currentPixels - _previousScrollPosition).abs() > 0) {
         if (currentPixels < _previousScrollPosition) {
           _buttonOpacityNotifier.value = 1.0;
         } else {
@@ -37,6 +47,7 @@ class ScrollPageState extends ChangeNotifier {
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }

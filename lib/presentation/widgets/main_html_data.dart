@@ -39,7 +39,7 @@ class MainHtmlData extends StatelessWidget {
           lineHeight: LineHeight(textHeight),
         ),
         'small': Style(
-          fontSize: FontSize(fontSize - 5),
+          fontSize: FontSize(fontSize - 7.5),
           color: fontColor.withOpacity(0.5),
           direction: textDirection,
           lineHeight: LineHeight(textHeight),

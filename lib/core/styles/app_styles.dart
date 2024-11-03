@@ -17,8 +17,8 @@ class AppStyles {
   static const EdgeInsets paddingHorizontal = EdgeInsets.symmetric(horizontal: 16);
   static const EdgeInsets paddingHorizontalMini = EdgeInsets.symmetric(horizontal: 8);
 
-  static const BorderRadius border = BorderRadius.all(Radius.circular(25));
-  static const BorderRadius borderMini = BorderRadius.all(Radius.circular(12.5));
+  static const BorderRadius border = BorderRadius.all(Radius.circular(20));
+  static const BorderRadius borderMini = BorderRadius.all(Radius.circular(10));
 
   static const RoundedRectangleBorder shape = RoundedRectangleBorder(borderRadius: border);
 

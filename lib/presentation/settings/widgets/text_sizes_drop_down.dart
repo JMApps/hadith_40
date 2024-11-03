@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/content_settings_state.dart';
 
@@ -32,14 +31,14 @@ class TextSizesDropDown extends StatelessWidget {
             alignment: Alignment.centerRight,
             value: selectedIndex,
             items: List.generate(
-              AppStrings.textSizeNamesRu.length,
+              locale.sizes.split(', ').length,
               (index) => DropdownMenuItem<int>(
                 value: index,
                 child: Center(
                   child: Padding(
                     padding: AppStyles.paddingRightMini,
                     child: Text(
-                      AppStrings.textSizeNamesRu[index]!,
+                      locale.sizes.split(', ')[index],
                       style: selectedIndex == index ? itemSelectedTextStyle : AppStyles.mainTextStyle18,
                     ),
                   ),

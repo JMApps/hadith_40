@@ -25,12 +25,15 @@ class ApartHadithItem extends StatelessWidget {
     final appColors = Theme.of(context).colorScheme;
     final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
     final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
-    return Padding(
-      padding: AppStyles.paddingBottomMini,
+    return Container(
+      margin: AppStyles.paddingBottomMini,
+      decoration: BoxDecoration(
+        borderRadius: AppStyles.border,
+        color: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
+      ),
       child: ListTile(
         contentPadding: AppStyles.apartListTile,
         splashColor: appColors.inversePrimary.withOpacity(0.5),
-        tileColor: hadithIndex.isOdd ? itemOddColor : itemEvenColor,
         shape: AppStyles.shape,
         onTap: () async {
           HapticFeedback.lightImpact();

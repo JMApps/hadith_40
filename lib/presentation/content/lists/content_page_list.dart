@@ -24,13 +24,11 @@ class ContentPageList extends StatefulWidget {
 }
 
 class _ContentPageListState extends State<ContentPageList> {
-  late final ScrollController _scrollController;
   late final Future<List<HadithEntity>> _futureHadiths;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
     _futureHadiths = Provider.of<HadithsState>(context, listen: false).fetchAllHadiths(tableName: widget.tableName);
   }
 
@@ -47,10 +45,11 @@ class _ContentPageListState extends State<ContentPageList> {
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final HadithEntity hadithModel = snapshot.data![index];
+              final scrollController = Provider.of<ScrollPageState>(context, listen: false).getScrollController;
               return Scrollbar(
-                controller: _scrollController,
+                controller: scrollController,
                 child: SingleChildScrollView(
-                  controller: _scrollController,
+                  controller: scrollController,
                   padding: AppStyles.paddingMini,
                   child: Card(
                     margin: EdgeInsets.zero,
@@ -87,6 +86,7 @@ class _ContentPageListState extends State<ContentPageList> {
               );
             },
             onPageChanged: (int pageIndex) {
+              Provider.of<ScrollPageState>(context, listen: false).setButtonVisibility(0.0);
               Provider.of<ContentIndexState>(context, listen: false).setHadithId = pageIndex + 1;
             },
           );
@@ -94,7 +94,7 @@ class _ContentPageListState extends State<ContentPageList> {
         if (snapshot.hasError) {
           return MainErrorTextData(errorText: snapshot.error.toString());
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator.adaptive(),
         );
       },

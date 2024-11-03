@@ -26,7 +26,7 @@ class ContentHadithPage extends StatefulWidget {
 }
 
 class _ContentHadithPageState extends State<ContentHadithPage> {
-  late PageController _pageController;
+  late final PageController _pageController;
 
   @override
   void initState() {
@@ -113,9 +113,9 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                   alignment: WrapAlignment.spaceEvenly,
                   children: [
                     IconButton.filledTonal(
-                      onPressed: () async {
+                      onPressed: () {
                         hadithPlayer.stopTrack();
-                        await _pageController.previousPage(
+                        _pageController.previousPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                         );
@@ -164,9 +164,9 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                     ),
                     ShareHadithButton(),
                     IconButton.filledTonal(
-                      onPressed: () async {
+                      onPressed: () {
                         hadithPlayer.stopTrack();
-                        await _pageController.nextPage(
+                        _pageController.nextPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                         );
