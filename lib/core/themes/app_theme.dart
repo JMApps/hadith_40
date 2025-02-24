@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hadith_40/core/strings/app_strings.dart';
 
 import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
@@ -15,6 +16,7 @@ class AppThemes {
   ThemeData _buildTheme(Brightness brightness) {
     return ThemeData(
       fontFamily: AppConstraints.fontGilroy,
+      fontFamilyFallback: ['SF Pro'],
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
         seedColor: _appColor,

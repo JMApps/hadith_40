@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -6,15 +8,30 @@ import '../../core/strings/app_constraints.dart';
 
 class AppSettingsState extends ChangeNotifier {
   final _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
+  Locale deviceLocale = PlatformDispatcher.instance.locale;
 
   AppSettingsState() {
-    _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: 0);
+    _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: _getDefLocaleIndex());
     _notificationState = _mainSettingsBox.get(AppConstraints.keyNotificationState, defaultValue: false);
     _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2024, 12, 31, 10, 0).toIso8601String());
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.blue.value);
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
+  }
+
+  int _getDefLocaleIndex() {
+    final deviceLocale = PlatformDispatcher.instance.locale;
+    switch (deviceLocale.languageCode) {
+      case 'tr':
+        return 1;
+      case 'ru':
+        return 2;
+      case 'ky':
+        return 3;
+      default:
+        return 0;
+    }
   }
 
   late int _localeIndex;

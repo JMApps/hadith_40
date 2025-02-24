@@ -1,6 +1,6 @@
 class DatabaseValues {
   static const String dbName = 'hadith.db';
-  static const int dbVersion = 1;
+  static const int dbVersion = 3;
 
   static const String dbId = 'id';
   static const String dbHadithNumber = 'hadith_number';

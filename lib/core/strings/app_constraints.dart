@@ -2,6 +2,7 @@ import 'dart:ui';
 
 class AppConstraints {
   static const String fontGilroy = 'Gilroy';
+  static const String fontSFPro = 'SF Pro';
 
   static const String keyMainAppSettingsBox = 'key_main_app_settings_box';
   static const String keyContentSettingsBox = 'key_content_settings_box';
@@ -34,11 +35,13 @@ class AppConstraints {
     'English',
     'Türkçe',
     'Русский',
+    'Кыргызча',
   ];
 
   static const List<Locale> appLocales = [
     Locale('en', 'EN'),
     Locale('tr', 'TR'),
     Locale('ru', 'RU'),
+    Locale('ky', 'KG'),
   ];
 }

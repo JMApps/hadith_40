@@ -74,7 +74,7 @@ class MainHadithItem extends StatelessWidget {
                     shape: AppStyles.shapeTop,
                     elevation: 0,
                     content: Text(
-                      hadithsState.isFavorite(hadithId: hadithModel.id) ? locale.removed : locale.added,
+                      hadithsState.isFavorite(hadithId: hadithModel.id) ? locale.added : locale.removed,
                       style: TextStyle(
                         color: appColors.onSurface,
                         fontSize: 17.0,
