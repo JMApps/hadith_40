@@ -19,8 +19,8 @@ class CardFrontHadithItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appColors = theme.colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(55);
     final bool isLight = theme.brightness == Brightness.light;
     return Consumer<ContentSettingsState>(
       builder: (context, contentSettings, _) {

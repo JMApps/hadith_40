@@ -19,7 +19,7 @@ class FavoriteIsEmpty extends StatelessWidget {
         children: [
           Icon(
             Icons.bookmark,
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
+            color: Theme.of(context).colorScheme.primary.withAlpha(125),
             size: 200,
           ),
           Text(

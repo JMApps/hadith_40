@@ -9,7 +9,6 @@ import '../../presentation/content/pages/content_hadith_page.dart';
 import '../../presentation/settings/pages/content_settings_page.dart';
 import 'route_page_names.dart';
 
-
 class AppRoutes {
   static Route<dynamic> onRouteGenerator(RouteSettings routeSettings) {
     final builder = routes[routeSettings.name];

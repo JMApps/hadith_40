@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/styles/app_styles.dart';
@@ -23,8 +23,8 @@ class MainHadithItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final itemOddColor = appColors.inversePrimary.withOpacity(0.075);
-    final itemEvenColor = appColors.inversePrimary.withOpacity(0.150);
+    final itemOddColor = appColors.inversePrimary.withAlpha(15);
+    final itemEvenColor = appColors.inversePrimary.withAlpha(55);
     return Container(
       margin: AppStyles.paddingBottomMini,
       decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class MainHadithItem extends StatelessWidget {
       child: ListTile(
         horizontalTitleGap: 8,
         contentPadding: AppStyles.paddingMini,
-        splashColor: appColors.inversePrimary.withOpacity(0.5),
+        splashColor: appColors.inversePrimary.withAlpha(125),
         shape: AppStyles.shape,
         onTap: () async {
           HapticFeedback.lightImpact();

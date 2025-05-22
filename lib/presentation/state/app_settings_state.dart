@@ -13,7 +13,7 @@ class AppSettingsState extends ChangeNotifier {
   AppSettingsState() {
     _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: _getDefLocaleIndex());
     _notificationState = _mainSettingsBox.get(AppConstraints.keyNotificationState, defaultValue: false);
-    _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2024, 12, 31, 10, 0).toIso8601String());
+    _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2025, 12, 31, 10, 0).toIso8601String());
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
     _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.blue.value);

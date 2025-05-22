@@ -8,12 +8,16 @@ import 'package:sqflite/sqflite.dart';
 import '../../core/strings/database_values.dart';
 
 class DatabaseService {
+  static final DatabaseService _instance = DatabaseService._internal();
+
+  factory DatabaseService() => _instance;
+
+  DatabaseService._internal();
+
   static Database? _db;
 
   Future<Database> get db async {
-    if (_db != null) {
-      return _db!;
-    }
+    if (_db != null) return _db!;
     _db = await initializeDatabase();
     return _db!;
   }

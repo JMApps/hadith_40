@@ -22,7 +22,7 @@ class CardHadithList extends StatefulWidget {
 }
 
 class _CardHadithListState extends State<CardHadithList> {
-  late Future<List<ApartHadithEntity>> _futureApartHadiths;
+  late final Future<List<ApartHadithEntity>> _futureApartHadiths;
 
   @override
   void initState() {
@@ -35,6 +35,9 @@ class _CardHadithListState extends State<CardHadithList> {
     return FutureBuilder<List<ApartHadithEntity>>(
       future: _futureApartHadiths,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
         if (snapshot.hasData) {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -49,9 +52,6 @@ class _CardHadithListState extends State<CardHadithList> {
               );
             },
           );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

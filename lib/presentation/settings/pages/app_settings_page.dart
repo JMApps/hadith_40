@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/services/notification/notification_service.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../state/app_settings_state.dart';
 import '../widgets/about_us_list_tile.dart';
 import '../widgets/app_setting_list_tile.dart';

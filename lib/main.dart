@@ -28,7 +28,7 @@ void main() async {
 
   final DatabaseService databaseService = DatabaseService();
   await databaseService.initializeDatabase();
-
+  
   runApp(
     MultiProvider(
       providers: [

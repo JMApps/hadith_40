@@ -15,7 +15,7 @@ class MainDescriptionText extends StatelessWidget {
     return Container(
       padding: AppStyles.padding,
       alignment: Alignment.center,
-      child: Text(
+      child: SelectableText(
         descriptionText,
         style: AppStyles.mainTextStyle18,
         textAlign: TextAlign.center,

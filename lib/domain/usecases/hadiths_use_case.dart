@@ -4,12 +4,11 @@ import '../repositories/hadiths_repository.dart';
 class HadithsUseCase {
   final HadithsRepository hadithsRepository;
 
-  HadithsUseCase({required this.hadithsRepository});
+  const HadithsUseCase({required this.hadithsRepository});
 
   Future<List<HadithEntity>> fetchAllHadiths({required String tableName}) async {
     try {
-      final List<HadithEntity> allHadiths = await hadithsRepository.getAllHadiths(tableName: tableName);
-      return allHadiths;
+      return await hadithsRepository.getAllHadiths(tableName: tableName);
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -17,8 +16,7 @@ class HadithsUseCase {
 
   Future<HadithEntity> fetchHadithById({required String tableName, required int hadithId}) async {
     try {
-      final HadithEntity hadithById = await hadithsRepository.getHadithById(tableName: tableName, hadithId: hadithId);
-      return hadithById;
+      return await hadithsRepository.getHadithById(tableName: tableName, hadithId: hadithId);
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -26,8 +24,7 @@ class HadithsUseCase {
 
   Future<List<HadithEntity>> fetchFavoriteHadiths({required String tableName, required List<int> favorites}) async {
     try {
-      final List<HadithEntity> favoriteHadiths = await hadithsRepository.getFavoriteHadiths(tableName: tableName, favorites: favorites);
-      return favoriteHadiths;
+      return await hadithsRepository.getFavoriteHadiths(tableName: tableName, favorites: favorites);
     } catch (e) {
       throw Exception(e.toString());
     }

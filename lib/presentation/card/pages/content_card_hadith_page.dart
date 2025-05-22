@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../state/card_mode_state.dart';
@@ -36,7 +36,7 @@ class ContentCardHadithPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('${locale.hadith} $hadithId'),
           actions: [
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 await Navigator.pushNamed(
                   context,
@@ -44,11 +44,11 @@ class ContentCardHadithPage extends StatelessWidget {
                 );
               },
               tooltip: locale.settings,
-              icon: Icon(Icons.settings_outlined),
+              icon: Icon(Icons.settings),
             ),
             Consumer<CardModeState>(
               builder: (context, cardMode, _) {
-                return IconButton.filledTonal(
+                return IconButton(
                   onPressed: () => cardMode.toggleReverseCard(),
                   tooltip: locale.reverseCard,
                   icon: Icon(CupertinoIcons.rectangle_compress_vertical),

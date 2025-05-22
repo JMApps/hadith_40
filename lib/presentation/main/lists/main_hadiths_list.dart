@@ -36,6 +36,9 @@ class _MainHadithsListState extends State<MainHadithsList> {
     return FutureBuilder<List<HadithEntity>>(
       future: _futureHadiths,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
         if (snapshot.hasData) {
           return Scrollbar(
             controller: _scrollController,
@@ -52,9 +55,6 @@ class _MainHadithsListState extends State<MainHadithsList> {
               },
             ),
           );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

@@ -67,7 +67,6 @@ class NotificationService {
         ),
         androidScheduleMode: AndroidScheduleMode.alarmClock,
         matchDateTimeComponents: DateTimeComponents.time,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       );
     } on PlatformException catch (e) {
       debugPrint("Error scheduling notification: $e");

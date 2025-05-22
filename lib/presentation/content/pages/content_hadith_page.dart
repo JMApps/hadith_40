@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/styles/app_styles.dart';
@@ -64,7 +64,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
             },
           ),
           actions: [
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 await Navigator.pushNamed(
                   context,
@@ -72,7 +72,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                 );
               },
               tooltip: locale.settings,
-              icon: Icon(Icons.settings_outlined),
+              icon: Icon(Icons.settings),
             ),
             Consumer<ContentIndexState>(
               builder: (context, contentIndex, _) {

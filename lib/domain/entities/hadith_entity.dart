@@ -8,7 +8,7 @@ class HadithEntity {
   final String hadithTranslation;
   final String nameAudio;
 
-  HadithEntity({
+  const HadithEntity({
     required this.id,
     required this.hadithNumber,
     required this.hadithTitle,

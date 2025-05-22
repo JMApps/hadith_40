@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:html/parser.dart' as html_parser;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/hadith_entity.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/content_index_state.dart';
 import '../state/hadiths_state.dart';
 

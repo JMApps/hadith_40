@@ -40,7 +40,7 @@ class MainHtmlData extends StatelessWidget {
         ),
         'small': Style(
           fontSize: FontSize(fontSize - 7.5),
-          color: fontColor.withOpacity(0.5),
+          color: fontColor.withAlpha(125),
           direction: textDirection,
           lineHeight: LineHeight(textHeight),
         ),
@@ -54,16 +54,6 @@ class MainHtmlData extends StatelessWidget {
           fontFamily: AppConstraints.fontGilroy,
         ),
       },
-      // onLinkTap: (String? footnoteNumber, _, __) {
-      //   showModalBottomSheet(
-      //     context: (context),
-      //     isScrollControlled: true,
-      //     builder: (_) => MainFootnoteData(
-      //       footnoteNumber: int.parse(footnoteNumber!),
-      //       footnoteColor: footnoteColor,
-      //     ),
-      //   );
-      // },
     );
   }
 }

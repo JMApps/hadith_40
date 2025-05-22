@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../../core/routes/route_page_names.dart';
 import '../../../core/styles/app_styles.dart';
@@ -47,7 +47,7 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
         appBar: AppBar(
           title: Text('${locale.hadith} ${widget.hadithId}'),
           actions: [
-            IconButton.filledTonal(
+            IconButton(
               onPressed: () async {
                 await Navigator.pushNamed(
                   context,
@@ -55,13 +55,13 @@ class _ContentApartHadithPageState extends State<ContentApartHadithPage> {
                 );
               },
               tooltip: locale.settings,
-              icon: Icon(Icons.settings_outlined),
+              icon: Icon(Icons.settings),
             ),
             Visibility(
               visible: locale.localeName.contains('ru'),
               child: Consumer<ApartHadithPlayerState>(
                 builder: (context, apartHadithPlayer, _) {
-                  return IconButton.filledTonal(
+                  return IconButton(
                     onPressed: () async {
                       apartHadithPlayer.stopTrack();
                       await Navigator.pushNamed(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../l10n/app_localizations.dart';
 import '../widgets/default_settings_button.dart';
 import '../widgets/text_aligns_drop_down.dart';
 import '../widgets/text_colors.dart';

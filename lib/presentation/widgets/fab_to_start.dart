@@ -19,7 +19,7 @@ class FabTopStart extends StatelessWidget {
               child: FloatingActionButton(
                 elevation: 0,
                 onPressed: scrollPageState.getToTop,
-                backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                backgroundColor: Theme.of(context).colorScheme.primary.withAlpha(125),
                 child: const Icon(Icons.arrow_upward_rounded),
               ),
             );

@@ -21,8 +21,8 @@ class ApartHadithsList extends StatefulWidget {
 }
 
 class _ApartHadithsListState extends State<ApartHadithsList> {
-  late ScrollController _scrollController;
-  late Future<List<HadithEntity>> _futureHadiths;
+  late final ScrollController _scrollController;
+  late final Future<List<HadithEntity>> _futureHadiths;
 
   @override
   void initState() {
@@ -36,6 +36,9 @@ class _ApartHadithsListState extends State<ApartHadithsList> {
     return FutureBuilder<List<HadithEntity>>(
       future: _futureHadiths,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
         if (snapshot.hasData) {
           return Scrollbar(
             controller: _scrollController,
@@ -52,9 +55,6 @@ class _ApartHadithsListState extends State<ApartHadithsList> {
               },
             ),
           );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

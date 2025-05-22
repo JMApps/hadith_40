@@ -24,7 +24,7 @@ class ContentApartHadithsList extends StatefulWidget {
 }
 
 class _ContentApartHadithsListState extends State<ContentApartHadithsList> {
-  late Future<List<ApartHadithEntity>> _futureApartHadiths;
+  late final Future<List<ApartHadithEntity>> _futureApartHadiths;
 
   @override
   void initState() {
@@ -37,6 +37,9 @@ class _ContentApartHadithsListState extends State<ContentApartHadithsList> {
     return FutureBuilder<List<ApartHadithEntity>>(
       future: _futureApartHadiths,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
         if (snapshot.hasData) {
           return ScrollablePositionedList.builder(
             physics: const ClampingScrollPhysics(),
@@ -51,9 +54,6 @@ class _ContentApartHadithsListState extends State<ContentApartHadithsList> {
               );
             },
           );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

@@ -7,9 +7,9 @@ class SearchHadithsDelegate extends SearchDelegate {
     required this.tableName,
     required this.searchLabel,
   }) : super(
-    searchFieldLabel: searchLabel,
-    keyboardType: TextInputType.text,
-  );
+          searchFieldLabel: searchLabel,
+          keyboardType: TextInputType.text,
+        );
 
   final String tableName;
   final String searchLabel;
@@ -18,22 +18,26 @@ class SearchHadithsDelegate extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: InputBorder.none,
+      ),
     );
   }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      query.isNotEmpty ? IconButton(
-        onPressed: () {
-          query = '';
-          },
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_close,
-          progress: transitionAnimation,
-        ),
-      ) : const SizedBox(),
+      query.isNotEmpty
+          ? IconButton(
+              onPressed: () {
+                query = '';
+              },
+              icon: AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                progress: transitionAnimation,
+              ),
+            )
+          : const SizedBox(),
     ];
   }
 

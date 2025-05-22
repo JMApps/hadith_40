@@ -15,7 +15,7 @@ class MainErrorTextData extends StatelessWidget {
     return Container(
       padding: AppStyles.padding,
       alignment: Alignment.center,
-      child: Text(
+      child: SelectableText(
         errorText,
         style: TextStyle(
           fontSize: 18.0,

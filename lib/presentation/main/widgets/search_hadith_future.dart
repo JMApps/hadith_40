@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/hadith_entity.dart';
@@ -24,7 +24,7 @@ class SearchHadithFuture extends StatefulWidget {
 }
 
 class _SearchHadithFutureState extends State<SearchHadithFuture> {
-  late Future<List<HadithEntity>> _futureMainHadiths;
+  late final Future<List<HadithEntity>> _futureMainHadiths;
   List<HadithEntity> _hadiths = [];
   List<HadithEntity> _recentHadiths = [];
 
@@ -40,6 +40,14 @@ class _SearchHadithFutureState extends State<SearchHadithFuture> {
     return FutureBuilder<List<HadithEntity>>(
       future: _futureMainHadiths,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(errorText: snapshot.error.toString());
+        }
+        if (snapshot.hasData && snapshot.data!.isEmpty) {
+          return MainDescriptionText(
+            descriptionText: locale.searchIsEmpty,
+          );
+        }
         if (snapshot.hasData) {
           _hadiths = snapshot.data!;
           _recentHadiths = widget.query.isEmpty ? _hadiths : _hadiths.where((element) =>
@@ -56,14 +64,6 @@ class _SearchHadithFutureState extends State<SearchHadithFuture> {
               },
             ),
           );
-        }
-        if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return MainDescriptionText(
-            descriptionText: locale.searchIsEmpty,
-          );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(errorText: snapshot.error.toString());
         }
         return const Center(
           child: CircularProgressIndicator.adaptive(),

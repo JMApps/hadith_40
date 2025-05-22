@@ -37,6 +37,11 @@ class _FutureChapterTitleState extends State<FutureChapterTitle> {
     return FutureBuilder<HadithEntity>(
       future: _futureHadith,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MainErrorTextData(
+            errorText: snapshot.error.toString(),
+          );
+        }
         if (snapshot.hasData) {
           final HadithEntity hadithModel = snapshot.data!;
           return Container(
@@ -51,11 +56,6 @@ class _FutureChapterTitleState extends State<FutureChapterTitle> {
               style: AppStyles.mainTextStyle18Bold,
               textAlign: TextAlign.center,
             ),
-          );
-        }
-        if (snapshot.hasError) {
-          return MainErrorTextData(
-            errorText: snapshot.error.toString(),
           );
         }
         return Center(

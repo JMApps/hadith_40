@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 
 import '../../core/routes/route_page_names.dart';
 import '../../core/strings/app_strings.dart';
@@ -39,9 +39,9 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(locale.appName),
-        leading: IconButton.filledTonal(
+        leading: IconButton(
           onPressed: () async {
-            await Share.share([locale.appName, locale.versionIOS, AppStrings.linkIOS, locale.versionAndroid, AppStrings.linkAndroid].join('\n\n'));
+            await SharePlus.instance.share(ShareParams(text: [locale.appName, locale.versionIOS, AppStrings.linkIOS, locale.versionAndroid, AppStrings.linkAndroid].join('\n\n')));
           },
           tooltip: locale.share,
           icon: Icon(CupertinoIcons.share),
@@ -64,7 +64,6 @@ class _MainPageState extends State<MainPage> {
                   Provider.of<HadithsState>(context).getLastHadithId.toString(),
                   style: TextStyle(
                     color: appColors.primary,
-                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,
                   ),
@@ -72,7 +71,7 @@ class _MainPageState extends State<MainPage> {
               );
             },
           ),
-          IconButton.filledTonal(
+          IconButton(
             onPressed: () async {
               await showSearch(
                 context: context,
