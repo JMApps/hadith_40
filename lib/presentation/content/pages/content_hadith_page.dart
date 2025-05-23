@@ -76,7 +76,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
             ),
             Consumer<ContentIndexState>(
               builder: (context, contentIndex, _) {
-                return IconButton.filledTonal(
+                return IconButton(
                   onPressed: () async {
                     Provider.of<HadithPlayerState>(context, listen: false).stopTrack();
                     await Navigator.pushNamed(
@@ -89,7 +89,7 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
                     );
                   },
                   tooltip: locale.apartMode,
-                  icon: Icon(CupertinoIcons.layers_alt),
+                  icon: Icon(CupertinoIcons.layers_alt_fill),
                 );
               },
             ),

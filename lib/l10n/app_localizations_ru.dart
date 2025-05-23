@@ -60,7 +60,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get added => 'Добавлено';
 
   @override
-  String get themes => 'Светлая, Тёмная, Система';
+  String get themes => 'Светлая, Тёмная, Системная';
 
   @override
   String get sizes => 'Маленький, Нормальный, Средний, Большой, Очень большой';
@@ -111,10 +111,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get textColor => 'Цвет текста';
 
   @override
-  String get forLightTheme => 'Для дневной темы';
+  String get forLightTheme => 'Для светлой темы';
 
   @override
-  String get forDarkTheme => 'Для ночной темы';
+  String get forDarkTheme => 'Для тёмной темы';
 
   @override
   String get close => 'Закрыть';

@@ -33,7 +33,7 @@ class AppThemeColorListTile extends StatelessWidget {
                   content: Material(
                     color: Colors.transparent,
                     child: MaterialColorPicker(
-                      alignment: WrapAlignment.start,
+                      alignment: WrapAlignment.center,
                       iconSelected: Icons.check_circle,
                       elevation: 0.5,
                       colors: [
@@ -54,7 +54,7 @@ class AppThemeColorListTile extends StatelessWidget {
                         Colors.amber,
                       ],
                       allowShades: false,
-                      onMainColorChange: (Color? color) => settingsState.setAppThemeColor = color!.value,
+                      onMainColorChange: (Color? color) => settingsState.setAppThemeColor = color!.toARGB32(),
                       selectedColor: Color(settingsState.getAppThemeColor),
                     ),
                   ),
