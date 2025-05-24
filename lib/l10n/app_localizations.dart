@@ -186,6 +186,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @player.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get player;
+
   /// No description provided for @previous.
   ///
   /// In en, this message translates to:

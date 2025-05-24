@@ -51,6 +51,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get settings => 'Орнотуулар';
 
   @override
+  String get player => 'Плеер';
+
+  @override
   String get previous => 'Мурунку';
 
   @override

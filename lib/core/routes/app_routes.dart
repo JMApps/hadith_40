@@ -6,6 +6,7 @@ import '../../data/models/arguments/hadith_args.dart';
 import '../../presentation/apart/pages/content_apart_hadith_page.dart';
 import '../../presentation/card/pages/content_card_hadith_page.dart';
 import '../../presentation/content/pages/content_hadith_page.dart';
+import '../../presentation/playlist/pages/play_list_page.dart';
 import '../../presentation/settings/pages/content_settings_page.dart';
 import 'route_page_names.dart';
 
@@ -36,5 +37,6 @@ class AppRoutes {
       return ContentCardHadithPage(tableName: cardHadithArgs.tableName, hadithId: cardHadithArgs.hadithId);
     },
     RoutePageNames.contentSettingsPage: (context, args) => ContentSettingsPage(),
+    RoutePageNames.playListPage: (context, args) => PlayListPage(),
   };
 }

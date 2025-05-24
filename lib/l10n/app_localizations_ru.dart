@@ -51,6 +51,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settings => 'Настройки';
 
   @override
+  String get player => 'Плеер';
+
+  @override
   String get previous => 'Предыдущий';
 
   @override

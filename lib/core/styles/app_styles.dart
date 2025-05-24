@@ -6,6 +6,7 @@ class AppStyles {
   static const EdgeInsets padding = EdgeInsets.all(16);
   static const EdgeInsets paddingMini = EdgeInsets.all(8);
 
+  static const EdgeInsets withoutTop = EdgeInsets.only(left: 16, bottom: 16, right: 16);
   static const EdgeInsets withoutBottomMini = EdgeInsets.only(left: 8, top: 8, right: 8);
   static const EdgeInsets bottomTopMini = EdgeInsets.only(left: 8, bottom: 16, right: 8, top: 8);
   static const EdgeInsets bottomMini = EdgeInsets.only(bottom: 8);

@@ -3,4 +3,5 @@ class RoutePageNames {
   static const String contentApartHadith = '/content_apart_hadith_page';
   static const String contentCardHadithPage = '/content_card_hadith_page';
   static const String contentSettingsPage = '/content_settings_page';
+  static const String playListPage = '/play_list_page';
 }

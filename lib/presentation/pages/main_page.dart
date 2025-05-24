@@ -72,6 +72,12 @@ class _MainPageState extends State<MainPage> {
             },
           ),
           IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, RoutePageNames.playListPage);
+            },
+            icon: Icon(Icons.playlist_play_rounded),
+          ),
+          IconButton(
             onPressed: () async {
               await showSearch(
                 context: context,

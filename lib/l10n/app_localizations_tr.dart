@@ -51,6 +51,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settings => 'Ayarlar';
 
   @override
+  String get player => 'Player';
+
+  @override
   String get previous => 'Önceki';
 
   @override
