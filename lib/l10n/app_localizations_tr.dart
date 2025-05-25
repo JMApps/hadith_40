@@ -162,6 +162,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get share => 'Paylaş';
 
   @override
+  String get useOtherOurApps => 'Diğer uygulamalarımızı da deneyin:';
+
+  @override
+  String get shelfMuslim => 'Müslümanın Rafı';
+
+  @override
+  String get fortressMuslim => 'Müslümanın Kalesi';
+
+  @override
   String get versionAndroid => 'Android versiyonu:';
 
   @override

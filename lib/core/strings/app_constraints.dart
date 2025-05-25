@@ -32,6 +32,8 @@ class AppConstraints {
   static const String keyAppThemeColor = 'key_app_theme_color';
   static const String keyThemeModeIndex = 'key_theme_mode_index';
 
+  static const String keyAppVersion = 'key_theme_mode_index';
+
   static const List<String> trackNames = [
     'hadeeth_1',
     'hadeeth_2',

@@ -162,6 +162,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get share => 'Поделиться';
 
   @override
+  String get useOtherOurApps => 'Воспользуйтесь и другими нашими приложениями:';
+
+  @override
+  String get shelfMuslim => 'Полка мусульманина';
+
+  @override
+  String get fortressMuslim => 'Крепость мусульманина';
+
+  @override
   String get versionAndroid => 'Версия Android:';
 
   @override

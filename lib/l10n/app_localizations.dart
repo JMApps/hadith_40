@@ -408,6 +408,24 @@ abstract class AppLocalizations {
   /// **'Share'**
   String get share;
 
+  /// No description provided for @useOtherOurApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Try our other apps too:'**
+  String get useOtherOurApps;
+
+  /// No description provided for @shelfMuslim.
+  ///
+  /// In en, this message translates to:
+  /// **'Muslim\'s Shelf'**
+  String get shelfMuslim;
+
+  /// No description provided for @fortressMuslim.
+  ///
+  /// In en, this message translates to:
+  /// **'Fortress of the Muslim'**
+  String get fortressMuslim;
+
   /// No description provided for @versionAndroid.
   ///
   /// In en, this message translates to:

@@ -11,12 +11,13 @@ class AppSettingsState extends ChangeNotifier {
   Locale deviceLocale = PlatformDispatcher.instance.locale;
 
   AppSettingsState() {
+    _appVersion = _mainSettingsBox.get(AppConstraints.keyAppVersion, defaultValue: 0);
     _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: _getDefLocaleIndex());
     _notificationState = _mainSettingsBox.get(AppConstraints.keyNotificationState, defaultValue: false);
     _notificationTime = _mainSettingsBox.get(AppConstraints.keyNotificationTime, defaultValue: DateTime(2025, 12, 31, 10, 0).toIso8601String());
     _displayAlwaysOn = _mainSettingsBox.get(AppConstraints.keyDisplayAlwaysOn, defaultValue: true);
     _displayAlwaysOn ? WakelockPlus.enable() : WakelockPlus.disable();
-    _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.blue.value);
+    _appThemeColor = _mainSettingsBox.get(AppConstraints.keyAppThemeColor, defaultValue: Colors.blue.toARGB32());
     _themeModeIndex = _mainSettingsBox.get(AppConstraints.keyThemeModeIndex, defaultValue: 2);
   }
 
@@ -40,6 +41,10 @@ class AppSettingsState extends ChangeNotifier {
   late bool _displayAlwaysOn;
   late int _appThemeColor;
   late int _themeModeIndex;
+
+  late int _appVersion;
+
+  int get getAppVersion => _appVersion;
 
   int get getLocaleIndex => _localeIndex;
 
@@ -76,6 +81,11 @@ class AppSettingsState extends ChangeNotifier {
       default: currentTheme = ThemeMode.system;
     }
     return currentTheme;
+  }
+
+  set setAppVersion(int appVersion) {
+    _appVersion = appVersion;
+    _saveSetting(AppConstraints.keyAppVersion, appVersion);
   }
 
   set setThemeModeIndex(int themeModeIndex) {

@@ -1,4 +1,5 @@
 class AppStrings {
+  static const int appVersion = 1;
   static const String appStore = 'App Store';
   static const String googlePlay = 'Google Play';
   static const String telegram = 'Telegram';
@@ -6,6 +7,10 @@ class AppStrings {
   static const String instagram = 'Instagram';
   static const String jmapps = '@jmapps';
   static const String devMuslim = '@dev_muslim';
+  static const String shelfMuslimAndroid = 'https://play.google.com/store/apps/details?id=jmapps.project.majmua';
+  static const String fortressMuslimAndroid = 'https://play.google.com/store/apps/details?id=jmapps.fortressofthemuslim';
+  static const String shelfMuslimIOS = 'https://apps.apple.com/app/muslims-shelf/id1659190395';
+  static const String fortressMuslimIOS = 'https://apps.apple.com/app/крепость-верующего/id1564920951';
   static const String linkGooglePlay = 'https://play.google.com/store/apps/dev?id=8649252597553656018';
   static const String linkAppStore = 'https://apps.apple.com/ru/developer/imanil-binyaminov/id1564920953';
   static const String linkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.hadith40';

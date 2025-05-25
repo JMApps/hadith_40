@@ -162,6 +162,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get share => 'Share';
 
   @override
+  String get useOtherOurApps => 'Try our other apps too:';
+
+  @override
+  String get shelfMuslim => 'Muslim\'s Shelf';
+
+  @override
+  String get fortressMuslim => 'Fortress of the Muslim';
+
+  @override
   String get versionAndroid => 'Android version:';
 
   @override

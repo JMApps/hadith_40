@@ -14,8 +14,10 @@ import '../main/pages/favorite_hadiths_page.dart';
 import '../main/pages/main_hadiths_page.dart';
 import '../main/widgets/search_hadiths_delegate.dart';
 import '../settings/pages/app_settings_page.dart';
+import '../state/app_settings_state.dart';
 import '../state/hadiths_state.dart';
 import '../state/main_state.dart';
+import '../widgets/our_apps_bottom_sheet.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -31,6 +33,19 @@ class _MainPageState extends State<MainPage> {
     ListApartHadithsPage(),
     AppSettingsPage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final settings = Provider.of<AppSettingsState>(context, listen: false);
+    if (settings.getAppVersion < AppStrings.appVersion) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        checkWhatsNew().then((_) {
+          settings.setAppVersion = AppStrings.appVersion;
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,5 +169,14 @@ class _MainPageState extends State<MainPage> {
 
   Text _itemText({required String title}) {
     return Text(title, style: AppStyles.mainTextStyle16);
+  }
+
+  Future<void> checkWhatsNew() async {
+    final isNewVersion = Provider.of<AppSettingsState>(context, listen: false).getAppVersion < AppStrings.appVersion;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: false,
+      builder: (context) => OurAppsBottomSheet(isNewVersion: isNewVersion),
+    );
   }
 }

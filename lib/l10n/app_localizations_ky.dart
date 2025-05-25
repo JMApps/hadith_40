@@ -162,6 +162,16 @@ class AppLocalizationsKy extends AppLocalizations {
   String get share => 'Бөлүшүү';
 
   @override
+  String get useOtherOurApps =>
+      'Башка колдонмолорубузду дагы колдонуп көрүңүз:';
+
+  @override
+  String get shelfMuslim => 'Мусулмандын текчеси';
+
+  @override
+  String get fortressMuslim => 'Мусулмандын чеби';
+
+  @override
   String get versionAndroid => 'Android версиясы:';
 
   @override
