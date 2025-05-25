@@ -3,6 +3,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../state/play_list_state.dart';
 
 class PlayListPlayer extends StatelessWidget {
@@ -10,6 +11,7 @@ class PlayListPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer<PlayListState>(
       builder: (context, player, _) {
@@ -38,10 +40,21 @@ class PlayListPlayer extends StatelessWidget {
                   children: [
                     Expanded(
                       child: IconButton(
-                        onPressed: player.toggleLoopPlaylist,
+                        onPressed: () {
+                          player.toggleLoopPlaylist();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: appColors.primary,
+                              content: Text(
+                                player.loopMode == LoopMode.all ? locale.repeatPlaylistOn : locale.repeatPlaylistOn,
+                                style: AppStyles.mainTextStyle16,
+                              ),
+                            ),
+                          );
+                        },
                         icon: Icon(
                           Icons.repeat,
-                          color: player.loopMode == LoopMode.all ? appColors.primary : null,
+                          color: player.loopMode == LoopMode.all ? appColors.primary : appColors.onSurface
                         ),
                       ),
                     ),
@@ -57,9 +70,7 @@ class PlayListPlayer extends StatelessWidget {
                           player.player.playing ? player.pause() : player.play();
                         },
                         icon: Icon(
-                          player.player.playing
-                              ? Icons.pause_circle_outline
-                              : Icons.play_circle_outline_rounded,
+                          player.player.playing ? Icons.pause_circle_outline : Icons.play_circle_outline_rounded
                         ),
                         iconSize: 35,
                       ),
@@ -72,10 +83,21 @@ class PlayListPlayer extends StatelessWidget {
                     ),
                     Expanded(
                       child: IconButton(
-                        onPressed: player.toggleLoopTrack,
+                        onPressed: () {
+                          player.toggleLoopTrack();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: appColors.primary,
+                              content: Text(
+                                player.loopMode == LoopMode.all ? locale.repeatOn : locale.repeatOn,
+                                style: AppStyles.mainTextStyle16,
+                              ),
+                            ),
+                          );
+                        },
                         icon: Icon(
                           Icons.repeat_one,
-                          color: player.loopMode == LoopMode.one ? appColors.primary : null,
+                          color: player.loopMode == LoopMode.one ? appColors.primary : appColors.onSurface,
                         ),
                       ),
                     ),
