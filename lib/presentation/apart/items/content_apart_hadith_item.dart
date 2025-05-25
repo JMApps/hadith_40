@@ -34,9 +34,9 @@ class ContentApartHadithItem extends StatelessWidget {
             onTap: () async {
               Provider.of<ApartHadithPlayerState>(context, listen: false).playTrackIndex(apartHadithIndex);
             },
-            tileColor: Provider.of<ApartHadithPlayerState>(context).currentTrackIndex == apartHadithIndex ? appColors.inversePrimary.withOpacity(0.75) : apartHadithIndex.isOdd ? itemOddColor : itemEvenColor,
+            tileColor: Provider.of<ApartHadithPlayerState>(context).currentTrackIndex == apartHadithIndex ? appColors.inversePrimary.withAlpha(200) : apartHadithIndex.isOdd ? itemOddColor : itemEvenColor,
             shape: AppStyles.shape,
-            splashColor: appColors.inversePrimary.withOpacity(0.5),
+            splashColor: appColors.inversePrimary.withAlpha(125),
             title: MainHtmlData(
               htmlData: apartHadithModel.hadithArabic,
               font: AppStyles.arabicFonts[contentSettings.getArabicFontIndex],

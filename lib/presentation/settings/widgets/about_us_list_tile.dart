@@ -23,7 +23,7 @@ class AboutUsListTile extends StatelessWidget {
       onTap: () async {
         await _launchUrl();
       },
-      splashColor: Theme.of(context).colorScheme.primary.withOpacity(0.25),
+      splashColor: Theme.of(context).colorScheme.primary.withAlpha(75),
       shape: AppStyles.shape,
       title: Text(
         title,

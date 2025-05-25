@@ -31,7 +31,7 @@ class TextColors extends StatelessWidget {
             alignment: WrapAlignment.center,
             iconSelected: Icons.check_circle,
             elevation: 0.5,
-            onColorChange: (Color? color) => onColorSelected(color!.value),
+            onColorChange: (Color? color) => onColorSelected(color!.toARGB32()),
             selectedColor: Color(currentColor),
           ),
         ),

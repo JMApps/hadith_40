@@ -38,7 +38,11 @@ class _ShareHadithButtonState extends State<ShareHadithButton> {
                     hadithArabic: hadithModel.hadithArabic,
                     hadithTranslation: hadithModel.hadithTranslation,
                   );
-                  await Share.share(shareContent);
+                  await SharePlus.instance.share(
+                    ShareParams(
+                      text: shareContent
+                    ),
+                  );
                 },
                 tooltip: locale.share,
                 icon: Icon(CupertinoIcons.share_up),
