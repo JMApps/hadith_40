@@ -8,13 +8,14 @@ class PlayListState extends ChangeNotifier {
   final AudioPlayer _audioPlayer = AudioPlayer();
   final ItemScrollController _itemScrollController = ItemScrollController();
 
-  ItemScrollController get itemScrollController => _itemScrollController;
-
   int _currentIndex = -1;
   bool _autoScrollEnabled = false;
+  LoopMode _loopMode = LoopMode.off;
 
   AudioPlayer get player => _audioPlayer;
+  ItemScrollController get itemScrollController => _itemScrollController;
   int get currentIndex => _currentIndex;
+  LoopMode get loopMode => _loopMode;
 
   PlayListState() {
     _loadPlaylist();
@@ -22,7 +23,7 @@ class PlayListState extends ChangeNotifier {
     _audioPlayer.playerStateStream.listen((state) async {
       if (state.processingState == ProcessingState.completed) {
         final lastIndex = AppConstraints.trackNames.length - 1;
-        if (_currentIndex == lastIndex) {
+        if (_currentIndex == lastIndex && _loopMode != LoopMode.all) {
           await _audioPlayer.stop();
           await _audioPlayer.seek(Duration.zero, index: 0);
           _currentIndex = -1;
@@ -86,10 +87,23 @@ class PlayListState extends ChangeNotifier {
     await _audioPlayer.seekToPrevious();
   }
 
+  void toggleLoopPlaylist() {
+    _loopMode = _loopMode == LoopMode.all ? LoopMode.off : LoopMode.all;
+    _audioPlayer.setLoopMode(_loopMode);
+    notifyListeners();
+  }
+
+  void toggleLoopTrack() {
+    _loopMode = _loopMode == LoopMode.one ? LoopMode.off : LoopMode.one;
+    _audioPlayer.setLoopMode(_loopMode);
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _audioPlayer.dispose();
     super.dispose();
   }
 }
+
 

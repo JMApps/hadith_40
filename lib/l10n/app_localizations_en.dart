@@ -81,6 +81,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repeatOff => 'Repeat is off';
 
   @override
+  String get repeatPlaylistOn => 'Playlist repeat is on';
+
+  @override
+  String get repeatPlaylistOff => 'Playlist repeat is off';
+
+  @override
   String get continueRead => 'Continue reading';
 
   @override

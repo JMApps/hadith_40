@@ -24,6 +24,8 @@
   "repeat": "Repeat",
   "repeatOn": "Repeat is on",
   "repeatOff": "Repeat is off",
+  "repeatPlaylistOn": "Playlist repeat is on",
+  "repeatPlaylistOff": "Playlist repeat is off",
   "continueRead": "Continue reading",
   "search": "Search",
   "startSearch": "Start search",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
@@ -9,12 +10,13 @@ class PlayListPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     return Consumer<PlayListState>(
       builder: (context, player, _) {
         return Card(
           shape: AppStyles.shape,
           child: Padding(
-            padding: AppStyles.paddingBottomMini,
+            padding: AppStyles.withoutTopMini,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -23,6 +25,7 @@ class PlayListPlayer extends StatelessWidget {
                   builder: (context, snapshot) {
                     return Slider(
                       value: snapshot.data?.inSeconds.toDouble() ?? 0.0,
+                      padding: AppStyles.withoutBottom,
                       min: 0.0,
                       max: player.player.duration?.inSeconds.toDouble() ?? 1.0,
                       onChanged: (value) {
@@ -35,8 +38,11 @@ class PlayListPlayer extends StatelessWidget {
                   children: [
                     Expanded(
                       child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.repeat),
+                        onPressed: player.toggleLoopPlaylist,
+                        icon: Icon(
+                          Icons.repeat,
+                          color: player.loopMode == LoopMode.all ? appColors.primary : null,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -48,9 +54,7 @@ class PlayListPlayer extends StatelessWidget {
                     Expanded(
                       child: IconButton(
                         onPressed: () {
-                          player.player.playing
-                              ? player.pause()
-                              : player.play();
+                          player.player.playing ? player.pause() : player.play();
                         },
                         icon: Icon(
                           player.player.playing
@@ -68,8 +72,11 @@ class PlayListPlayer extends StatelessWidget {
                     ),
                     Expanded(
                       child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.refresh_rounded),
+                        onPressed: player.toggleLoopTrack,
+                        icon: Icon(
+                          Icons.repeat_one,
+                          color: player.loopMode == LoopMode.one ? appColors.primary : null,
+                        ),
                       ),
                     ),
                   ],

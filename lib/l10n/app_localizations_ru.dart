@@ -81,6 +81,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get repeatOff => 'Повтор отключён';
 
   @override
+  String get repeatPlaylistOn => 'Повтор списка включён';
+
+  @override
+  String get repeatPlaylistOff => 'Повтор списка отключён';
+
+  @override
   String get continueRead => 'Продолжить чтение';
 
   @override

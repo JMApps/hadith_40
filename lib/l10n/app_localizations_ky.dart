@@ -51,7 +51,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get settings => 'Орнотуулар';
 
   @override
-  String get player => 'Плеер';
+  String get player => 'Ойноткыч';
 
   @override
   String get previous => 'Мурунку';
@@ -79,6 +79,12 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get repeatOff => 'Кайталоо өчүрүлдү';
+
+  @override
+  String get repeatPlaylistOn => 'Тизменин кайталоосу күйгүзүлгөн';
+
+  @override
+  String get repeatPlaylistOff => 'Тизменин кайталоосу өчүрүлгөн';
 
   @override
   String get continueRead => 'Окууну улантуу';

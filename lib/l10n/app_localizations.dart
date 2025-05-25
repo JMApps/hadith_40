@@ -246,6 +246,18 @@ abstract class AppLocalizations {
   /// **'Repeat is off'**
   String get repeatOff;
 
+  /// No description provided for @repeatPlaylistOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Playlist repeat is on'**
+  String get repeatPlaylistOn;
+
+  /// No description provided for @repeatPlaylistOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Playlist repeat is off'**
+  String get repeatPlaylistOff;
+
   /// No description provided for @continueRead.
   ///
   /// In en, this message translates to:

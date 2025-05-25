@@ -51,7 +51,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settings => 'Ayarlar';
 
   @override
-  String get player => 'Player';
+  String get player => 'Oynatıcı';
 
   @override
   String get previous => 'Önceki';
@@ -79,6 +79,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get repeatOff => 'Tekrar kapalı';
+
+  @override
+  String get repeatPlaylistOn => 'Çalma listesi tekrarı açık';
+
+  @override
+  String get repeatPlaylistOff => 'Çalma listesi tekrarı kapalı';
 
   @override
   String get continueRead => 'Okumaya devam et';

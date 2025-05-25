@@ -24,6 +24,8 @@
   "repeat": "Повтор",
   "repeatOn": "Повтор включён",
   "repeatOff": "Повтор отключён",
+  "repeatPlaylistOn": "Повтор списка включён",
+  "repeatPlaylistOff": "Повтор списка отключён",
   "continueRead": "Продолжить чтение",
   "search": "Поиск",
   "startSearch": "Начните поиск",

@@ -75,6 +75,7 @@ class _MainPageState extends State<MainPage> {
             onPressed: () {
               Navigator.pushNamed(context, RoutePageNames.playListPage);
             },
+            tooltip: locale.player,
             icon: Icon(Icons.playlist_play_rounded),
           ),
           IconButton(

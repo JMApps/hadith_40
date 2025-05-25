@@ -65,6 +65,13 @@ class _ContentHadithPageState extends State<ContentHadithPage> {
           ),
           actions: [
             IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RoutePageNames.playListPage);
+              },
+              tooltip: locale.player,
+              icon: Icon(Icons.playlist_play_rounded),
+            ),
+            IconButton(
               onPressed: () async {
                 await Navigator.pushNamed(
                   context,
