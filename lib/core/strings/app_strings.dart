@@ -1,5 +1,5 @@
 class AppStrings {
-  static const int appVersion = 1;
+  static const int appVersion = 2;
   static const String appStore = 'App Store';
   static const String googlePlay = 'Google Play';
   static const String telegram = 'Telegram';

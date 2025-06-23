@@ -28,8 +28,8 @@ android {
         applicationId = "jmapps.hadith40"
         minSdk = 23
         targetSdk = 35
-        versionCode = 24
-        versionName = "2.1.3"
+        versionCode = 25
+        versionName = "2.1.4"
     }
 
     buildTypes {
@@ -37,10 +37,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-}
-
-flutter {
-    source = "../.."
 }
 
 dependencies {
